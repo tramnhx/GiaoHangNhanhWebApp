@@ -1,0 +1,21 @@
+﻿.table.dataTable thead,
+.table.dataTable th {
+    text-align: center;
+}
+
+table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_desc:after, table.dataTable thead .sorting_asc_disabled:after, table.dataTable thead .sorting_desc_disabled:after {
+    right: unset !important;
+     content: unset !important;
+}
+
+div.dataTables_wrapper div.dataTables_length select {
+    background-color: #f5f8fa;
+    border-color: #f5f8fa;
+    color: #5e6278;
+    transition: color .2s ease,background-color .2s ease;
+}
+
+
+.dataTables_wrapper.no-footer .dataTables_scrollBody{
+    border:unset !important;
+}

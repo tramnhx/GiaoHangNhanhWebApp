@@ -1,0 +1,26 @@
+﻿.user_profile_bg {
+    background: url('/theme/dist/default/assets/app/media/img/misc/user_profile_bg.jpg');
+    background-size: cover;
+}
+.m-brand .m-brand__logo .m-brand__logo-wrapper img {
+    width: 150%;
+}
+
+.m-topbar .m-topbar__nav.m-nav > .m-nav__item > .m-nav__language-options-form {
+    position: relative;
+    margin: 0 auto;
+    width: auto;
+    padding: 9px 0;
+    display: table;
+    table-layout: fixed;    
+    height: 100%;
+    text-decoration: none;
+    outline: none !important;
+    vertical-align: middle;
+}
+
+    .m-topbar .m-topbar__nav.m-nav > .m-nav__item > .m-nav__language-options-form > .language-options {
+        margin: 7px auto;
+    }
+
+

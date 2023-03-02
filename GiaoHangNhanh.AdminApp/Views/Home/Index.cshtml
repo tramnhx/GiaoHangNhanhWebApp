@@ -1,0 +1,22 @@
+﻿
+@{ ViewData["Title"] = "Trang chủ"; }
+
+
+@section Vendors_Scripts{
+    
+}
+
+<!--begin::Toolbar-->
+@section Custom_Scripts{
+    <script src="@Url.Content("~/js/util.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/Home/Index.js")"></script>
+}
+
+<script>
+    jQuery(document).ready(function () {
+        Home.init();
+    });
+
+</script>
+
+@await Html.PartialAsync("_PartialToolbar")

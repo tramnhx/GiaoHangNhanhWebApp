@@ -1,0 +1,7 @@
+﻿#m_login {
+    background-image: url('/theme/src/media/app/img/bg/bg-2.jpg');
+}
+
+    #m_login .m-login__logo img {
+        width: 100px;
+    }

@@ -1,0 +1,180 @@
+﻿@model StaffViewModel
+
+@{
+    ViewBag.Title = "Nhân viên";
+}
+
+@section Vendors_CSS{
+
+}
+
+@section Custom_CSS{
+    <link href="@Url.Content("~/css/Staff/SecurityEdit.css")" rel="stylesheet" />
+}
+
+@section Vendors_Scripts{
+    
+}
+
+@section Custom_Scripts{
+    <script type="text/javascript" src="@Url.Content("~/js/Staff/SecurityEdit.js")"></script>
+}
+
+<script>
+    var user = {
+        userId: '@Model.CurrentUserRole.Id',
+        userName: '@User.Identity.Name',
+        roles: {
+            isAllowEdit: @if (Model.CurrentUserRole.IsAllowEdit == true) {<text>true</text>} else {<text>false</text>},
+            isAllowDelete: @if (Model.CurrentUserRole.IsAllowDelete == true) {<text>true</text>} else {<text>false</text>}
+        }
+    };
+
+    @if (Model.Staff != null)
+    {
+        <text>
+            var editingData = {
+                id: '@Model.Staff.Id'
+            };
+        </text>
+        if (Model.Staff.AppRoles != null)
+        {
+            <text>editingData.appRoles = [];</text>
+            foreach (var item in Model.Staff.AppRoles)
+            {
+                <text>editingData.appRoles.push({ code: '@item.Code', name: '@item.Name' });</text>
+            }
+        }
+    }
+    else
+    {
+        <text>
+            editingData = null;
+        </text>
+    }
+
+    $(document).ready(function () {
+        Staff.init();
+    });
+
+</script>
+
+@await Html.PartialAsync("_PartialToolbar")
+
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Post-->
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container">
+            @await Html.PartialAsync("_PartialEditHeader")
+
+            <!--begin::Basic info-->
+            <div class="card mb-5 mb-xl-10">
+                <!--begin::Card header-->
+                <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#edit" aria-expanded="true" aria-controls="edit">
+                    <!--begin::Card title-->
+                    <div class="card-title m-0">
+                        <h3 class="fw-bolder m-0">@Html.Raw("Bảo mật")</h3>
+                    </div>
+                    <!--end::Card title-->
+                </div>
+                <!--begin::Card header-->
+                <!--begin::Content-->
+                <div id="edit" class="collapse show">
+                    <!--begin::Form-->
+                    <form id="edit_form" class="form">
+                        <!--begin::Card body-->
+                        <div class="card-body border-top p-9">
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-bold fs-6">@Html.Raw("Tên truy cập")</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row">
+                                    <input type="text" name="edit_form_userName" class="form-control form-control-lg form-control-solid" placeholder="@Html.Raw("Tên truy cập")" data-field="UserName" @if (Model.Staff != null) { <text> value="@Model.Staff.UserName" </text> } />
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-bold fs-6">@Html.Raw("Mật khẩu")</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row">
+                                    <input type="password" name="edit_form_password" class="form-control form-control-lg form-control-solid" data-field="Password" />
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-bold fs-6">Email</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row">
+                                    <input type="email" name="edit_form_email" class="form-control form-control-lg form-control-solid" placeholder="Email" data-field="Email" @if (Model.Staff != null) { <text> value="@Model.Staff.Email" </text> } />
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            
+                            <!--end::Input group-->
+                            <!--end::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-bold fs-6">Phân quyền</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row">
+                                    <select multiple name="edit_form_appRoleIds" aria-label="Select a Roles" data-control="select2" data-placeholder="@Html.Raw("Chọn phân quyền...")" data-field="AppRoleCodes" class="form-select form-select-solid form-select-lg">
+                                    </select>
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-0">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">@Html.Raw("Kích hoạt")</label>
+                                <!--begin::Label-->
+                                <!--begin::Label-->
+                                <div class="col-lg-8 d-flex align-items-center">
+                                    <div class="form-check form-check-solid form-switch fv-row">
+                                        <input class="form-check-input w-45px h-30px" type="checkbox" name="edit_form_isActive" data-field="IsActive" @if (Model.Staff != null) { if (Model.Staff.IsActive == true) { <text> checked</text>} } />
+                                        <label class="form-check-label" for="IsActive"></label>
+                                    </div>
+                                </div>
+                                <!--begin::Label-->
+                            </div>
+                            <!--end::Input group-->
+                            
+                        </div>
+                        <!--end::Card body-->
+                        <!--begin::Actions-->
+                        <div class="card-footer d-flex justify-content-end py-6 px-9">
+                            <!--begin::Button-->
+                            <button type="button" id="edit_form_submit" class="btn btn-primary">
+                                <span id="kt_modal_edit_submit_text" class="indicator-label">@Html.Raw("Cập nhật")</span>
+                                <span class="indicator-progress">
+                                    @Html.Raw("Đang cập nhật...")
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                </span>
+                            </button>
+                            <!--end::Button-->
+                        </div>
+                        <!--end::Actions-->
+                    </form>
+                    <!--end::Form-->
+                </div>
+                <!--end::Content-->
+            </div>
+            <!--end::Basic info-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Post-->
+</div>
+<!--end::Content-->

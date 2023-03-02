@@ -1,0 +1,503 @@
+﻿@model VanDonViewModel
+
+@{
+    ViewBag.Title = "Cập nhật Vận đơn";
+}
+
+@section Vendors_CSS{
+    <link rel="stylesheet" href="@Url.Content("~/plugins/DataTables/css/jquery.dataTables.css")" type="text/css">
+    <link rel="stylesheet" href="@Url.Content("~/plugins/DataTables/css/dataTables.bootstrap4.min.css")" type="text/css">
+
+}
+
+@section Custom_CSS{
+    <link href="@Url.Content("~/css/customize_third_party/customiseDatatable.css")" rel="stylesheet" />
+}
+
+@section Vendors_Scripts{
+    <script src="@Url.Content("~/plugins/DataTables/js/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/plugins/DataTables/js/dataTables.bootstrap4.min.js")"></script>
+	<script src="@Url.Content("~/js/customiseFlatpickr.js")"></script>
+}
+@section Custom_Scripts{
+	<script type="text/javascript" src="@Url.Content("~/js/util.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/VanDon/Edit.js")"></script>
+}
+
+@await Html.PartialAsync("_PartialToolbar")
+
+<script>
+    var user = {
+        userId: '@Model.CurrentUserRole.Id',
+        userName: '@User.Identity.Name',
+        roles: {
+            isAllowEdit: @if (Model.CurrentUserRole.IsAllowEdit == true) {<text>true</text>} else {<text>false</text>},
+            isAllowDelete: @if (Model.CurrentUserRole.IsAllowDelete == true) {<text>true</text>} else {<text>false</text>}
+        }
+    };
+
+	@if (Model.VanDon != null)
+    {
+        <text>
+                var editingData = {
+                    id: '@Model.VanDon.Id'
+                };
+        </text>
+		if(Model.VanDon.BuuCuc != null)
+        {
+            <text>
+                editingData.buuCuc = {
+                    id: @Model.VanDon.BuuCuc.Id,
+                    name: '@Html.Raw(Model.VanDon.BuuCuc.Name)'
+                };
+            </text>
+        }
+
+		if(Model.VanDon.DichVu != null)
+        {
+            <text>
+                editingData.dichVu = {
+                    id: @Model.VanDon.DichVu.Id,
+                    name: '@Html.Raw(Model.VanDon.DichVu.Name)'
+                };
+            </text>
+        }
+
+		if(Model.VanDon.PhuongThucThanhToan != null)
+        {
+            <text>
+                editingData.phuongThucThanhToan = {
+                    id: @Model.VanDon.PhuongThucThanhToan.Id,
+                    name: '@Html.Raw(Model.VanDon.PhuongThucThanhToan.Name)'
+                };
+            </text>
+        }
+
+		if(Model.VanDon.CongTyGuiHang != null)
+        {
+            <text>
+                editingData.congTyGuiHang = {
+                    id: @Model.VanDon.CongTyGuiHang.Id,
+                    name: '@Html.Raw(Model.VanDon.CongTyGuiHang.Name)'
+                };
+            </text>
+        }
+
+		if(Model.VanDon.User != null)
+        {
+            <text>
+                editingData.user = {
+                    id: '@Model.VanDon.User.Id',
+                    name: '@Html.Raw(Model.VanDon.User.FullName)'
+                };
+            </text>
+        }
+    }
+	else
+    {
+        <text>
+                editingData = null;
+        </text>
+    }
+
+    $(document).ready(function () {
+        EditVanDon.init();
+    });
+
+</script>
+
+<!--begin::Post-->
+<div class="post d-flex flex-column-fluid" id="kt_form_post">
+	<!--begin::Container-->
+	<div id="kt_content_container" class="container">
+		<!--begin::Careers - Apply-->
+		<div class="card">
+			<!--begin::Body-->
+			<div class="card-body p-lg-17">
+				<!--begin::Layout-->
+				<div class="d-flex flex-column flex-lg-row mb-17">
+					<!--begin::Content-->
+					<div class="flex-lg-row-fluid me-0 me-lg-20">
+						<!--begin::Form-->
+						<form action="#" class="form mb-15" id="kt_edit_form">
+							<!--begin::Title-->
+							<h4 class="fs-1 text-gray-800 w-bolder mb-6">Thông tin cơ bản</h4>
+							<!--end::Title-->
+							<!--begin::Input group-->
+							<div class="d-flex flex-column mb-5 fv-row">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-5 fw-bold mb-2">
+									<span class="required">@Html.Raw("Ngày gửi hàng")</span>
+								</label>
+								<!--end::Label-->
+								<!--begin::input-->
+								<input type="text" name="kt_form_edit_form_ngayguihang" 
+									class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 flatpickr" 
+									data-field="NgayGuiHang" placeholder="@Html.Raw("Chọn ngày gửi hàng")" 
+									value="@if (Model.VanDon != null) { <text>@Model.VanDon.NgayGuiHang.ToString("dd/MM/yyyy")</text> }"/>
+								<!--end::input-->
+								<div class="fv-plugins-message-container invalid-feedback"></div>
+							</div>
+							<!--end::Input group-->
+							<!--begin::Input group-->
+							<div class="row mb-5">
+								<!--begin::Col-->
+								<div class="col-md-4 fv-row">
+									<!--begin::Label-->
+									<label class="d-flex align-items-center fs-5 fw-bold mb-2">
+										<span>@Html.Raw("Tỉnh/Thành phố nhận hàng")</span>
+									</label>
+									<!--end::Label-->
+									<!--begin::Select-->
+									<select data-control="select2" data-placeholder="Chọn tỉnh" class="form-select form-select-solid" name="kt_form_edit_form_tinhid">
+									</select>
+									<!--end::Select-->
+								</div>
+								<!--end::Col-->
+								<!--begin::Col-->
+								<div class="col-md-4 fv-row">
+									<!--begin::Label-->
+									<label class="d-flex align-items-center fs-5 fw-bold mb-2">
+										<span>@Html.Raw("Tỉnh/Thành phố nhận hàng")</span>
+									</label>
+									<!--end::Label-->
+									<!--begin::Select-->
+									<select data-control="select2" data-placeholder="Chọn huyện" class="form-select form-select-solid" name="kt_form_edit_form_huyenid">
+									</select>
+									<!--end::Select-->
+								</div>
+								<!--end::Col-->
+								<!--begin::Col-->
+								<div class="col-md-4 fv-row">
+									<!--begin::Label-->
+									<label class="d-flex align-items-center fs-5 fw-bold mb-2">
+										<span>@Html.Raw("Khu vực hàng đến")</span>
+									</label>
+									<!--end::Label-->
+									<!--begin::Select-->
+									<select data-control="select2" data-placeholder="Chọn khu vực" class="form-select form-select-solid" name="kt_form_edit_form_khuvucid">
+									</select>
+									<!--end::Select-->
+								</div>
+								<!--end::Col-->
+							</div>
+							<!--end::Input group-->
+							<!--begin::Input group-->
+							<div class="d-flex flex-column mb-5 fv-row">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-5 fw-bold mb-2">
+									<span class="required">@Html.Raw("Bưu cục hàng đến")</span>
+								</label>
+								<!--end::Label-->
+								<!--begin::Select-->
+								<select data-control="select2" data-placeholder="Chọn bưu cục" class="form-select form-select-solid" 
+										data-field="BuuCucHangDenId" name="kt_form_edit_form_buucucid">									
+								</select>
+								<!--end::Select-->
+								<div class="fv-plugins-message-container invalid-feedback"></div>
+							</div>
+							<!--end::Input group-->
+							<!--begin::Input group-->
+							<div class="row mb-5">
+								<!--begin::Col-->
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class="d-flex align-items-center fs-5 fw-bold mb-2">
+										<span class="required">@Html.Raw("Phân loại chuyển phát nhanh")</span>
+									</label>
+									<!--end::Label-->
+									<!--begin::Select-->
+									<select data-control="select2" data-placeholder="Chọn dịch vụ" class="form-select form-select-solid" data-field="DichVuId" name="kt_form_edit_form_dichvuid">
+									</select>
+									<!--end::Select-->
+									<div class="fv-plugins-message-container invalid-feedback"></div>
+								</div>
+								<!--end::Col-->
+								<!--begin::Col-->
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class="d-flex align-items-center fs-5 fw-bold mb-2">
+										<span class="required">@Html.Raw("Phương thức thanh toán")</span>
+									</label>
+									<!--end::Label-->
+									<!--begin::Select-->
+									<select data-control="select2" data-placeholder="Chọn phương thức thanh toán" class="form-select form-select-solid" data-field="PhuongThucThanhToanId" name="kt_form_edit_form_phuongthucthanhtoanid">
+									</select>
+									<!--end::Select-->
+									<div class="fv-plugins-message-container invalid-feedback"></div>
+								</div>
+								<!--end::Col-->
+							</div>
+							<!--end::Input group-->
+							<!--begin::Input group-->
+							<div class="row mb-5">
+								<!--begin::Col-->
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class="d-flex align-items-center fs-5 fw-bold mb-2">
+										<span class="required">@Html.Raw("Nhân viên bưu cục lấy hàng")</span>
+									</label>
+									<!--end::Label-->
+									<!--begin::Select-->
+									<select data-control="select2" data-placeholder="Chọn nhân viên" class="form-select form-select-solid" data-field="NhanVienLayHangId" name="kt_form_edit_form_userid">
+									</select>
+									<!--end::Select-->
+								</div>
+								<!--end::Col-->
+								<!--begin::Col-->
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class="d-flex align-items-center fs-5 fw-bold mb-2">
+										<span>@Html.Raw("Công ty gửi hàng")</span>
+									</label>
+									<!--end::Label-->
+									<!--begin::Select-->
+									<select data-control="select2" data-placeholder="Chọn công ty gửi hàng" class="form-select form-select-solid" data-field="CongTyGuiHangId" name="kt_form_edit_form_congtyguihangid">
+									</select>
+									<!--end::Select-->
+								</div>
+								<!--end::Col-->
+							</div>
+							<!--end::Input group-->
+							<!--begin::Separator-->
+							<div class="separator mb-8"></div>
+							<!--end::Separator-->
+							<!--begin::Title-->
+							<h4 class="fs-1 text-gray-800 w-bolder mb-6">Thông tin người gửi-nhận</h4>
+							<!--end::Title-->
+							<!--begin::Input group-->
+							<div class="row mb-5">
+								<!--begin::Col-->
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class="required fs-5 fw-bold mb-2">@Html.Raw("Người gửi")</label>
+									<!--end::Label-->
+									<!--begin::Input-->
+									<input type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Người gửi")"
+													   data-field="HoTenNguoiGui" name="kt_form_edit_form_ten_nguoi_gui" 
+													   value="@if (Model.VanDon != null) { <text>@Model.VanDon.HoTenNguoiGui</text> }"/>
+									<!--end::Input-->
+								</div>
+								<!--end::Col-->
+								<!--begin::Col-->
+								<div class="col-md-6 fv-row">
+									<!--end::Label-->
+									<label class="fs-5 fw-bold mb-2">@Html.Raw("Điện thoại người gửi")</label>
+									<!--end::Label-->
+									<!--end::Input-->
+									<input type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Điện thoại người gửi")" 
+													   data-field="DienThoaiNguoiGui" name="kt_form_edit_form_dien_thoai_nguoi_gui"
+													   value="@if (Model.VanDon != null) { <text>@Model.VanDon.DienThoaiNguoiGui</text> }"/>
+									<!--end::Input-->
+								</div>
+								<!--end::Col-->
+							</div>
+							<!--end::Input group-->
+							<!--begin::Input group-->
+							<div class="d-flex flex-column mb-5 fv-row">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-5 fw-bold mb-2">
+									<span>@Html.Raw("Địa chỉ người gửi")</span>
+								</label>
+								<!--end::Label-->
+								<!--end::Input-->
+								<textarea type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Địa chỉ người gửi")" 
+													  data-field="DiaChiNguoiGui" name="kt_form_edit_form_dia_chi_nguoi_gui">
+													  @if (Model.VanDon != null) { <text>@Model.VanDon.DiaChiNguoiGui</text> }
+								</textarea>
+								<!--end::Input-->
+							</div>
+							<!--end::Input group-->
+							<!--begin::Input group-->
+							<div class="row mb-5">
+								<!--begin::Col-->
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class="required fs-5 fw-bold mb-2">@Html.Raw("Người nhận")</label>
+									<!--end::Label-->
+									<!--begin::Input-->
+									<input type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Người nhận")" 
+													   data-field="HoTenNguoiNhan" name="kt_form_edit_form_ten_nguoi_nhan"
+													   value="@if (Model.VanDon != null) { <text>@Model.VanDon.HoTenNguoiNhan</text> }"/>
+									<!--end::Input-->
+									<div class="fv-plugins-message-container invalid-feedback"></div>
+								</div>
+								<!--end::Col-->
+								<!--begin::Col-->
+								<div class="col-md-6 fv-row">
+									<!--end::Label-->
+									<label class="required fs-5 fw-bold mb-2">@Html.Raw("Điện thoại người nhận")</label>
+									<!--end::Label-->
+									<!--end::Input-->
+									<input type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Điện thoại người nhận")" 
+													   data-field="DienThoaiNguoiNhan" name="kt_form_edit_form_dien_thoai_nguoi_nhan"
+													   value="@if (Model.VanDon != null) { <text>@Model.VanDon.DienThoaiNguoiNhan</text> }"/>
+									<!--end::Input-->
+									<div class="fv-plugins-message-container invalid-feedback"></div>
+								</div>
+								<!--end::Col-->
+							</div>
+							<!--end::Input group-->
+							<!--begin::Input group-->
+							<div class="d-flex flex-column mb-5 fv-row">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-5 fw-bold mb-2">
+									<span class="required">@Html.Raw("Địa chỉ người nhận")</span>
+								</label>
+								<!--end::Label-->
+								<!--end::Input-->
+								<textarea type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Địa chỉ người nhận")" 
+													  data-field="DiaChiNguoiNhan" name="kt_form_edit_form_dia_chi_nguoi_nhan">
+													  @if (Model.VanDon != null) { <text>@Model.VanDon.DiaChiNguoiNhan</text> }
+								</textarea>
+								<!--end::Input-->
+								<div class="fv-plugins-message-container invalid-feedback"></div>
+							</div>
+							<!--end::Input group-->
+							<!--begin::Input group-->
+							<div class="d-flex flex-column mb-5 fv-row">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-5 fw-bold mb-2">
+									<span>@Html.Raw("Địa chỉ công ty")</span>
+								</label>
+								<!--end::Label-->
+								<!--end::Input-->
+								<textarea type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Địa chỉ công ty")" 
+													  name="kt_form_edit_form_dia_chi_cong_ty">
+								</textarea>
+								<!--end::Input-->
+							</div>
+							<!--end::Input group-->
+							<!--begin::Input group-->
+							<div class="d-flex flex-column mb-5 fv-row">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-5 fw-bold mb-2">
+									<span>@Html.Raw("Ghi chú")</span>
+								</label>
+								<!--end::Label-->
+								<!--end::Input-->
+								<textarea type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Ghi chú")" 
+													  data-field="Description" name="kt_form_edit_form_description">
+													  @if (Model.VanDon != null) { <text>@Model.VanDon.Description</text> }
+								</textarea>
+								<!--end::Input-->
+							</div>
+							<!--end::Input group-->
+							<!--begin::Separator-->
+							<div class="separator mb-8"></div>
+							<!--end::Separator-->
+							<!--begin::Title-->
+							<h4 class="fs-1 text-gray-800 w-bolder mb-6">Thông tin mặt hàng</h4>
+							<!--end::Title-->
+							<!--begin::Input group-->
+							<div class="d-flex flex-column mb-5 fv-row">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-5 fw-bold mb-2">
+									<span>@Html.Raw("Nội dung hàng hóa")</span>
+								</label>
+								<!--end::Label-->
+								<!--end::Input-->
+								<textarea type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Nội dung hàng hóa")" 
+													  data-field="NoiDungHangHoa" name="kt_form_edit_form_mo_ta_hang_hoa">
+													  @if (Model.VanDon != null) { <text>@Model.VanDon.MoTaHangHoa</text> }
+								</textarea>
+								<!--end::Input-->
+							</div>
+							<!--end::Input group-->
+							<!--begin::Input group-->
+							<div class="row mb-5">
+								<!--begin::Col-->
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class="d-flex align-items-center fs-5 fw-bold mb-2">
+										<span>@Html.Raw("Giá trị hàng hóa")</span>
+									</label>
+									<!--end::Label-->
+									<!--end::Input-->
+									<input type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Giá trị hàng hóa")" 
+													   data-field="GiaTriHangHoa" name="kt_form_edit_form_gia_tri_hang_hoa"
+													   value="@if (Model.VanDon != null) { <text>@Model.VanDon.GiaTriHangHoa</text> }"/>
+									<!--end::Input-->
+								</div>
+								<!--end::Col-->
+								<!--begin::Col-->
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class="d-flex align-items-center fs-5 fw-bold mb-2">
+										<span>@Html.Raw("COD")</span>
+									</label>
+									<!--end::Label-->
+									<!--end::Input-->
+									<input type="text" class="form-control form-control-solid" placeholder="@Html.Raw("COD")" 
+													   data-field="COD" name="kt_form_edit_form_cod"
+													   value="@if (Model.VanDon != null) { <text>@Model.VanDon.COD</text> }"/>
+									<!--end::Input-->
+								</div>
+								<!--end::Col-->
+							</div>
+							<!--end::Input group-->
+							<!--begin::Separator-->
+							<div class="separator mb-8"></div>
+							<!--end::Separator-->
+							<!--begin::Title-->
+							<h4 class="fs-1 text-gray-800 w-bolder mb-6">Thông tin tính phí</h4>
+							<!--end::Title-->
+							<!--begin::Input group-->
+							<div class="row mb-5">
+								<!--begin::Col-->
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class="required fs-5 fw-bold mb-2">@Html.Raw("Trọng lượng thực")</label>
+									<!--end::Label-->
+									<!--end::Input-->
+									<input type="text" class="form-control form-control-solid" placeholder="@Html.Raw("trọng lượng thực")" 
+													   data-field="TrongLuong" name="kt_form_edit_form_trong_luong"
+													   value="@if (Model.VanDon != null) { <text>@Model.VanDon.TrongLuong</text> }"/>
+									<!--end::Input-->
+								</div>
+								<!--end::Col-->
+								<!--begin::Col-->
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class="required fs-5 fw-bold mb-2">@Html.Raw("Phí bảo hiểm")</label>
+									<!--end::Label-->
+									<!--end::Input-->
+									<input disabled="disabled" type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Phí bảo hiểm")" name="kt_form_edit_form_phi_bao_hiem"/>
+									<!--end::Input-->
+								</div>
+								<!--end::Col-->
+							</div>
+							<!--end::Input group-->							
+							<!--begin::Separator-->
+							<div class="separator mb-8"></div>
+							<!--end::Separator-->
+							<div class="flex-center">
+								<!--begin::Button-->
+								<a asp-controller="VanDon" asp-action="Index" type="button" class="btn btn-light me-3">@Html.Raw("Trở về")</a>
+								<!--end::Button-->
+								<!--begin::Submit-->
+								<button type="button" class="btn btn-primary" id="kt_form_edit_submit">
+									<!--begin::Indicator-->
+									<span class="indicator-label" id="kt_form_edit_submit_text">@Html.Raw("Cập nhật")</span>
+									<span class="indicator-progress">
+										@Html.Raw("Đang cập nhật...")
+										<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+									</span>
+									<!--end::Indicator-->
+								</button>
+								<!--end::Submit-->
+							</div>							
+						</form>
+						<!--end::Form-->
+					</div>
+					<!--end::Content-->
+				</div>
+				<!--end::Layout-->
+			</div>
+			<!--end::Body-->
+		</div>
+		<!--end::Careers - Apply-->
+	</div>
+	<!--end::Container-->
+</div>
+<!--end::Post-->

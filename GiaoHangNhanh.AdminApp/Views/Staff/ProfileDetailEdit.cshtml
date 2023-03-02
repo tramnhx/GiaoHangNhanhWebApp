@@ -1,0 +1,254 @@
+﻿@model StaffViewModel
+
+@{
+    ViewBag.Title = "Nhân viên";
+}
+
+@section Vendors_CSS{
+
+}
+
+@section Custom_CSS{
+    <link href="@Url.Content("~/css/Staff/ProfileDetailEdit.css")" rel="stylesheet" />
+}
+
+@section Vendors_Scripts{
+    <script src="@Url.Content("~/js/customize_third_party/customiseFlatpickr.js")"></script>
+}
+
+@section Custom_Scripts{
+    <script type="text/javascript" src="@Url.Content("~/js/Staff/ProfileDetailEdit.js")"></script>
+}
+
+<script>
+    var user = {
+        userId: '@Model.CurrentUserRole.Id',
+        userName: '@User.Identity.Name',
+        roles: {
+            isAllowEdit: @if (Model.CurrentUserRole.IsAllowEdit == true) {<text>true</text>} else {<text>false</text>},
+            isAllowDelete: @if (Model.CurrentUserRole.IsAllowDelete == true) {<text>true</text>} else {<text>false</text>}
+        }
+    };
+
+    @if (Model.Staff != null)
+    {
+        <text>
+            var editingData = {
+                id: '@Model.Staff.Id'
+            };
+        </text>
+
+    }
+    else
+    {
+        <text>
+            editingData = null;
+        </text>
+    }
+
+    $(document).ready(function () {
+        Staff.init();
+    });
+
+</script>
+
+@await Html.PartialAsync("_PartialToolbar")
+
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Post-->
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container">
+            @await Html.PartialAsync("_PartialEditHeader")
+
+            <!--begin::Basic info-->
+            <div class="card mb-5 mb-xl-10">
+                <!--begin::Card header-->
+                <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#edit" aria-expanded="true" aria-controls="edit">
+                    <!--begin::Card title-->
+                    <div class="card-title m-0">
+                        <h3 class="fw-bolder m-0">@Html.Raw("Thông tin cá nhân")</h3>
+                    </div>
+                    <!--end::Card title-->
+                </div>
+                <!--begin::Card header-->
+                <!--begin::Content-->
+                <div id="edit" class="collapse show">
+                    <!--begin::Form-->
+                    <form id="edit_form" class="form">
+                        <!--begin::Card body-->
+                        <div class="card-body border-top p-9">
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">@Html.Raw("Hình ảnh")</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8">
+                                    <!--begin::Image input-->
+                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(/theme/dist/assets/media/avatars/blank.png)">
+                                        <!--begin::Preview existing avatar-->
+                                        <div class="image-input-wrapper w-125px h-125px" id="edit_form_previewAvatar" style="background-image: url(@if (Model.Staff != null) { <text>@Model.Staff.Avatar</text>})"></div>
+                                        <!--end::Preview existing avatar-->
+                                        <!--begin::Label-->
+                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                                            <i class="bi bi-pencil-fill fs-7"></i>
+                                            <!--begin::Inputs-->
+                                            <input type="file" name="edit_form_avatar" data-field="Avatar" accept=".png, .jpg, .jpeg" />
+                                            <input type="hidden" id="btnDeleteAvatar" name="avatar_remove" />
+                                            <!--end::Inputs-->
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Cancel-->
+                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+                                            <i class="bi bi-x fs-2"></i>
+                                        </span>
+                                        <!--end::Cancel-->
+                                        <!--begin::Remove-->
+                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                                            <i class="bi bi-x fs-2"></i>
+                                        </span>
+                                        <!--end::Remove-->
+                                    </div>
+                                    <!--end::Image input-->
+                                    <!--begin::Hint-->
+                                    <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+                                    <!--end::Hint-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-bold fs-6">@Html.Raw("Mã nhân viên")</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row">
+                                    <input type="text" name="edit_form_code" class="form-control form-control-lg form-control-solid" placeholder="@Html.Raw("Mã nhân viên")" data-field="MaNhanVien" @if (Model.Staff != null) { if (Model.Staff.MaNhanVien != null) { <text> value="@Model.Staff.MaNhanVien" </text> } } />
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-bold fs-6">@Html.Raw("Họ và tên")</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 fv-row">
+                                            <input type="text" name="edit_form_lastName" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" data-field="LastName" placeholder="@Html.Raw("Họ")" @if (Model.Staff != null) { <text> value="@Model.Staff.LastName" </text> } />
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 fv-row">
+                                            <input type="text" name="edit_form_firstName" class="form-control form-control-lg form-control-solid" data-field="FirstName" placeholder="@Html.Raw("Tên")" @if (Model.Staff != null) { <text> value="@Model.Staff.FirstName" </text> } />
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-bold fs-6">@Html.Raw("Ngày sinh")</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row">
+                                    <input type="text" name="edit_form_dob" class="form-control form-control-lg form-control-solid" placeholder="@Html.Raw("Ngày sinh")" data-field="Dob" @if (Model.Staff != null) { if (Model.Staff.Dob != null) { <text> value="@Model.Staff.Dob.Value.ToString("dd/MM/yyyy")" </text> } } />
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-bold fs-6">@Html.Raw("Điện thoại")</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row">
+                                    <input type="tel" name="edit_form_phoneNumber" class="form-control form-control-lg form-control-solid" placeholder="@Html.Raw("Điện thoại")" data-field="PhoneNumber" @if (Model.Staff != null) { <text> value="@Model.Staff.PhoneNumber" </text> } />
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-bold fs-6">@Html.Raw("Địa chỉ")</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row">
+                                    <input type="text" name="edit_form_address" class="form-control form-control-lg form-control-solid" placeholder="@Html.Raw("Địa chỉ")" data-field="Address" @if (Model.Staff != null) { if (Model.Staff.Address != null)
+                                        { <text> value="@Model.Staff.Address" </text> }}
+                                    } />
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-bold fs-6">@Html.Raw("Thời gian công tác")</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 fv-row">
+                                            <input type="text" name="edit_form_startingDate" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 flatpickr" data-field="StartingDate" placeholder="@Html.Raw("Ngày bắt đầu làm việc")" @if (Model.Staff != null) { <text> value="@Model.Staff.StrStartingDate" </text> } />
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 fv-row">
+                                            <input type="text" name="edit_form_leaveDate" class="form-control form-control-lg form-control-solid flatpickr" data-field="LeaveDate" placeholder="@Html.Raw("Ngày nghỉ việc")" @if (Model.Staff != null) { <text> value="@Model.Staff.StrLeaveDate" </text> } />
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+                        <!--end::Card body-->
+                        <!--begin::Actions-->
+                        <div class="card-footer d-flex justify-content-end py-6 px-9">
+                            @if (Model.CurrentUserRole.IsAllowEdit)
+                            {
+                                <text>
+                                    <!--begin::Button-->
+                                    <button type="button" id="edit_form_submit" class="btn btn-primary">
+                                        <span id="kt_modal_edit_submit_text" class="indicator-label">@Html.Raw("Cập nhật")</span>
+                                        <span class="indicator-progress">
+                                            @Html.Raw("Đang cập nhật...")
+                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                        </span>
+                                    </button>
+                                    <!--end::Button-->
+                                </text>
+                            }
+
+                        </div>
+                        <!--end::Actions-->
+                    </form>
+                    <!--end::Form-->
+                </div>
+                <!--end::Content-->
+            </div>
+            <!--end::Basic info-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Post-->
+</div>
+<!--end::Content-->
