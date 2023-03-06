@@ -6,8 +6,6 @@ using GiaoHangNhanh.Services.System;
 using GiaoHangNhanh.Services.UI;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-
-
 namespace GiaoHangNhanh.Services
 {
     public static class DIService
@@ -42,6 +40,7 @@ namespace GiaoHangNhanh.Services
             services.AddTransient<ILichSuThaoBaoService, LichSuThaoBaoService>();
             services.AddTransient<ILichSuDongBaoService, LichSuDongBaoService>();
             services.AddTransient<ILichSuGuiHangService, LichSuGuiHangService>();
+            services.AddTransient<ILichSuHangDenService, LichSuHangDenService>();
             services.AddTransient<IDangKyChuyenHoanService, DangKyChuyenHoanService>();
             services.AddTransient<IDangKyKienVanDeService, DangKyKienVanDeService>();
             services.AddTransient<ILichSuXeDiService, LichSuXeDiService>();
