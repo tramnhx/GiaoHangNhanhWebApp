@@ -37,8 +37,8 @@ namespace GiaoHangNhanh.AdminApp.Controllers
             model.CurrentUserRole = InternalService.FixedUserRole(HttpContext.Session.GetObject<UserDto>(SystemConstants.UserConstants.CurrentUserRoleSession),
                                                                                                             (ControllerContext.ActionDescriptor).ControllerName,
                                                                                                             (ControllerContext.ActionDescriptor).ActionName);
-            model.PageTitle = "Nhân viên";
-            model.Breadcrumbs = new List<string>() { "Cài đặt", "Nhân viên" };
+            model.PageTitle = "Người sử dụng";
+            model.Breadcrumbs = new List<string>() { "Cài đặt", "Người sử dụng" };
 
             var appRoleApiClient = await _appRoleApiClient.GetAll(new ManageAppRolePagingRequest());
 
