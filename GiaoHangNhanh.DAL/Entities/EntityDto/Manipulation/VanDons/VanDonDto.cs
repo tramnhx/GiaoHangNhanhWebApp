@@ -17,6 +17,7 @@ namespace GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.VanDons
         public string MoTaHangHoa { get; set; }
         public Decimal COD { get; set; }
         public DateTime NgayGuiHang { get; set; }
+        public string StrNgayGuiHang { get; set; }
         public string NoiDungHangHoa { get; set; }
 
         // Thông tin người gửi
