@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Reflection;
 
 namespace GiaoHangNhanh.DAL.EF
 {
@@ -43,6 +44,8 @@ namespace GiaoHangNhanh.DAL.EF
             modelBuilder.ApplyConfiguration(new PhanLoaiHangBatThuongConfiguration());
             modelBuilder.ApplyConfiguration(new PhuongThucThanhToanConfiguration());
             modelBuilder.ApplyConfiguration(new TinhConfiguration());
+            modelBuilder.ApplyConfiguration(new NhanVienConfiguration());
+            modelBuilder.ApplyConfiguration(new GenderConfiguration());
 
             //Manipulation
             modelBuilder.ApplyConfiguration(new DangKyChuyenHoanConfiguration());
@@ -55,7 +58,6 @@ namespace GiaoHangNhanh.DAL.EF
             modelBuilder.ApplyConfiguration(new LichSuNhapKhoConfigutaion());
             modelBuilder.ApplyConfiguration(new LichSuHangDenConfiguration());
 
-            //modelBuilder.ApplyConfiguration(new NhanVienChuyenPhatConfiguration());
             //modelBuilder.ApplyConfiguration(new PhanLoaiVanDonConfiguration());
 
             //Vận đơn
@@ -89,14 +91,13 @@ namespace GiaoHangNhanh.DAL.EF
         public DbSet<LichSuNhapKho> LichSuNhapKhos { get; set; }
         public DbSet<Menu> Menus { get; set; }
         public DbSet<MenuAppRole> MenuAppRoles { get; set; }
-        public DbSet<NhanVienChuyenPhat> NhanVienChuyenPhats { get; set; }
         public DbSet<PhanLoaiHangBatThuong> PhanLoaiHangBatThuongs { get; set; }
         public DbSet<PhanLoaiVanDon> PhanLoaiVanDons { get; set; }
         public DbSet<PhuongThucThanhToan> PhuongThucThanhToans { get; set; }
         public DbSet<Tinh> Tinhs { get; set; }
         public DbSet<VanDon> VanDons { get; set; }
+        public DbSet<Gender> Genders { get; set; }
+        public DbSet<NhanVien> NhanViens { get; set; }
 
-
-       
     }
 }

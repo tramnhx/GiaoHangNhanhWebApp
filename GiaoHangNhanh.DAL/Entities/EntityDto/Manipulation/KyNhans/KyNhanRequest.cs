@@ -21,7 +21,7 @@ namespace GiaoHangNhanh.DAL.Entities.EntityDto.Manipulation.KyNhans
         public string TenNguoiKy { get; set; }
         public bool DauKyThay { get; set; }
         public BuuCuc DanhMucBuuCuc { get; set; }
-        public NhanVienChuyenPhat NhanVienChuyenPhat { get; set; }
+        public NhanVien NhanVien { get; set; }
         public VanDon VanDon { get; set; }
     }
 }

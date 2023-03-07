@@ -20,6 +20,7 @@ namespace GiaoHangNhanh.ApiIntegration
             services.AddTransient<IPhuongThucThanhToanApiClient, PhuongThucThanhToanApiClient>();
             services.AddTransient<ITinhApiClient, TinhApiClient>();
             services.AddTransient<IUserApiClient, UserApiClient>();
+            services.AddTransient<INhanVienApiClient, NhanVienApiClient>();
 
 
             //

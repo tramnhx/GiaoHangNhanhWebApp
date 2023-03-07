@@ -10,7 +10,7 @@ namespace GiaoHangNhanh.DAL.Entities.Entity
         public Tinh Tinh { get; set; }
         public Huyen Huyen { get; set; }
         public KhuVuc KhuVuc { get; set; }
-        public ICollection<NhanVienChuyenPhat> NhanVienChuyenPhats { get; set; }
+        public ICollection<NhanVien> NhanViens { get; set; }
         public ICollection<KyNhan> KyNhans { get; set; }
         public ICollection<LichSuChuyenHang> LichSuChuyenHangs { get; set; }
         public ICollection<LichSuGuiHang> LichSuGuiHangs { get; set; }

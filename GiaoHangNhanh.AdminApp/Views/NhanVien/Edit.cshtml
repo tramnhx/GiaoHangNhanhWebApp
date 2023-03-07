@@ -1,0 +1,350 @@
+﻿@model NhanVienViewModel
+
+@{
+    ViewBag.Title = "Cập nhật nhân viên";
+}
+
+@section Vendors_CSS{
+    <link rel="stylesheet" href="@Url.Content("~/plugins/DataTables/css/jquery.dataTables.css")" type="text/css">
+    <link rel="stylesheet" href="@Url.Content("~/plugins/DataTables/css/dataTables.bootstrap4.min.css")" type="text/css">
+
+}
+
+@section Custom_CSS{
+    <link href="@Url.Content("~/css/customize_third_party/customiseDatatable.css")" rel="stylesheet" />
+}
+
+@section Vendors_Scripts{
+    <script src="@Url.Content("~/plugins/DataTables/js/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/plugins/DataTables/js/dataTables.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/js/customiseFlatpickr.js")"></script>
+    <script src="~/plugins/Inputmask-5.x/dist/jquery.inputmask.js"></script>
+}
+@section Custom_Scripts{
+    <script type="text/javascript" src="@Url.Content("~/js/util.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/NhanVien/Edit.js")"></script>
+}
+
+@await Html.PartialAsync("_PartialToolbar")
+
+<script>
+    var user = {
+        userId: '@Model.CurrentUserRole.Id',
+        userName: '@User.Identity.Name',
+        roles: {
+            isAllowEdit: @if (Model.CurrentUserRole.IsAllowEdit == true) {<text>true</text>} else {<text>false</text>},
+            isAllowDelete: @if (Model.CurrentUserRole.IsAllowDelete == true) {<text>true</text>} else {<text>false</text>}
+        }
+    };
+
+	@if (Model.NhanVien != null)
+    {
+        <text>
+                var editingData = {
+                    id: '@Model.NhanVien.Id'
+                };
+        </text>
+        if (Model.NhanVien.Gender != null)
+        {
+            <text>
+                editingData.gender = {
+                    id: @Model.NhanVien.Gender.Id,
+                    name: '@Html.Raw(Model.NhanVien.Gender.Name)'
+                };
+            </text>
+        }
+        if (Model.NhanVien.BuuCuc != null)
+        {
+            <text>
+                editingData.buuCuc = {
+                    id: @Model.NhanVien.BuuCuc.Id,
+                    name: '@Html.Raw(Model.NhanVien.BuuCuc.Name)'
+                };
+            </text>
+        }
+    }
+	else
+    {
+        <text>
+                editingData = null;
+        </text>
+    }
+
+    $(document).ready(function () {
+        EditNhanVien.init();
+    });
+
+</script>
+<!--begin::Post-->
+<div class="post d-flex flex-column-fluid" id="kt_form_post">
+    <!--begin::Container-->
+    <div id="kt_content_container" class="container">
+        <!--begin::Careers - Apply-->
+        <div class="card">
+            <!--begin::Body-->
+            <div class="card-body p-lg-17">
+                <!--begin::Layout-->
+                <div class="d-flex flex-column flex-lg-row mb-17">
+                    <!--begin::Content-->
+                    <div class="flex-lg-row-fluid me-0 me-lg-20">
+                        <!--begin::Form-->
+                        <form action="#" class="form mb-15" id="kt_edit_form">
+                            <!--begin::Title-->
+                            <h4 class="fs-1 text-gray-800 w-bolder mb-6">Thông tin cơ bản</h4>
+                            <!--end::Title-->
+                            <!--begin::Input group-->
+                            <div class="row mb-5">
+                                <!--begin::Col-->
+                                <label class="required fs-5 fw-bold mb-2">@Html.Raw("Họ và tên nhân viên")</label>
+                                <div class="col-md-4 fv-row">
+                                    <!--begin::Input-->
+                                    <input type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Họ nhân viên")" data-field="LastName" name="kt_form_edit_form_ho_nhan_vien" @if (Model.NhanVien != null) { if (Model.NhanVien.LastName != null) { <text> value="@Model.NhanVien.LastName" </text> } } />
+                                    <!--end::Input-->
+                                </div>
+                                <div class="col-md-3 fv-row">
+                                    <!--begin::Input-->
+                                    <input type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Tên nhân viên")" data-field="FirstName" name="kt_form_edit_form_ten_nhan_vien" @if (Model.NhanVien != null) { if (Model.NhanVien.FirstName != null) { <text> value="@Model.NhanVien.FirstName" </text> } } />
+                                    <!--end::Input-->
+                                </div>
+                            </div>
+                            <div class="row mb-6">
+                                <!--begin::Col-->
+                                <div class="col-lg-8">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 fv-row">
+                                            <label class="col-lg-4 col-form-label required fw-bold fs-6">@Html.Raw("Ngày sinh")</label>
+                                            <input type="text" name="kt_form_edit_form_ngaysinh" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 flatpickr" data-field="NgaySinh" placeholder="@Html.Raw("Ngày sinh")" @if (Model.NhanVien != null) { if (Model.NhanVien.NgaySinh != null) { <text> value="@Model.NhanVien.NgaySinh.Value.ToString("dd/MM/yyyy")" </text> } } />
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 fv-row">
+                                            <label class="col-lg-4 col-form-label required fw-bold fs-6">@Html.Raw("Giới tính")</label>
+                                            <select data-control="select2"
+                                                    data-placeholder="Chọn giới tính"
+                                                    class="form-select form-select-solid" data-field="GenderId" name="kt_form_edit_form_gioitinh">
+                                            </select>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <div class="row mb-6">
+                                <!--begin::Col-->
+                                <div class="col-lg-8">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 fv-row">
+                                            <label class="col-lg-4 col-form-label required fw-bold fs-6">@Html.Raw("CMND/CCCD")</label>
+                                            <input type="text" class="form-control form-control-solid" placeholder="@Html.Raw("CMND/CCCD")" data-field="CCCD" name="kt_form_edit_form_cccd" @if (Model.NhanVien != null) { if (Model.NhanVien.CCCD != null) { <text> value="@Model.NhanVien.CCCD" </text> } } />
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 fv-row">
+                                            <label class="col-lg-4 col-form-label required fw-bold fs-6">@Html.Raw("Số điện thoại")</label>
+                                            <input type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Số điện thoại")" data-field="SoDienThoai" name="kt_form_edit_form_soDienThoai" @if (Model.NhanVien != null) { if (Model.NhanVien.SoDienThoai != null) { <text> value="@Model.NhanVien.SoDienThoai" </text> } } />
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <div class="row mb-12">
+                                <!--begin::Col-->
+                                <div class="col-lg-12">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-md-4 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="d-flex align-items-center fs-5 fw-bold mb-2">
+                                                <span>@Html.Raw("Email")</span>
+                                            </label>
+                                            <!--end::Label-->
+                                            <!--end::Input-->
+                                            <input type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Email")" data-field="Email" name="kt_form_edit_form_email" @if (Model.NhanVien != null) { if (Model.NhanVien.Email != null) { <text> value="@Model.NhanVien.Email" </text> } } />
+                                            <!--end::Input-->
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-md-6 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="d-flex align-items-center fs-5 fw-bold mb-2">
+                                                <span>@Html.Raw("Nơi sinh")</span>
+                                            </label>
+                                            <!--end::Label-->
+                                            <!--end::Input-->
+                                            <input type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Nơi sinh")" data-field="NoiSinh" name="kt_form_edit_form_noisinh" @if (Model.NhanVien != null) { if (Model.NhanVien.NoiSinh != null) { <text> value="@Model.NhanVien.NoiSinh" </text> } } />
+                                            <!--end::Input-->
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <div class="col-md-8 fv-row">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-5 fw-bold mb-2">
+                                    <span>@Html.Raw("Địa chỉ")</span>
+                                </label>
+                                <!--end::Label-->
+                                <!--end::Input-->
+                                <input type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Địa chỉ")" data-field="DiaChi" name="kt_form_edit_form_diachi" @if (Model.NhanVien != null) { if (Model.NhanVien.DiaChi != null) { <text> value="@Model.NhanVien.DiaChi" </text> } } />
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="mb-8"></div>
+                            <div class="separator mb-8"></div>
+                            <!--end::Separator-->
+                            <!--begin::Title-->
+                            <h4 class="fs-1 text-gray-800 w-bolder mb-6">Thông tin làm việc</h4>
+                            <!--begin::Col-->
+                            <div class="col-md-6 fv-row">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-5 fw-bold mb-2">
+                                    <span>@Html.Raw("Mã nhân viên")</span>
+                                </label>
+                                <!--end::Label-->
+                                <!--end::Input-->
+                                <input type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Mã nhân viên")" data-field="Code" name="kt_form_edit_form_noisinh" @if (Model.NhanVien != null) { if (Model.NhanVien.Code != null) { <text> value="@Model.NhanVien.Code" </text> } } />
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Col-->
+                            <div class="row mb-5">
+                                <!--begin::Col-->
+                                <div class="col-md-4 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="d-flex align-items-center fs-5 fw-bold mb-2">
+                                        <span>@Html.Raw("Tỉnh/Thành phố")</span>
+                                    </label>
+                                    <!--end::Label-->
+                                    <!--begin::Select-->
+                                    <select data-control="select2" data-placeholder="Chọn tỉnh" class="form-select form-select-solid" name="kt_form_edit_form_tinhid">
+                                    </select>
+                                    <!--end::Select-->
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="col-md-4 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="d-flex align-items-center fs-5 fw-bold mb-2">
+                                        <span>@Html.Raw("Quận/huyện")</span>
+                                    </label>
+                                    <!--end::Label-->
+                                    <!--begin::Select-->
+                                    <select data-control="select2" data-placeholder="Chọn huyện" class="form-select form-select-solid" name="kt_form_edit_form_huyenid">
+                                    </select>
+                                    <!--end::Select-->
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="col-md-4 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="d-flex align-items-center fs-5 fw-bold mb-2">
+                                        <span>@Html.Raw("Khu vực")</span>
+                                    </label>
+                                    <!--end::Label-->
+                                    <!--begin::Select-->
+                                    <select data-control="select2" data-placeholder="Chọn khu vực" class="form-select form-select-solid" name="kt_form_edit_form_khuvucid">
+                                    </select>
+                                    <!--end::Select-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="d-flex flex-column mb-5 fv-row">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-5 fw-bold mb-2">
+                                    <span class="required">@Html.Raw("Bưu cục làm việc")</span>
+                                </label>
+                                <!--end::Label-->
+                                <!--begin::Select-->
+                                <select data-control="select2" data-placeholder="Chọn bưu cục làm việc" class="form-select form-select-solid" data-field="BuuCucLamViecId" name="kt_form_edit_form_buucucid">
+                                </select>
+                                <!--end::Select-->
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-bold fs-6">@Html.Raw("Thời gian làm việc")</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 fv-row">
+                                            <input type="text" name="kt_form_edit_form_ngayLamViec" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 flatpickr" data-field="NgayLamViec" placeholder="@Html.Raw("Ngày bắt đầu làm việc")" @if (Model.NhanVien != null) { if (Model.NhanVien.NgayLamViec != null) { <text> value="@Model.NhanVien.NgayLamViec.Value.ToString("dd/MM/yyyy")" </text> } } />
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 fv-row">
+                                            <input type="text" name="edit_form_ngayNghiViec" class="form-control form-control-lg form-control-solid flatpickr" data-field="NgayNghiViec" placeholder="@Html.Raw("Ngày nghỉ việc")" @if (Model.NhanVien != null) { <text> value="@Model.NhanVien.NgayNghiViec" </text> } />
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <div class="row mb-0">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">@Html.Raw("Kích hoạt")</label>
+                                <!--begin::Label-->
+                                <!--begin::Label-->
+                                <div class="col-lg-8 d-flex align-items-center">
+                                    <div class="form-check form-check-solid form-switch fv-row">
+                                        <input class="form-check-input w-45px h-30px" type="checkbox" name="edit_form_isActive" data-field="IsActive" @if (Model.NhanVien != null) { if (Model.NhanVien.IsActive == true) { <text> checked</text>} } />
+                                        <label class="form-check-label" for="IsActive"></label>
+                                    </div>
+                                </div>
+                                <!--begin::Label-->
+                            </div>
+                            <!--begin::Separator-->
+                            <div class="separator mb-8"></div>
+                            <!--end::Separator-->
+                            <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                <a asp-controller="NhanVien" asp-action="Index" class="btn btn-light me-3">@Html.Raw("Trở về")</a>
+                                @if (Model.CurrentUserRole.IsAllowEdit)
+                                {
+                                    <text>
+                                        <!--begin::Button-->
+                                        <!--end::Button-->
+                                        <!--begin::Submit-->
+                                        <button type="button" class="btn btn-primary" id="kt_form_edit_submit">
+                                            <!--begin::Indicator-->
+                                            <span class="indicator-label" id="kt_form_edit_submit_text">@Html.Raw("Cập nhật")</span>
+                                            <span class="indicator-progress">
+                                                @Html.Raw("Đang cập nhật...")
+                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                            </span>
+                                            <!--end::Indicator-->
+                                        </button>
+                                        <!--end::Button-->
+                                    </text>
+                                }
+
+                            </div>
+                        </form>
+                        <!--end::Form-->
+                    </div>
+                    <!--end::Content-->
+                </div>
+                <!--end::Layout-->
+            </div>
+            <!--end::Body-->
+        </div>
+        <!--end::Careers - Apply-->
+    </div>
+    <!--end::Container-->
+</div>
+<!--end::Post-->
