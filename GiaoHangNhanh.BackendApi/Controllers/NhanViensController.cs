@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SGShipperWebApp.BackendApi.Controllers
+namespace GiaoHangNhanh.BackendApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

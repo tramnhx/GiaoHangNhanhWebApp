@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SGShipperWebApp.AdminApp.Controllers
+namespace GiaoHangNhanh.AdminApp.Controllers
 {
     public class NhanVienController : Controller
     {
