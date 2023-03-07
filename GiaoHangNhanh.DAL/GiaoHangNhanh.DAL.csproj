@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Entities\EntityDto\System\NewFolder\**" />
+    <EmbeddedResource Remove="Entities\EntityDto\System\NewFolder\**" />
+    <None Remove="Entities\EntityDto\System\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Entities\Entity\KyNhan.cs~RF47e6a3ab.TMP" />
   </ItemGroup>
 

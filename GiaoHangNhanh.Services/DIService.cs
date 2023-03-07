@@ -54,6 +54,7 @@ namespace GiaoHangNhanh.Services
             services.AddTransient<IMenuAppRoleService, MenuAppRoleService>();
             services.AddTransient<IMenuService, MenuService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<INhanVienService, NhanVienService>();
 
 
             return services;
