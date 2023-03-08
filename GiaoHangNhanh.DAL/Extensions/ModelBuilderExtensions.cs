@@ -91,7 +91,9 @@ namespace GiaoHangNhanh.DAL.Extensions
                 new Menu() { Id = 15, SortOrder = 1, IsDeleted = false, IsActive = true, Code = "DM_DV", Name = "Dịch vụ", ParentId = 14, Link = "/DichVu/Index", ControllerName = "DanhMucDichVu", ActionName = "Index" },
                 new Menu() { Id = 16, SortOrder = 2, IsDeleted = false, IsActive = true, Code = "DM_CTGH", Name = "Công ty gửi hàng", ParentId = 14, Link = "/CongTyGuiHang/Index", ControllerName = "DanhMucCongTyGuiHang", ActionName = "Index" },
                 new Menu() { Id = 17, SortOrder = 3, IsDeleted = false, IsActive = true, Code = "DM_PTTT", Name = "Phương thức thanh toán", ParentId = 14, Link = "/PhuongThucThanhToan/Index", ControllerName = "DanhMucPhuongThucThanhToan", ActionName = "Index" },
-                new Menu() { Id = 7, SortOrder = 5, IsDeleted = false, IsActive = true, Code = "TT_PLHBT", Name = "Phân loại hàng bất thường", ParentId = 14, Link = "/PhanLoaiHangBatThuong/Index", ControllerName = "PhanLoaiHangBatThuong", ActionName = "Index" },
+                new Menu() { Id = 7, SortOrder = 5, IsDeleted = false, IsActive = true, Code = "DM_PLHBT", Name = "Phân loại hàng bất thường", ParentId = 14, Link = "/PhanLoaiHangBatThuong/Index", ControllerName = "PhanLoaiHangBatThuong", ActionName = "Index" },
+                new Menu() { Id = 27, SortOrder = 6, IsDeleted = false, IsActive = true, Code = "DM_GT", Name = "Giới tính", ParentId = 14, Link = "/Gender/Index", ControllerName = "Gender", ActionName = "Index" },
+
 
                 new Menu() { Id = 18, SortOrder = 5, IsDeleted = false, IsActive = true, Code = "QTHT", Name = "Quản trị hệ thống", ParentId = new Nullable<int>(), Link = string.Empty, Icon = "<span class='menu-icon'><span class='svg-icon svg-icon-2'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'><path opacity='0.25' d='M2 6.5C2 4.01472 4.01472 2 6.5 2H17.5C19.9853 2 22 4.01472 22 6.5V6.5C22 8.98528 19.9853 11 17.5 11H6.5C4.01472 11 2 8.98528 2 6.5V6.5Z' fill='#12131A'></path><path d='M20 6.5C20 7.88071 18.8807 9 17.5 9C16.1193 9 15 7.88071 15 6.5C15 5.11929 16.1193 4 17.5 4C18.8807 4 20 5.11929 20 6.5Z' fill='#12131A'></path><path opacity='0.25' d='M2 17.5C2 15.0147 4.01472 13 6.5 13H17.5C19.9853 13 22 15.0147 22 17.5V17.5C22 19.9853 19.9853 22 17.5 22H6.5C4.01472 22 2 19.9853 2 17.5V17.5Z' fill='#12131A'></path><path d='M9 17.5C9 18.8807 7.88071 20 6.5 20C5.11929 20 4 18.8807 4 17.5C4 16.1193 5.11929 15 6.5 15C7.88071 15 9 16.1193 9 17.5Z' fill='#12131A'></path></svg></span></span>" },
                 new Menu() { Id = 19, SortOrder = 1, IsDeleted = false, IsActive = true, Code = "QTHT_AC", Name = "Người sử dụng", ParentId = 18, Link = "/Staff/Index", ControllerName = "Staff", ActionName = "Index" },
@@ -138,6 +140,18 @@ namespace GiaoHangNhanh.DAL.Extensions
                     Name = "Thanh toán trực tiếp",
                     CreatedUserId = new Guid("447FE343-9985-412C-BB19-C6F398BC014F"),
                     ModifiedUserId = new Guid("447FE343-9985-412C-BB19-C6F398BC014F"),
+                }
+            );
+            //Genders
+            modelBuilder.Entity<Gender>().HasData(
+                new Gender
+                {
+                    Id = 1,
+                    Code = "NU",
+                    Name = "Nữ",
+                    CreatedUserId = new Guid("447FE343-9985-412C-BB19-C6F398BC014F"),
+                    ModifiedUserId = new Guid("447FE343-9985-412C-BB19-C6F398BC014F"),
+                    
                 }
             );
 

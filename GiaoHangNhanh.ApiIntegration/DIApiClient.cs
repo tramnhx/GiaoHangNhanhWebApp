@@ -7,11 +7,13 @@ namespace GiaoHangNhanh.ApiIntegration
     {
         public static IServiceCollection AddDIApiClient(this IServiceCollection services)
         {
+            //DanhMuc
             services.AddTransient<IAdminAppUIApiClient, AdminAppUIApiCLient>();
             services.AddTransient<IAppRoleApiClient, AppRoleApiClient>();
             services.AddTransient<IBuuCucApiClient, BuuCucApiClient>();
             services.AddTransient<ICongTyGuiHangApiClient, CongTyGuiHangApiClient>();
             services.AddTransient<IDichVuApiClient, DichVuApiClient>();
+            services.AddTransient<IGenderApiClient, GenderApiClient>();
             services.AddTransient<IHuyenApiClient, HuyenApiClient>();
             services.AddTransient<IKhuVucApiClient, KhuVucApiClient>();
             services.AddSingleton<IMenuApiClient, MenuApiClient>();
@@ -23,7 +25,7 @@ namespace GiaoHangNhanh.ApiIntegration
             services.AddTransient<INhanVienApiClient, NhanVienApiClient>();
 
 
-            //
+            //ThaoTac
             services.AddTransient<ILichSuNhapKhoApiClient, LichSuNhapKhoApiClient>();
             services.AddTransient<ILichSuThaoBaoApiClient, LichSuThaoBaoApiClient>();
             services.AddTransient<ILichSuDongBaoApiClient, LichSuDongBaoApiClient>();
