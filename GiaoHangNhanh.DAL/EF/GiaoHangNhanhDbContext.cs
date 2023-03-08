@@ -80,6 +80,7 @@ namespace GiaoHangNhanh.DAL.EF
         public DbSet<DangKyChuyenHoan> DangKyChuyenHoans { get; set; }
         public DbSet<DangKyKienVanDe> DangKyKienVanDes { get; set; }
         public DbSet<DichVu> DichVus { get; set; }
+        public DbSet<Gender> Genders { get; set; }
         public DbSet<Huyen> Huyens { get; set; }
         public DbSet<KhachHang> KhachHangs { get; set; }
         public DbSet<KhuVuc> KhuVucs { get; set; }
@@ -96,7 +97,6 @@ namespace GiaoHangNhanh.DAL.EF
         public DbSet<PhuongThucThanhToan> PhuongThucThanhToans { get; set; }
         public DbSet<Tinh> Tinhs { get; set; }
         public DbSet<VanDon> VanDons { get; set; }
-        public DbSet<Gender> Genders { get; set; }
         public DbSet<NhanVien> NhanViens { get; set; }
 
     }

@@ -12,12 +12,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Gender\Index.cshtml" />
+    <None Include="Views\Gender\_PartialEditModal.cshtml" />
+    <None Include="Views\Gender\_PartialToolbar.cshtml" />
     <None Include="Views\LichSuHangDen\Index.cshtml" />
     <None Include="Views\LichSuHangDen\_PartialEditModal.cshtml" />
     <None Include="Views\LichSuHangDen\_PartialToolbar.cshtml" />
     <None Include="Views\NhanVien\Edit.cshtml" />
     <None Include="Views\NhanVien\Index.cshtml" />
     <None Include="Views\NhanVien\_PartialToolbar.cshtml" />
+    <None Include="wwwroot\js\Gender\Index.js" />
     <None Include="wwwroot\js\LichSuHangDen\Index.js" />
     <None Include="wwwroot\js\NhanVien\Edit.js" />
     <None Include="wwwroot\js\NhanVien\Index.js" />

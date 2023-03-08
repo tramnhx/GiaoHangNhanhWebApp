@@ -23,6 +23,8 @@ namespace GiaoHangNhanh.Services
             services.AddTransient<IDichVuService, DichVuService>();
             services.AddTransient<IPhanLoaiHangBatThuongService, PhanLoaiHangBatThuongService>();
             services.AddTransient<IHuyenService, HuyenService>();
+            services.AddTransient<IGenderService, GenderService>();
+
             services.AddTransient<IPhuongThucThanhToanService, PhuongThucThanhToanService>();
             services.AddTransient<IKhuVucService, KhuVucService>();
             services.AddTransient<ITinhService, TinhService>();
