@@ -29,7 +29,7 @@ namespace GiaoHangNhanh.AdminApp.Controllers
                                                                                                             (ControllerContext.ActionDescriptor).ControllerName,
                                                                                                             (ControllerContext.ActionDescriptor).ActionName);
 
-            model.PageTitle = "Thao tác Đăng Ký Chuyển Hoàn";
+            model.PageTitle = "Thao tác đăng ký chuyển hoàn";
             model.Breadcrumbs = new List<string>() { "Cài đặt", "Thao tác hệ thống", "Đăng Ký Chuyển Hoàn" };
 
             return View(model);

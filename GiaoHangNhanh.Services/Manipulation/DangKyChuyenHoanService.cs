@@ -110,7 +110,9 @@ namespace GiaoHangNhanh.Services.Manipulation
                     Id = x.v.Id,
                     Code = x.v.Code,
                     TrongLuong = x.v.TrongLuong,
-                    DiaChiNguoiGui = x.v.DiaChiNguoiGui
+                    DiaChiNguoiGui = x.v.DiaChiNguoiGui,
+                    HoTenNguoiGui = x.v.HoTenNguoiGui,
+                    NgayGuiHang = x.v.NgayGuiHang
                 }
 
             }).AsNoTracking().ToListAsync();
