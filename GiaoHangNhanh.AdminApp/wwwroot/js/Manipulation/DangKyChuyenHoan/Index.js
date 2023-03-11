@@ -165,6 +165,10 @@ var DangKyChuyenHoan = function () {
         $('[name="kt_modal_edit_form_vandon_id"]').change(function () {
             loadTrongLuongByVanDon();
             loadDiaChiByVanDon();
+            loadHoTenNguoiGuiByVanDon();
+            loadNgayGuiHangByVanDon();
+
+
         });
     };
 
@@ -189,7 +193,26 @@ var DangKyChuyenHoan = function () {
             });
         }
     }
-
+    function loadHoTenNguoiGuiByVanDon() {
+        $('[name="kt_modal_edit_form_hoTenNguoiGui"]').empty();
+        if ($('[name="kt_modal_edit_form_vandon_id"]').val() != null) {
+            var data = {
+                id: $('[name="kt_modal_edit_form_vandon_id"]').val()
+            };
+            $.ajax({
+                url: '/VanDon/GetById',
+                data: data,
+                error: function (textStatus, error) {
+                    return false;
+                },
+                success: function (res) {
+                    var html = '<option value="' + res.resultObj.id + '">' + res.resultObj.hoTenNguoiGui + '</option>';
+                    $('[name="kt_modal_edit_form_hoTenNguoiGui"]').append(html);
+                    $('[name="kt_modal_edit_form_hoTenNguoiGui"]').trigger('change');
+                }
+            });
+        }
+    }
     function loadDiaChiByVanDon() {
         $('[name="kt_modal_edit_form_dichden"]').empty();
         if ($('[name="kt_modal_edit_form_vandon_id"]').val() != null) {
@@ -206,6 +229,27 @@ var DangKyChuyenHoan = function () {
                     var html = '<option value="' + res.resultObj.id + '">' + res.resultObj.diaChiNguoiGui + '</option>';
                     $('[name="kt_modal_edit_form_dichden"]').append(html);
                     $('[name="kt_modal_edit_form_dichden"]').trigger('change');
+                }
+            });
+        }
+    }
+
+    function loadNgayGuiHangByVanDon() {
+        $('[name="kt_modal_edit_form_ngayGuiHang"]').empty();
+        if ($('[name="kt_modal_edit_form_vandon_id"]').val() != null) {
+            var data = {
+                id: $('[name="kt_modal_edit_form_vandon_id"]').val()
+            };
+            $.ajax({
+                url: '/VanDon/GetById',
+                data: data,
+                error: function (textStatus, error) {
+                    return false;
+                },
+                success: function (res) {
+                    var html = '<option value="' + res.resultObj.id + '">' + res.resultObj.ngayGuiHang + '</option>';
+                    $('[name="kt_modal_edit_form_ngayGuiHang"]').append(html);
+                    $('[name="kt_modal_edit_form_ngayGuiHang"]').trigger('change');
                 }
             });
         }
@@ -295,8 +339,18 @@ var DangKyChuyenHoan = function () {
                 }
             },
             {
+                "data": "vanDon", "name": "vanDon", "autoWidth": true, "title": "Họ tên người gửi", "render": function (data, type, full, meta) {
+                    return '<span class="text-muted">' + data.hoTenNguoiGui + '</span>';
+                }
+            },
+            {
                 "data": "vanDon", "name": "vanDon", "autoWidth": true, "title": "Rút về đích đến", "render": function (data, type, full, meta) {
                     return '<span class="text-muted">' + data.diaChiNguoiGui + '</span>';
+                }
+            },
+            {
+                "data": "vanDon", "name": "vanDon", "autoWidth": true, "title": "Ngày gửi hàng", "render": function (data, type, full, meta) {
+                    return '<span class="text-muted">' + data.ngayGuiHang + '</span>';
                 }
             },
             {
@@ -340,6 +394,9 @@ var DangKyChuyenHoan = function () {
             editingDataRow = selectedDataRow;
 
             $('[name="kt_modal_edit_form_vandon_id"]').append("<option value=" + selectedDataRow.vanDon.id + " selected>" + selectedDataRow.vanDon.code + "</option>").trigger('change');
+            $('[name="kt_modal_edit_form_hoTenNguoiGui"]').append("<option value=" + selectedDataRow.vanDon.id + " selected>" + selectedDataRow.vanDon.hoTenNguoiGui + "</option>").trigger('change');
+            $('[name="kt_modal_edit_form_ngayGuiHang"]').append("<option value=" + selectedDataRow.vanDon.id + " selected>" + selectedDataRow.vanDon.ngayGuiHang + "</option>").trigger('change');
+
             $('[name="kt_modal_edit_form_trongluong"]').append("<option value=" + selectedDataRow.vanDon.id + " selected>" + selectedDataRow.vanDon.trongLuong + "</option>").trigger('change');
             $('[name="kt_modal_edit_form_dichden"]').append("<option value=" + selectedDataRow.vanDon.id + " selected>" + selectedDataRow.vanDon.diaChiNguoiGui + "</option>").trigger('change');
             $('input[data-field="MieuTaNguyenNhan"]').val(selectedDataRow.mieuTaNguyenNhan);
@@ -368,6 +425,11 @@ var DangKyChuyenHoan = function () {
         $('[name="kt_modal_edit_form_nguyennhan"]').val(null).trigger('change');
         $('[name="kt_modal_edit_form_trongluong"]').val(null).trigger('change');
         $('[name="kt_modal_edit_form_dichden"]').val(null).trigger('change');
+        $('[name="kt_modal_edit_form_dichden"]').val(null).trigger('change');
+        $('[name="kt_modal_edit_form_hoTenNguoiGui"]').val(null).trigger('change');
+        $('[name="kt_modal_edit_form_ngayGuiHang"]').val(null).trigger('change');
+
+
      
         setTimeout(function () { $('input[name="kt_modal_edit_form_vandon_id"]').focus() }, 500);
     }
