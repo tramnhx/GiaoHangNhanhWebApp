@@ -1,7 +1,10 @@
 ﻿using GiaoHangNhanh.DAL.EF;
 using GiaoHangNhanh.DAL.Entities.Entity;
+using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.BuuCucs;
+using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.VanDons;
 using GiaoHangNhanh.DAL.Entities.EntityDto.Common;
 using GiaoHangNhanh.DAL.Entities.EntityDto.Manipulation.KyNhans;
+using GiaoHangNhanh.DAL.Entities.EntityDto.System.Users;
 using GiaoHangNhanh.Utilities.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -30,37 +33,58 @@ namespace GiaoHangNhanh.Services.Manipulation
         }
         public async Task<ApiResult<List<KyNhanDto>>> GetAll(ManageKyNhanPagingRequest request)
         {
-            var query = from p in _context.KyNhans
-                        select new { p };
+            var query = from k in _context.KyNhans
+                        join vd in _context.VanDons on k.VanDonId equals vd.Id
+                        join bc in _context.BuuCucs on k.BuuCucId equals bc.Id
+                        select new { k, vd, bc };
 
             if (!string.IsNullOrEmpty(request.TextSearch))
             {
-                query = query.Where(x => x.p.TenNguoiKy.Contains(request.TextSearch) || x.p.VanDon.Code.Contains(request.TextSearch));
+                query = query.Where(x => x.k.TenNguoiKy.Contains(request.TextSearch));
             }
 
             return new ApiSuccessResult<List<KyNhanDto>>(await query.Select(x => new KyNhanDto()
             {
-                Id = x.p.Id,
-                BuuCucId = x.p.BuuCucId,
-                TenNguoiKy = x.p.TenNguoiKy,
-                NgayKyNhan = x.p.NgayKyNhan,
-                MaVanDon = x.p.VanDon.Code
+                Id = x.k.Id,
+                TenNguoiKy = x.k.TenNguoiKy,
+                DauKyThay = x.k.DauKyThay,
+                NgayKyNhan = x.k.NgayKyNhan.ToString("dd/MM/yyyy HH:mm:ss"),
+                Description = x.k.Description,
+                BuuCuc = new BuuCucDto()
+                {
+                    Id = x.bc.Id,
+                    Code = x.bc.Code
+                },
+                VanDon = new VanDonDto()
+                {
+                    Id = x.vd.Id,
+                    Code = x.vd.Code
+                }
             }).AsNoTracking().ToListAsync());
         }
         public async Task<ApiResult<KyNhanDto>> GetById(int id)
         {
             var KyNhan = await _context.KyNhans.FindAsync(id);
+            if (KyNhan.IsDeleted == true || KyNhan == null) throw new GiaoHangNhanhException($"Không tìm thấy id: {id}");
 
             var KyNhanDto = new KyNhanDto()
             {
                 Id = KyNhan.Id,
                 CreatedDate = KyNhan.NgayKyNhan,
-                BuuCucId = KyNhan.BuuCucId,
-                MaVanDon = KyNhan.VanDon.Code
+                TenNguoiKy = KyNhan.TenNguoiKy,
+                DauKyThay = KyNhan.DauKyThay,
+                VanDonId = KyNhan.VanDonId,
+                Description = KyNhan.Description,
+                BuuCuc = new BuuCucDto()
+                {
+                    Id = KyNhan.BuuCuc.Id,
+                    Name = KyNhan.BuuCuc.Code
+                }
             };
 
             return new ApiSuccessResult<KyNhanDto>(KyNhanDto);
         }
+
         public async Task<ApiResult<int>> CreateAsync(KyNhanRequest request)
         {
             try
@@ -69,8 +93,12 @@ namespace GiaoHangNhanh.Services.Manipulation
                 {
                     BuuCucId = request.BuuCucId,
                     VanDonId = request.VanDonId,
+                    NhanVienPhat = request.NhanVienPhat,
                     TenNguoiKy = request.TenNguoiKy,
-                    NgayKyNhan = DateTime.Now
+                    DauKyThay = request.DauKyThay,
+                    Description = request.Description,
+                    CreatedUserId = request.CreatedUserId,
+                    NgayKyNhan = DateTime.Now,
                 };
 
                 _context.KyNhans.Add(KyNhan);
@@ -88,11 +116,15 @@ namespace GiaoHangNhanh.Services.Manipulation
             {
                 var KyNhan = await _context.KyNhans.FindAsync(request.Id);
 
-                if (KyNhan == null) throw new ApplicationException($"Không tìm thấy Giới tính có id: {request.Id}");
+                if (KyNhan == null) throw new GiaoHangNhanh.Utilities.Exceptions.GiaoHangNhanhException($"Không tìm thấy nhân viên có id: {request.Id}");
 
                 KyNhan.BuuCucId = request.BuuCucId;
+                KyNhan.NhanVienPhat = request.NhanVienPhat;
                 KyNhan.VanDonId = request.VanDonId;
                 KyNhan.TenNguoiKy = request.TenNguoiKy;
+                KyNhan.DauKyThay = request.DauKyThay;
+                KyNhan.Description = request.Description;
+                KyNhan.NhanVienPhat = request.NhanVienPhat;
                 KyNhan.NgayKyNhan = DateTime.Now;
                 _context.KyNhans.Update(KyNhan);
 
@@ -109,7 +141,7 @@ namespace GiaoHangNhanh.Services.Manipulation
             try
             {
                 var KyNhans = await _context.KyNhans.Where(m => request.Ids.Contains(m.Id)).AsNoTracking().ToListAsync();
-                if (KyNhans == null) throw new GiaoHangNhanhException($"Tìm không thấy Id: {string.Join(";", request.Ids)}");
+                if (KyNhans == null) throw new GiaoHangNhanh.Utilities.Exceptions.GiaoHangNhanhException($"Tìm không thấy Id: {string.Join(";", request.Ids)}");
 
                 _context.KyNhans.RemoveRange(KyNhans);
 
@@ -125,12 +157,21 @@ namespace GiaoHangNhanh.Services.Manipulation
         public async Task<PagedResult<KyNhanDto>> GetManageListPaging(ManageKyNhanPagingRequest request)
         {
             //1. Select join
-            var query = from p in _context.KyNhans
-                        select new { p };
+            var query = from k in _context.KyNhans
+                         .Where(x => x.IsDeleted == false)
+                        join vd in _context.VanDons on k.VanDonId equals vd.Id
+                        join bc in _context.BuuCucs on k.BuuCucId equals bc.Id
+                        join us in _context.AppUsers on vd.NhanVienLayHangId equals us.Id
+                        select new { k, vd, bc, us };
 
             //2. filter
             if (!string.IsNullOrEmpty(request.TextSearch))
-                query = query.Where(x => x.p.TenNguoiKy.Contains(request.TextSearch));
+                query = query.Where(x => x.k.TenNguoiKy.Contains(request.TextSearch));
+
+            if (request.FilterByVanDon != null)
+            {
+                query = query.Where(x => x.k.Id == request.FilterByVanDon.Value);
+            }
 
             //3. Paging
             int totalRow = await query.CountAsync();
@@ -140,12 +181,30 @@ namespace GiaoHangNhanh.Services.Manipulation
                 query = query.Skip((request.PageIndex.Value - 1) * request.PageSize)
                             .Take(request.PageSize);
             }
+
             var data = await query.Select(x => new KyNhanDto()
             {
-                Id = x.p.Id,
-                BuuCucId = x.p.BuuCucId,
-                CreatedDate = x.p.NgayKyNhan,
-                MaVanDon = x.p.VanDon.Code
+                Id = x.k.Id,
+                NgayKyNhan = x.k.NgayKyNhan.ToString("dd/MM/yyyy HH:mm:ss"),
+                DauKyThay = x.k.DauKyThay,
+                TenNguoiKy = x.k.TenNguoiKy,
+                Description = x.k.Description,
+                BuuCuc = new BuuCucDto()
+                {
+                    Id = x.bc.Id,
+                    Code = x.bc.Code
+                },
+                VanDon = new VanDonDto()
+                {
+                    Id = x.vd.Id,
+                    Code = x.vd.Code,
+                    User = new UserDto()
+                    {
+                        Id = x.us.Id.ToString(),
+                        UserName = x.us.UserName,
+                        FullName = $"{x.us.LastName} {x.us.FirstName}"
+                    }
+                }
             }).AsNoTracking().ToListAsync();
 
             //4. Select and projection
