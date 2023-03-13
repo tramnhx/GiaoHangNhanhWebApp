@@ -5,6 +5,6 @@ namespace GiaoHangNhanh.DAL.Entities.EntityDto.Manipulation.KyNhans
     public class ManageKyNhanPagingRequest : PagingRequestBase
     {
         public int? FilterByDMBuuCuc { set; get; }
-        public int? FilterByDMNhanVien { set; get; }
+        public int? FilterByVanDon { set; get; }
     }
 }

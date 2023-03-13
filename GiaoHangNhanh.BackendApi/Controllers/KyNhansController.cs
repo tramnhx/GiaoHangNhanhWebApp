@@ -16,7 +16,7 @@ namespace GiaoHangNhanh.BackendApi.Controllers
             _kyNhanService = kyNhanService;
         }
 
-        [HttpGet]
+        [HttpGet("GetManageListPaging")]
         public async Task<IActionResult> GetManageListPaging([FromQuery] ManageKyNhanPagingRequest request)
         {
             var kynhan = await _kyNhanService.GetManageListPaging(request);
