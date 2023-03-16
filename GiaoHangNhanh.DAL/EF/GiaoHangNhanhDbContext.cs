@@ -57,6 +57,7 @@ namespace GiaoHangNhanh.DAL.EF
             modelBuilder.ApplyConfiguration(new LichSuGuiHangConfiguration());
             modelBuilder.ApplyConfiguration(new LichSuNhapKhoConfigutaion());
             modelBuilder.ApplyConfiguration(new LichSuHangDenConfiguration());
+            modelBuilder.ApplyConfiguration(new LichSuPhatHangConfiguration());
 
             //modelBuilder.ApplyConfiguration(new PhanLoaiVanDonConfiguration());
 
@@ -90,6 +91,7 @@ namespace GiaoHangNhanh.DAL.EF
         public DbSet<LichSuHangDen> LichSuHangDens { get; set; }
         public DbSet<LichSuGuiHang> LichSuGuiHangs { get; set; }
         public DbSet<LichSuNhapKho> LichSuNhapKhos { get; set; }
+        public DbSet<LichSuPhatHang> LichSuPhatHangs { get; set; }
         public DbSet<Menu> Menus { get; set; }
         public DbSet<MenuAppRole> MenuAppRoles { get; set; }
         public DbSet<PhanLoaiHangBatThuong> PhanLoaiHangBatThuongs { get; set; }
