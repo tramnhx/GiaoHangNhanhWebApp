@@ -148,11 +148,72 @@ namespace GiaoHangNhanh.DAL.Extensions
                 new Gender
                 {
                     Id = 1,
+                    Code = "N",
+                    Name = "Nam",
+                    CreatedUserId = new Guid("447FE343-9985-412C-BB19-C6F398BC014F"),
+                    ModifiedUserId = new Guid("447FE343-9985-412C-BB19-C6F398BC014F"),
+                },
+                new Gender
+                {
+                    Id = 2,
                     Code = "NU",
                     Name = "Nữ",
                     CreatedUserId = new Guid("447FE343-9985-412C-BB19-C6F398BC014F"),
                     ModifiedUserId = new Guid("447FE343-9985-412C-BB19-C6F398BC014F"),
-                    
+                }
+            );
+
+            //NhanViens
+            modelBuilder.Entity<NhanVien>().HasData(
+                new NhanVien
+                {
+                    Id = 1,
+                    Code = "NV01",
+                    Email = "vuthanh@gmail.com",
+                    FirstName = "Thanh",
+                    LastName = "Vu",
+                    CreatedDate = DateTime.Now,
+                    GenderId = 1,
+                    BuuCucLamViecId = 1,
+                    CCCD = "123456789",
+                    SoDienThoai = "0123456789",
+                    NoiSinh = "Ninh Thuan",
+                    DiaChi = "79 Mai Thi Dong, Khanh Hoa",
+                    IsActive = true,
+                    ModifiedUserId = new Guid("447FE343-9985-412C-BB19-C6F398BC014F"),
+                    CreatedUserId = new Guid("447FE343-9985-412C-BB19-C6F398BC014F"),
+                },
+                new NhanVien
+                {
+                    Id = 2,
+                    Code = "NV02",
+                    Email = "nguyentram@gmail.com",
+                    FirstName = "Tram",
+                    LastName = "Nguyen",
+                    CreatedDate = DateTime.Now,
+                    GenderId = 2,
+                    BuuCucLamViecId = 1,
+                    CCCD = "102030405060",
+                    SoDienThoai = "0102030405",
+                    NoiSinh = "Ninh Thuan",
+                    DiaChi = "79 Mai Thi Dong, Khanh Hoa",
+                    IsActive = true,
+                    ModifiedUserId = new Guid("447FE343-9985-412C-BB19-C6F398BC014F"),
+                    CreatedUserId = new Guid("447FE343-9985-412C-BB19-C6F398BC014F"),
+                }
+            );
+
+            //LichSuPhatHang
+            modelBuilder.Entity<LichSuPhatHang>().HasData(
+                new LichSuPhatHang
+                {
+                    Id = 1,
+                    Code = "PH",
+                    VanDonId = 1,
+                    NhanVienId = 1,
+                    CreatedDate = DateTime.Now,
+                    CreatedUserId = new Guid("447FE343-9985-412C-BB19-C6F398BC014F"),
+                    ModifiedUserId = new Guid("447FE343-9985-412C-BB19-C6F398BC014F"),
                 }
             );
 

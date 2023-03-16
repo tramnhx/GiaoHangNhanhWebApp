@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GiaoHangNhanh.DAL.Entities.Entity
 {
@@ -19,5 +20,7 @@ namespace GiaoHangNhanh.DAL.Entities.Entity
         public int? GenderId { get; set; }
         public bool IsActive { get; set; }
         public Gender Gender { get; set; }
+        public ICollection<LichSuPhatHang> LichSuPhatHangs { get; set; }
+
     }
 }
