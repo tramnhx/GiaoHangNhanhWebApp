@@ -109,6 +109,25 @@ namespace GiaoHangNhanh.AdminApp.Controllers
         }
 
 
+        
+
+        public async Task<IActionResult> Filter(string textSearch, int? filterByDMBuuCuc, int? filterByVanDon)
+        {
+
+            var request = new ManageKyNhanPagingRequest()
+            {
+                TextSearch = textSearch,
+                PageIndex = 1,
+                PageSize = 20,
+                OrderCol = "Id",
+                OrderDir = "desc",
+                FilterByDMBuuCuc = filterByDMBuuCuc,
+                FilterByVanDon = filterByVanDon
+            };
+
+            var kyNhanApiClient = await _kyNhanApiClient.GetManageListPaging(request);
+            return Ok(kyNhanApiClient);
+        }
         public async Task<FileResult> ExportToExcel()
         {
             System.Data.DataTable dt = new System.Data.DataTable();
@@ -119,16 +138,36 @@ namespace GiaoHangNhanh.AdminApp.Controllers
 
             exportedFields.Add(new BaseDto()
             {
-                Code = "Code",
-                Name = "Mã bưu cục"
+                Code = "VanDonId",
+                Name = "Mã vận đơn"
             });
 
             exportedFields.Add(new BaseDto()
             {
-                Code = "Name",
-                Name = "Tên bưu cục"
+                Code = "DauKyThay",
+                Name = "Dấu ký thay"
+            });
+            exportedFields.Add(new BaseDto()
+            {
+                Code = "NgayKyNhan",
+                Name = "Thời gian ký"
             });
 
+            exportedFields.Add(new BaseDto()
+            {
+                Code = "TenNguoiKy",
+                Name = "Tên người ký "
+            });
+            exportedFields.Add(new BaseDto()
+            {
+                Code = "NhanVienPhat",
+                Name = "Nhân viên phát"
+            });
+            exportedFields.Add(new BaseDto()
+            {
+                Code = "BuuCucId",
+                Name = "Bưu cục"
+            });
 
             exportedFields.Add(new BaseDto()
             {
@@ -183,7 +222,7 @@ namespace GiaoHangNhanh.AdminApp.Controllers
 
                 try
                 {
-                    byte[] fileBytes = ExcelExportHelper.ExportExcel(dt, "Đơn vị tính", false, columnsToTake.ToArray());
+                    byte[] fileBytes = ExcelExportHelper.ExportExcel(dt, "Danh sách ký nhận", false, columnsToTake.ToArray());
 
                     if (fileBytes == null || !fileBytes.Any())
                     {
@@ -191,7 +230,7 @@ namespace GiaoHangNhanh.AdminApp.Controllers
                     }
 
 
-                    return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, "DonViTinh.xlsx");
+                    return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, "KyNhan.xlsx");
                 }
                 catch (Exception ex)
                 {
@@ -202,24 +241,6 @@ namespace GiaoHangNhanh.AdminApp.Controllers
             {
                 throw new Exception(String.Format("NOT FOUND"));
             }
-        }
-
-        public async Task<IActionResult> Filter(string textSearch, int? filterByDMBuuCuc, int? filterByVanDon)
-        {
-
-            var request = new ManageKyNhanPagingRequest()
-            {
-                TextSearch = textSearch,
-                PageIndex = 1,
-                PageSize = 20,
-                OrderCol = "Id",
-                OrderDir = "desc",
-                FilterByDMBuuCuc = filterByDMBuuCuc,
-                FilterByVanDon = filterByVanDon
-            };
-
-            var kyNhanApiClient = await _kyNhanApiClient.GetManageListPaging(request);
-            return Ok(kyNhanApiClient);
         }
     }
 }
