@@ -130,7 +130,8 @@ var VanDon = function () {
             { "data": "code", "name": "code", "autoWidth": true, "title": "Mã vận đơn" },
             { "data": "hoTenNguoiGui", "name": "hoTenNguoiGui", "autoWidth": true, "title": "Người gửi hàng" },
             { "data": "hoTenNguoiNhan", "name": "hoTenNguoiNhan", "autoWidth": true, "title": "Người nhận hàng" },
-            { "data": "ngayGuiHang", "name": "ngayGuiHang", "autoWidth": true, "title": "Ngày gửi hàng" },
+            { "data": "strNgayGuiHang", "name": "strNgayGuiHang", "autoWidth": true, "title": "Ngày gửi hàng" },
+
             {
                 width: "120px", "title": "Hành động", "render": function (data, type, full, meta) {
                     let html = '<div class="d-flex justify-content-center flex-shrink-0">';

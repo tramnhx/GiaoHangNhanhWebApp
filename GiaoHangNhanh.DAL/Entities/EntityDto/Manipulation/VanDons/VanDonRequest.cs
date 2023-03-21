@@ -7,6 +7,7 @@ namespace GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.VanDons
         public int? Id { get; set; }
         public string Code { set; get; }
         public string NhanVienLayHangId { get; set; }
+        public int NhanVienId { get; set; }
         public int DichVuId { get; set; }
         public int CongTyGuiHangId { get; set; }
         public int PhuongThucThanhToanId { get; set; }

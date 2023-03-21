@@ -24,7 +24,10 @@ namespace GiaoHangNhanh.DAL.Entities.Entity
         public string DienThoaiNguoiNhan { get; set; }
         public string DiaChiNguoiNhan { get; set; }
 
-        public Guid NhanVienLayHangId { get; set; }
+        public Guid? NhanVienLayHangId { get; set; }
+        public AppUser NhanVienLayHang { get; set; }
+        public int? NhanVienId { get; set; }
+        public NhanVien NhanVien { get; set; }
         public int? BuuCucHangDenId { get; set; }
         public BuuCuc BuuCuc { get; set; }
         public int? CongTyGuiHangId { get; set; }

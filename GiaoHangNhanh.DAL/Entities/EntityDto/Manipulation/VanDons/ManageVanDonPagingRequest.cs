@@ -11,6 +11,7 @@ namespace GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.VanDons
         public int? FilterByCongTyGuiHangId { set; get; }
         public int? FilterByPhuongThucThanhToanId { set; get; }
         public int? FilterByDichVuId { set; get; }
+        public int? FilterByNhanVienId { set; get; }
 
     }
 }

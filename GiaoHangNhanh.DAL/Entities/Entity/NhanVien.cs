@@ -21,6 +21,7 @@ namespace GiaoHangNhanh.DAL.Entities.Entity
         public bool IsActive { get; set; }
         public Gender Gender { get; set; }
         public ICollection<LichSuPhatHang> LichSuPhatHangs { get; set; }
+        public ICollection<VanDon> VanDons { get; set; }
 
     }
 }
