@@ -4,6 +4,8 @@ using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.KhuVucs;
 using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.Tinhs;
 using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.Genders;
 using System;
+using GiaoHangNhanh.DAL.Entities.Entity;
+using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.VanDons;
 
 namespace GiaoHangNhanh.DAL.Entities.EntityDto.System.NhanViens
 {
@@ -34,5 +36,6 @@ namespace GiaoHangNhanh.DAL.Entities.EntityDto.System.NhanViens
         public HuyenDto Huyen { set; get; }
         public TinhDto Tinh { set; get; }
         public KhuVucDto KhuVuc { set; get; }
+        public VanDonDto VanDon { get; set; }
     }
 }

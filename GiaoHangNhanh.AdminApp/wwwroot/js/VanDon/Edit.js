@@ -106,6 +106,8 @@ var EditVanDon = function () {
         App.initSelect2Base($('[name="kt_form_edit_form_dichvuid"]'), '/DichVu/Filter');
         App.initSelect2Base($('[name="kt_form_edit_form_phuongthucthanhtoanid"]'), '/PhuongThucThanhToan/Filter');
         App.initSelect2Base($('[name="kt_form_edit_form_congtyguihangid"]'), '/CongTyGuiHang/Filter');
+        App.initSelect2Base($('[name="kt_form_edit_form_nhanvienid"]'), '/NhanVien/Filter', { selectedFields: ["id", "fullName"] });
+
         userSelect2Custom($('[name="kt_form_edit_form_userid"]'), '/Staff/Filter');
 
 
@@ -122,12 +124,12 @@ var EditVanDon = function () {
             if (editingData.congTyGuiHang != null) {
                 $('[name="kt_form_edit_form_congtyguihangid"]').append("<option value='" + editingData.congTyGuiHang.id + "' selected>" + editingData.congTyGuiHang.name + "</option>").trigger('change');
             }
-            if (editingData.user != null) {
-                $('[name="kt_form_edit_form_userid"]').append("<option value='" + editingData.user.id + "' selected>" + editingData.user.fullName + "</option>").trigger('change');
+            if (editingData.nhanVien != null) {
+                $('[name="kt_form_edit_form_nhanvienid"]').append("<option value='" + editingData.nhanVien.id + "' selected>" + editingData.nhanVien.fullName + "</option>").trigger('change');
             }
         }
 
-        flatpickr('.flatpickr', flatpickrDateDefaultOption());
+        flatpickr('.flatpickr', flatpickrDateDefaultOption()); 
 
     };
 

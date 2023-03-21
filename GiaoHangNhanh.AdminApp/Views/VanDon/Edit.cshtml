@@ -134,7 +134,7 @@
 								<input type="text" name="kt_form_edit_form_ngayguihang" 
 									class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 flatpickr" 
 									data-field="NgayGuiHang" placeholder="@Html.Raw("Chọn ngày gửi hàng")" 
-									value="@if (Model.VanDon != null) { <text>@Model.VanDon.NgayGuiHang.ToString("dd/MM/yyyy")</text> }"/>
+									value="@if (Model.VanDon != null) { <text>@Model.VanDon.NgayGuiHang.ToString("dd/MM/yyyy HH:mm:ss")</text> }"/>
 								<!--end::input-->
 								<div class="fv-plugins-message-container invalid-feedback"></div>
 							</div>
@@ -239,7 +239,7 @@
 									</label>
 									<!--end::Label-->
 									<!--begin::Select-->
-									<select data-control="select2" data-placeholder="Chọn nhân viên" class="form-select form-select-solid" data-field="NhanVienLayHangId" name="kt_form_edit_form_userid">
+									<select data-control="select2" data-placeholder="Chọn nhân viên" class="form-select form-select-solid" data-field="NhanVienId" name="kt_form_edit_form_nhanvienid">
 									</select>
 									<!--end::Select-->
 								</div>
@@ -301,10 +301,10 @@
 								</label>
 								<!--end::Label-->
 								<!--end::Input-->
-								<textarea type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Địa chỉ người gửi")" 
+								<input type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Địa chỉ người gửi")" 
 													  data-field="DiaChiNguoiGui" name="kt_form_edit_form_dia_chi_nguoi_gui">
 													  @if (Model.VanDon != null) { <text>@Model.VanDon.DiaChiNguoiGui</text> }
-								</textarea>
+								</input>
 								<!--end::Input-->
 							</div>
 							<!--end::Input group-->
@@ -462,7 +462,7 @@
 									<label class="required fs-5 fw-bold mb-2">@Html.Raw("Phí bảo hiểm")</label>
 									<!--end::Label-->
 									<!--end::Input-->
-									<input disabled="disabled" type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Phí bảo hiểm")" name="kt_form_edit_form_phi_bao_hiem"/>
+									<input type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Phí bảo hiểm")" name="kt_form_edit_form_phi_bao_hiem"/>
 									<!--end::Input-->
 								</div>
 								<!--end::Col-->

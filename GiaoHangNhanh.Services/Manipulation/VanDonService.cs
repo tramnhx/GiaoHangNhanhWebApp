@@ -6,7 +6,7 @@ using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.DichVus;
 using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.PhuongThucThanhToans;
 using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.VanDons;
 using GiaoHangNhanh.DAL.Entities.EntityDto.Common;
-using GiaoHangNhanh.DAL.Entities.EntityDto.System.Users;
+using GiaoHangNhanh.DAL.Entities.EntityDto.System.NhanViens;
 using GiaoHangNhanh.Utilities.Constants;
 using GiaoHangNhanh.Utilities.Exceptions;
 using Microsoft.EntityFrameworkCore;
@@ -53,6 +53,7 @@ namespace GiaoHangNhanh.Services.Manipulation
                     CongTyGuiHangId = request.CongTyGuiHangId,
                     PhuongThucThanhToanId = request.PhuongThucThanhToanId,
                     CreatedUserId = Guid.Parse(request.CreatedUserId),
+                    NhanVienId = request.NhanVienId,
                     COD = request.COD,
                     Description = request.Description,
                     DiaChiNguoiGui = request.DiaChiNguoiGui,
@@ -64,7 +65,7 @@ namespace GiaoHangNhanh.Services.Manipulation
                     TrongLuong = request.TrongLuong,
                     GiaTriHangHoa = request.GiaTriHangHoa,
                     NoiDungHangHoa = request.NoiDungHangHoa,
-                    NhanVienLayHangId = Guid.Parse(request.NhanVienLayHangId),
+                    //NhanVienLayHangId = Guid.Parse(request.NhanVienLayHangId),
                     SortOrder = request.SortOrder,
                 };
                 if (DateTime.TryParseExact(request.NgayGuiHang, _configuration[SystemConstants.AppConstants.DateFormat], null, DateTimeStyles.None, out ngayGuiHangValue))
@@ -117,11 +118,13 @@ namespace GiaoHangNhanh.Services.Manipulation
                                 join d in _context.DichVus on v.DichVuId equals d.Id
                                 join c in _context.CongTyGuiHangs on v.CongTyGuiHangId equals c.Id
                                 join b in _context.BuuCucs on v.BuuCucHangDenId equals b.Id
-                                join a in _context.AppUsers on v.NhanVienLayHangId equals a.Id
+                                //join a in _context.AppUsers on v.NhanVienLayHangId equals a.Id
+                                join a in _context.NhanViens on v.NhanVienId equals a.Id
                                 select new VanDonDto()
                                 {
                                     Id = v.Id,
                                     Code = v.Code,
+                                    //StrNgayGuiHang = v.NgayGuiHang.ToString("dd/MM/yyyy HH:mm:ss"),
                                     CreatedDate = v.CreatedDate,
                                     ModifiedDate = v.ModifiedDate,
                                     CreatedUserId = v.CreatedUserId,
@@ -164,10 +167,15 @@ namespace GiaoHangNhanh.Services.Manipulation
                                         Code = b.Code,
                                         Name = b.Name
                                     },
-                                    User = new UserDto()
+                                    //User = new UserDto()
+                                    //{
+                                    //    Id = a.Id.ToString(),
+                                    //    UserName = a.UserName,
+                                    //    FullName = $"{a.LastName} {a.FirstName}"
+                                    //}
+                                    NhanVien = new NhanVienDto()
                                     {
-                                        Id = a.Id.ToString(),
-                                        UserName = a.UserName,
+                                        Id = a.Id,
                                         FullName = $"{a.LastName} {a.FirstName}"
                                     }
                                 }).AsNoTracking().FirstOrDefaultAsync();
@@ -191,6 +199,7 @@ namespace GiaoHangNhanh.Services.Manipulation
                                     CreatedDate = v.CreatedDate,
                                     ModifiedDate = v.ModifiedDate,
                                     CreatedUserId = v.CreatedUserId,
+
                                     ModifiedUserId = v.ModifiedUserId,
                                     SortOrder = v.SortOrder,
                                     IsDeleted = v.IsDeleted,
@@ -244,12 +253,17 @@ namespace GiaoHangNhanh.Services.Manipulation
                         join d in _context.DichVus on vd.DichVuId equals d.Id
                         join c in _context.CongTyGuiHangs on vd.CongTyGuiHangId equals c.Id
                         join b in _context.BuuCucs on vd.BuuCucHangDenId equals b.Id
-                        join a in _context.AppUsers on vd.NhanVienLayHangId equals a.Id
+                        //join a in _context.AppUsers on vd.NhanVienLayHangId equals a.Id
+                        join a in _context.NhanViens on vd.NhanVienId equals a.Id
                         select new { vd, p, d, c, b, a };
 
             //2. filter
             if (!string.IsNullOrEmpty(request.TextSearch))
                 query = query.Where(x => x.vd.Code.Contains(request.TextSearch));
+            if (request.FilterByNhanVienId != null)
+            {
+                query = query.Where(x => x.vd.Id == request.FilterByNhanVienId.Value);
+            }
 
             //if (request.FilterByTinhId != null)
             //{
@@ -282,6 +296,7 @@ namespace GiaoHangNhanh.Services.Manipulation
                 ModifiedDate = x.vd.ModifiedDate,
                 CreatedUserId = x.vd.CreatedUserId,
                 ModifiedUserId = x.vd.ModifiedUserId,
+                StrNgayGuiHang = x.vd.NgayGuiHang.ToString("dd/MM/yyyy HH:mm:ss"),
                 SortOrder = x.vd.SortOrder,
                 IsDeleted = x.vd.IsDeleted,
                 HoTenNguoiGui = x.vd.HoTenNguoiGui,
@@ -320,11 +335,16 @@ namespace GiaoHangNhanh.Services.Manipulation
                     Code = x.b.Code,
                     Name = x.b.Name
                 },
-                User = new UserDto()
+                //User = new UserDto()
+                //{
+                //    Id = x.a.Id.ToString(),
+                //    UserName = x.a.UserName,
+                //    FullName = $"{x.a.LastName} {x.a.FirstName}"
+                //}
+                NhanVien = new NhanVienDto()
                 {
-                    Id = x.a.Id.ToString(),
-                    UserName = x.a.UserName,
-                    FullName = $"{x.a.LastName} {x.a.FirstName}"
+                    Id = x.a.Id,
+                    FullName = $"{x.a.LastName} {x.a.FirstName}",
                 }
             }).AsNoTracking().ToListAsync();
 
@@ -349,6 +369,7 @@ namespace GiaoHangNhanh.Services.Manipulation
                 if (vanDon.IsDeleted == true || vanDon == null) throw new GiaoHangNhanhException($"Không tìm thấy id: {request.Id}");
 
                 vanDon.BuuCucHangDenId = request.BuuCucHangDenId;
+                vanDon.NhanVienId = request.NhanVienId;
                 vanDon.DichVuId = request.DichVuId;
                 vanDon.CongTyGuiHangId = request.CongTyGuiHangId;
                 vanDon.PhuongThucThanhToanId = request.PhuongThucThanhToanId;
