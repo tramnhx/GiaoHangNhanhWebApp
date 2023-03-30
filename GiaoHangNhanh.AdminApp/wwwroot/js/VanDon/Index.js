@@ -131,6 +131,8 @@ var VanDon = function () {
             { "data": "hoTenNguoiGui", "name": "hoTenNguoiGui", "autoWidth": true, "title": "Người gửi hàng" },
             { "data": "hoTenNguoiNhan", "name": "hoTenNguoiNhan", "autoWidth": true, "title": "Người nhận hàng" },
             { "data": "strNgayGuiHang", "name": "strNgayGuiHang", "autoWidth": true, "title": "Ngày gửi hàng" },
+            { "data": "dienThoaiNguoiGui", "name": "dienThoaiNguoiGui", "autoWidth": true, "title": "DT Người gửi" },
+            { "data": "diaChiNguoiGui", "name": "diaChiNguoiGui", "autoWidth": true, "title": "Địa chỉ người gửi" },
 
             {
                 width: "120px", "title": "Hành động", "render": function (data, type, full, meta) {

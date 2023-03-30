@@ -4,6 +4,7 @@ using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.BuuCucs;
 using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.VanDons;
 using GiaoHangNhanh.DAL.Entities.EntityDto.Common;
 using GiaoHangNhanh.DAL.Entities.EntityDto.Manipulation.KyNhans;
+using GiaoHangNhanh.DAL.Entities.EntityDto.System.NhanViens;
 using GiaoHangNhanh.DAL.Entities.EntityDto.System.Users;
 using GiaoHangNhanh.Utilities.Exceptions;
 using Microsoft.EntityFrameworkCore;
@@ -161,8 +162,8 @@ namespace GiaoHangNhanh.Services.Manipulation
                          .Where(x => x.IsDeleted == false)
                         join vd in _context.VanDons on k.VanDonId equals vd.Id
                         join bc in _context.BuuCucs on k.BuuCucId equals bc.Id
-                        join us in _context.AppUsers on vd.NhanVienLayHangId equals us.Id
-                        select new { k, vd, bc, us };
+                        join nv in _context.NhanViens on vd.NhanVienId equals nv.Id
+                        select new { k, vd, bc, nv };
 
             //2. filter
             if (!string.IsNullOrEmpty(request.TextSearch))
@@ -198,11 +199,10 @@ namespace GiaoHangNhanh.Services.Manipulation
                 {
                     Id = x.vd.Id,
                     Code = x.vd.Code,
-                    User = new UserDto()
+                    NhanVien = new NhanVienDto()
                     {
-                        Id = x.us.Id.ToString(),
-                        UserName = x.us.UserName,
-                        FullName = $"{x.us.LastName} {x.us.FirstName}"
+                        Id = x.nv.Id,
+                        FullName = $"{x.nv.LastName} {x.nv.FirstName}"
                     }
                 }
             }).AsNoTracking().ToListAsync();
