@@ -11,9 +11,9 @@ namespace GiaoHangNhanh.DAL.Configurations
             builder.ToTable("DangKyKienVanDes");
             builder.HasKey(x => x.Id);
 
-            builder.HasOne(v => v.VanDon).WithMany(p => p.DangKyKienVanDes).HasForeignKey(p => p.Id);
+            builder.HasOne(x => x.VanDon).WithMany(x => x.DangKyKienVanDes).HasForeignKey(x => x.VanDonId);
 
-            builder.HasOne(p => p.PhanLoaiHangBatThuong).WithMany(p => p.DangKyKienVanDes).HasForeignKey(p => p.Id);
+            builder.HasOne(x => x.PhanLoaiHangBatThuong).WithMany(x => x.DangKyKienVanDes).HasForeignKey(x => x.PhanLoaiHangBatThuongId);
 
         }
     }
