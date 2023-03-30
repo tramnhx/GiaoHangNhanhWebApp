@@ -152,7 +152,7 @@ var LichSuNhapKho = function () {
         });
     }
     function loadNhanVienLayHangByVanDon() {
-        $('[name="kt_modal_edit_form_nhanVienId"]').empty();
+        $('[name="kt_form_edit_form_nhanvienid"]').empty();
         if ($('[name="kt_modal_edit_form_vanDonId"]').val() != null) {
             var data = {
                 id: $('[name="kt_modal_edit_form_vanDonId"]').val()
@@ -164,9 +164,9 @@ var LichSuNhapKho = function () {
                     return false;
                 },
                 success: function (res) {
-                    var html = '<option value="' + res.resultObj.id + '">' + res.resultObj.user.fullName + '</option>';
-                    $('[name="kt_modal_edit_form_nhanVienId"]').append(html);
-                    $('[name="kt_modal_edit_form_nhanVienId"]').trigger('change');
+                    var html = '<option value="' + res.resultObj.id + '">' + res.resultObj.nhanVien.fullName + '</option>';
+                    $('[name="kt_form_edit_form_nhanvienid"]').append(html);
+                    $('[name="kt_form_edit_form_nhanvienid"]').trigger('change');
                 }
             });
         }
@@ -253,7 +253,7 @@ var LichSuNhapKho = function () {
             },
             {
                 "data": "vanDon", "name": "vanDon", "autoWidth": true, "title": "Nhân viên lấy hàng", "render": function (data, type, full, meta) {
-                    return '<span class="text-muted">' + data.user.fullName + '</span>';
+                    return '<span class="text-muted">' + data.nhanVien.fullName + '</span>';
                 }
             },
             { "data": "createdDate", "name": "createdDate", "autoWidth": true, "title": "Ngày thao tác" },

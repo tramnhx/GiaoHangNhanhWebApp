@@ -2,6 +2,7 @@
 using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.BuuCucs;
 using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.VanDons;
 using GiaoHangNhanh.DAL.Entities.EntityDto.Common;
+using GiaoHangNhanh.DAL.Entities.EntityDto.System.NhanViens;
 using GiaoHangNhanh.DAL.Entities.EntityDto.System.Users;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace GiaoHangNhanh.DAL.Entities.EntityDto.Manipulation.LichSuNhapKhos
 
         public VanDonDto VanDon { get; set; }
         public BuuCucDto BuuCuc { get; set; }
+        public NhanVienDto NhanVien { get; set; }
         public UserDto User { get; set; }
        
     }

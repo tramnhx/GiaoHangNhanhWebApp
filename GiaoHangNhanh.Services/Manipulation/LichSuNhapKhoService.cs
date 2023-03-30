@@ -6,6 +6,7 @@ using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.DichVus;
 using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.VanDons;
 using GiaoHangNhanh.DAL.Entities.EntityDto.Common;
 using GiaoHangNhanh.DAL.Entities.EntityDto.Manipulation.LichSuNhapKhos;
+using GiaoHangNhanh.DAL.Entities.EntityDto.System.NhanViens;
 using GiaoHangNhanh.DAL.Entities.EntityDto.System.Users;
 using GiaoHangNhanh.Utilities.Exceptions;
 using Microsoft.EntityFrameworkCore;
@@ -82,9 +83,9 @@ namespace GiaoHangNhanh.Services.Manipulation
             var query = from nk in _context.LichSuNhapKhos
                         join v in _context.VanDons on nk.VanDonId equals v.Id
                         join b in _context.BuuCucs on nk.BuuCucGuiHangId equals b.Id
-                        join au in _context.AppUsers on v.NhanVienLayHangId equals au.Id
+                        join nv in _context.NhanViens on v.NhanVienId equals nv.Id 
                         where nk.IsDeleted == false
-                        select new { nk,v,b,au };
+                        select new { nk, v, b, nv };
             
             //2. filter
             if (!string.IsNullOrEmpty(request.TextSearch))
@@ -92,10 +93,6 @@ namespace GiaoHangNhanh.Services.Manipulation
             if (request.FilterByBuuCucGuiHangId != null)
             {
                 query = query.Where(x => x.nk.Id == request.FilterByBuuCucGuiHangId.Value);
-            }
-            if (request.FilterByUserId != null)
-            {
-                query = query.Where(x => x.nk.Id == request.FilterByUserId.Value);
             }
             var a = await query.CountAsync();
             //3. Paging
@@ -123,24 +120,11 @@ namespace GiaoHangNhanh.Services.Manipulation
                     
                     SortOrder = x.v.SortOrder,
                     IsDeleted = x.v.IsDeleted,
-                    CongTyGuiHang = new CongTyGuiHangDto()
+                    NhanVien = new NhanVienDto()
                     {
-                        Id = x.v.CongTyGuiHang.Id,
-                        Code = x.v.CongTyGuiHang.Code,
-                        Name = x.v.CongTyGuiHang.Name
+                        Id = x.nv.Id,
+                        FullName = $"{x.nv.LastName} {x.nv.FirstName}"
                     },
-                    User = new UserDto()
-                    {
-                        Id = x.au.Id.ToString(),
-                        UserName = x.au.UserName,
-                        FullName = $"{x.au.LastName} {x.au.FirstName}"
-                    },
-                    DichVu = new DichVuDto()
-                    {
-                        Id = x.v.DichVu.Id,
-                        Code = x.v.DichVu.Code,
-                        Name = x.v.DichVu.Name,
-                    }
                 },
                 BuuCuc = new BuuCucDto()
                 {
