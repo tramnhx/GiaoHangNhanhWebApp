@@ -7,6 +7,9 @@ namespace GiaoHangNhanh.DAL.Entities.EntityDto.Enums
         SystemDataView = 1,
         SystemDataEdit = 2,
         SystemDataDelete = 3,
-        DownloadExcel = 4,
+        PersonalDataView = 4,
+        PersonalDataEdit = 5,
+        PersonalDataDelete = 6,
+        DownloadExcel = 7
     }
 }

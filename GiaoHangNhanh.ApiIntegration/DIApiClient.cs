@@ -13,6 +13,7 @@ namespace GiaoHangNhanh.ApiIntegration
             services.AddTransient<IBuuCucApiClient, BuuCucApiClient>();
             services.AddTransient<ICongTyGuiHangApiClient, CongTyGuiHangApiClient>();
             services.AddTransient<IDichVuApiClient, DichVuApiClient>();
+            services.AddTransient<IDuyetChuyenHoanApiClient, DuyetChuyenHoanApiClient>();
             services.AddTransient<IGenderApiClient, GenderApiClient>();
             services.AddTransient<IHuyenApiClient, HuyenApiClient>();
             services.AddTransient<IKhuVucApiClient, KhuVucApiClient>();

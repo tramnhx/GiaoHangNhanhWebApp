@@ -78,7 +78,7 @@ namespace GiaoHangNhanh.DAL.Extensions
                 new Menu() { Id = 3, SortOrder = 2, IsDeleted = false, IsActive = true, Code = "VD", Name = "Vận đơn", ParentId = new Nullable<int>(), Link = string.Empty, Icon = "<span class='menu-icon'><span class='svg-icon svg-icon-2'><svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24px' height='24px' viewBox='0 0 24 24' version='1.1'><g stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'><rect x='0' y='0' width='24' height='24'></rect><rect fill='#000000' x='4' y='4' width='7' height='7' rx='1.5'></rect><path d='M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z' fill='#000000' opacity='0.3'></path></g></svg></span></span>" },
                 new Menu() { Id = 4, SortOrder = 1, IsDeleted = false, IsActive = true, Code = "VD_TVD", Name = "Tra vận đơn", ParentId = 3, Link = "/VanDon/Index", ControllerName = "VanDon", ActionName = "Index" },
 
-                new Menu() { Id = 5, SortOrder = 3, IsDeleted = false, IsActive = true, Code = "TT", Name = "Thao Tác", ParentId = new Nullable<int>(), Link = string.Empty, Icon = "<span class='menu-icon'><span class='svg-icon svg-icon-2'><svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24px' height='24px' viewBox='0 0 24 24' version='1.1'><g stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'><rect x='0' y='0' width='24' height='24'></rect><rect fill='#000000' x='4' y='4' width='7' height='7' rx='1.5'></rect><path d='M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z' fill='#000000' opacity='0.3'></path></g></svg></span></span>" },
+                new Menu() { Id = 5, SortOrder = 3, IsDeleted = false, IsActive = true, Code = "TT", Name = "Thao tác", ParentId = new Nullable<int>(), Link = string.Empty, Icon = "<span class='menu-icon'><span class='svg-icon svg-icon-2'><svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24px' height='24px' viewBox='0 0 24 24' version='1.1'><g stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'><rect x='0' y='0' width='24' height='24'></rect><rect fill='#000000' x='4' y='4' width='7' height='7' rx='1.5'></rect><path d='M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z' fill='#000000' opacity='0.3'></path></g></svg></span></span>" },
                 new Menu() { Id = 6, SortOrder = 1, IsDeleted = false, IsActive = true, Code = "TT_KN", Name = "Ký nhận", ParentId = 5, Link = "/KyNhan/Index", ControllerName = "KyNhan", ActionName = "Index" },
                 new Menu() { Id = 8, SortOrder = 3, IsDeleted = false, IsActive = true, Code = "TT_LSNK", Name = "Lịch sử nhập kho", ParentId = 5, Link = "/LichSuNhapKho/Index", ControllerName = "LichSuNhapKho", ActionName = "Index" },
                 new Menu() { Id = 9, SortOrder = 4, IsDeleted = false, IsActive = true, Code = "TT_LSDB", Name = "Lịch sử đóng bao", ParentId = 5, Link = "/LichSuDongBao/Index", ControllerName = "LichSuDongBao", ActionName = "Index" },
@@ -86,7 +86,7 @@ namespace GiaoHangNhanh.DAL.Extensions
                 new Menu() { Id = 11, SortOrder = 6, IsDeleted = false, IsActive = true, Code = "TT_LSXDE", Name = "Lịch sử xe đến", ParentId = 5, Link = "/LichSuXeDen/Index", ControllerName = "LichSuXeDen", ActionName = "Index" },
                 new Menu() { Id = 12, SortOrder = 7, IsDeleted = false, IsActive = true, Code = "TT_LSXD", Name = "Lịch sử xe đi", ParentId = 5, Link = "/LichSuXeDi/Index", ControllerName = "LichSuXeDi", ActionName = "Index" },
                 new Menu() { Id = 13, SortOrder = 8, IsDeleted = false, IsActive = true, Code = "TT_LSGH", Name = "Lịch sử gửi hàng", ParentId = 5, Link = "/LichSuGuiHang/Index", ControllerName = "LichSuGuiHang", ActionName = "Index" },
-                new Menu() { Id = 28, SortOrder = 9, IsDeleted = false, IsActive = true, Code = "TT_DKCH", Name = "Đăng ký chuyển hoàn", ParentId = 5, Link = "/DangKyChuyenHoan/Index", ControllerName = "DangKyChuyenHoan", ActionName = "Index" },
+                new Menu() { Id = 31, SortOrder = 9, IsDeleted = false, IsActive = true, Code = "TT_LSHD", Name = "Lịch sử hàng đến", ParentId = 5, Link = "/LichSuHangDen/Index", ControllerName = "LichSuHangDen", ActionName = "Index" },
 
                 new Menu() { Id = 14, SortOrder = 4, IsDeleted = false, IsActive = true, Code = "DM", Name = "Danh mục", ParentId = new Nullable<int>(), Link = string.Empty, Icon = "<span class='menu-icon'><span class='svg-icon svg-icon-2'><svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24px' height='24px' viewBox='0 0 24 24' version='1.1'><g stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'><rect x='0' y='0' width='24' height='24'></rect><rect fill='#000000' x='4' y='4' width='7' height='7' rx='1.5'></rect><path d='M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z' fill='#000000' opacity='0.3'></path></g></svg></span></span>" },
                 new Menu() { Id = 15, SortOrder = 1, IsDeleted = false, IsActive = true, Code = "DM_DV", Name = "Dịch vụ", ParentId = 14, Link = "/DichVu/Index", ControllerName = "DanhMucDichVu", ActionName = "Index" },
@@ -105,7 +105,11 @@ namespace GiaoHangNhanh.DAL.Extensions
                 new Menu() { Id = 24, SortOrder = 6, IsDeleted = false, IsActive = true, Code = "QTHT_DMHT_KV", Name = "Khu vực", ParentId = 18, Link = "/KhuVuc/Index", ControllerName = "KhuVuc", ActionName = "Index" },
                 new Menu() { Id = 25, SortOrder = 7, IsDeleted = false, IsActive = true, Code = "QTHT_DMHT_BC", Name = "Bưu cục", ParentId = 18, Link = "/BuuCuc/Index", ControllerName = "BuuCuc", ActionName = "Index" },
 
-                new Menu() { Id = 26, SortOrder = 8, IsDeleted = false, IsActive = true, Code = "QTHT_DMHT_M", Name = "Menu", ParentId = 18, Link = "/Menu/Index", ControllerName = "Menu", ActionName = "Index" }
+                new Menu() { Id = 26, SortOrder = 8, IsDeleted = false, IsActive = true, Code = "QTHT_DMHT_M", Name = "Menu", ParentId = 18, Link = "/Menu/Index", ControllerName = "Menu", ActionName = "Index" },
+
+                new Menu() { Id = 28, SortOrder = 4, IsDeleted = false, IsActive = true, Code = "CH", Name = "Chuyển hoàn", ParentId = new Nullable<int>(), Link = string.Empty, Icon = "<span class='menu-icon'><span class='svg-icon svg-icon-2'><svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24px' height='24px' viewBox='0 0 24 24' version='1.1'><g stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'><rect x='0' y='0' width='24' height='24'></rect><rect fill='#000000' x='4' y='4' width='7' height='7' rx='1.5'></rect><path d='M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z' fill='#000000' opacity='0.3'></path></g></svg></span></span>" },
+                new Menu() { Id = 29, SortOrder = 1, IsDeleted = false, IsActive = true, Code = "CH_DKCH", Name = "Đăng ký chuyển hoàn", ParentId = 28, Link = "/DangKyChuyenHoan/Index", ControllerName = "DangKyChuyenHoan", ActionName = "Index" },
+                new Menu() { Id = 30, SortOrder = 2, IsDeleted = false, IsActive = true, Code = "CH_DCH", Name = "Duyệt chuyển hoàn", ParentId = 28, Link = "/DuyetChuyenHoan/Index", ControllerName = "DuyetChuyenHoan", ActionName = "Index" }
             );
 
             //Tinhs
@@ -131,6 +135,32 @@ namespace GiaoHangNhanh.DAL.Extensions
                     ModifiedUserId = new Guid("447FE343-9985-412C-BB19-C6F398BC014F"),
                 }
             );
+            //DangKyChuyenHoans
+            modelBuilder.Entity<DangKyChuyenHoan>().HasData(
+                new DangKyChuyenHoan
+                {
+                    Id = 1,
+                    VanDonId = 1,
+                    NguyenNhan = "Khách không nghe máy",
+                    MieuTaNguyenNhan = "Khách gọi không nghe máy",
+                    IsDangKyChuyenHoan = true,
+                    CreatedUserId = new Guid("447FE343-9985-412C-BB19-C6F398BC014F"),
+                    ModifiedUserId = new Guid("447FE343-9985-412C-BB19-C6F398BC014F"),
+                }
+            );
+            //DuyetChuyenHoans
+            modelBuilder.Entity<DuyetChuyenHoan>().HasData(
+                new DuyetChuyenHoan
+                {
+                    Id = 1,
+                    VanDonId = 1,
+                    DangKyChuyenHoanId = 1,
+                    NguoiKyNhanChuyenHoan = "Tram",
+                    CreatedUserId = new Guid("447FE343-9985-412C-BB19-C6F398BC014F"),
+                    ModifiedUserId = new Guid("447FE343-9985-412C-BB19-C6F398BC014F"),
+                }
+            );
+
 
             //PhuongThucThanhToans
             modelBuilder.Entity<PhuongThucThanhToan>().HasData(

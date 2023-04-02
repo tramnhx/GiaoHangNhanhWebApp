@@ -1,5 +1,7 @@
-﻿using GiaoHangNhanh.DAL.EF;
+﻿using FluentValidation.AspNetCore;
+using GiaoHangNhanh.DAL.EF;
 using GiaoHangNhanh.DAL.Entities.Entity;
+using GiaoHangNhanh.DAL.Entities.EntityDto.System.Users;
 using GiaoHangNhanh.Services;
 using GiaoHangNhanh.Utilities.Constants;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -18,6 +20,8 @@ namespace GiaoHangNhanh.BackendApi
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -30,10 +34,10 @@ namespace GiaoHangNhanh.BackendApi
         {
             services.AddDbContext<GiaoHangNhanhDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString(SystemConstants.ConnectionStringConstants.MainConnectionString)));
+
             services.AddIdentity<AppUser, AppRole>()
                 .AddEntityFrameworkStores<GiaoHangNhanhDbContext>()
                 .AddDefaultTokenProviders();
-
 
             // Truy cập IdentityOptions
             services.Configure<IdentityOptions>(options =>
@@ -46,9 +50,23 @@ namespace GiaoHangNhanh.BackendApi
                 options.Password.RequiredLength = 3; // Số ký tự tối thiểu của password
                 options.Password.RequiredUniqueChars = 1; // Số ký tự riêng biệt
             });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  builder => builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                );
+            });
+
             //Declare DI
             services.AddDIService();
-            services.AddControllersWithViews();
+
+            services.AddControllers()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger Giao Hang Nhanh Solution", Version = "v1" });
@@ -112,7 +130,6 @@ namespace GiaoHangNhanh.BackendApi
             services.AddControllersWithViews();
         }
 
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -128,15 +145,18 @@ namespace GiaoHangNhanh.BackendApi
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
             app.UseAuthentication();
             app.UseRouting();
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthorization();
+
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger GiaoHangNhanhSolution V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger GiaoHangNhanh V1");
             });
 
             app.UseEndpoints(endpoints =>

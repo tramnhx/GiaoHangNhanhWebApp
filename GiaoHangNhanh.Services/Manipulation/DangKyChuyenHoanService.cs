@@ -1,11 +1,8 @@
 ﻿using GiaoHangNhanh.DAL.EF;
 using GiaoHangNhanh.DAL.Entities.Entity;
-using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.BuuCucs;
-using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.CongTyGuiHangs;
 using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.VanDons;
 using GiaoHangNhanh.DAL.Entities.EntityDto.Common;
 using GiaoHangNhanh.DAL.Entities.EntityDto.Manipulation.DangKyChuyenHoans;
-using GiaoHangNhanh.DAL.Entities.EntityDto.Manipulation.LichSuGuiHangs;
 using GiaoHangNhanh.Utilities.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -37,16 +34,28 @@ namespace GiaoHangNhanh.Services.Manipulation
             {
                 var chuyenHoan = new DangKyChuyenHoan()
                 {
-              
                     VanDonId = request.VanDonId,
                     MieuTaNguyenNhan = request.MieuTaNguyenNhan,
                     NguyenNhan = request.NguyenNhan,
+                    IsDangKyChuyenHoan = true,
                     CreatedUserId = request.CreatedUserId,
                     ModifiedUserId = request.ModifiedUserId,
-                    
                 };
                 _context.DangKyChuyenHoans.Add(chuyenHoan);
                 await _context.SaveChangesAsync();
+
+                var duyetChuyenHoan = new DuyetChuyenHoan()
+                {
+                    DangKyChuyenHoanId = chuyenHoan.Id,
+                    VanDonId = request.VanDonId,
+                    NguoiKyNhanChuyenHoan = string.Empty,
+                    IsDaDuyet = false,
+                    CreatedUserId = request.CreatedUserId,
+                    ModifiedUserId = request.ModifiedUserId,
+                };
+                _context.DuyetChuyenHoans.Add(duyetChuyenHoan);
+                await _context.SaveChangesAsync();
+
                 return new ApiSuccessResult<int>(chuyenHoan.Id);
             }
             catch (Exception ex)
@@ -138,6 +147,7 @@ namespace GiaoHangNhanh.Services.Manipulation
 
                 dangKy.MieuTaNguyenNhan = request.MieuTaNguyenNhan;
                 dangKy.NguyenNhan = request.NguyenNhan;
+                dangKy.IsDangKyChuyenHoan = true;
                 dangKy.ModifiedDate = DateTime.Now;
                 dangKy.ModifiedUserId = request.ModifiedUserId;
                 dangKy.VanDonId = request.VanDonId;
