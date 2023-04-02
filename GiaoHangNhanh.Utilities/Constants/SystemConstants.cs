@@ -12,6 +12,7 @@
             public const string NA = "N/A";
             public const string LogoFile1 = "LogoFile1";
             public const string LogoFile2 = "LogoFile2";
+            public const string CurrentUserRoleSession = "CurrentUserRoleSession";
             public const string CKEditorUploadDocTemplateFile = "CKEditorUploadDocTemplateFile";
             public const string UploadProduct = "UploadProduct";
             public const string DocTemplateUploadFile = "DocTemplateUploadFile ";

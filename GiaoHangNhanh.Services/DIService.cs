@@ -44,6 +44,7 @@ namespace GiaoHangNhanh.Services
             services.AddTransient<ILichSuGuiHangService, LichSuGuiHangService>();
             services.AddTransient<ILichSuHangDenService, LichSuHangDenService>();
             services.AddTransient<IDangKyChuyenHoanService, DangKyChuyenHoanService>();
+            services.AddTransient<IDuyetChuyenHoanService, DuyetChuyenHoanService>();
             services.AddTransient<IDangKyKienVanDeService, DangKyKienVanDeService>();
             services.AddTransient<ILichSuXeDiService, LichSuXeDiService>();
             services.AddTransient<ILichSuXeDenService, LichSuXeDenService>();

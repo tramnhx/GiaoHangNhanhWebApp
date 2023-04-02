@@ -13,5 +13,6 @@ namespace GiaoHangNhanh.DAL.Entities.Entity
 
         public VanDon VanDon { get; set; }
         public PhanLoaiHangBatThuong PhanLoaiHangBatThuong { get; set; }
+
     }
 }

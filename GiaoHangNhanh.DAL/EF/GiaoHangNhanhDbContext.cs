@@ -48,6 +48,7 @@ namespace GiaoHangNhanh.DAL.EF
             modelBuilder.ApplyConfiguration(new GenderConfiguration());
 
             //Manipulation
+            modelBuilder.ApplyConfiguration(new DuyetChuyenHoanConfiguration());
             modelBuilder.ApplyConfiguration(new DangKyChuyenHoanConfiguration());
             modelBuilder.ApplyConfiguration(new DangKyKienVanDeConfiguration());
             modelBuilder.ApplyConfiguration(new KyNhanConfiguration());
@@ -78,6 +79,7 @@ namespace GiaoHangNhanh.DAL.EF
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<BuuCuc> BuuCucs { get; set; }
         public DbSet<CongTyGuiHang> CongTyGuiHangs { get; set; }
+        public DbSet<DuyetChuyenHoan> DuyetChuyenHoans { get; set; }
         public DbSet<DangKyChuyenHoan> DangKyChuyenHoans { get; set; }
         public DbSet<DangKyKienVanDe> DangKyKienVanDes { get; set; }
         public DbSet<DichVu> DichVus { get; set; }

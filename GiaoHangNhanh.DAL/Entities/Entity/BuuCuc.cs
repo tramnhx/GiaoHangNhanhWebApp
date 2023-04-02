@@ -17,6 +17,6 @@ namespace GiaoHangNhanh.DAL.Entities.Entity
         public ICollection<LichSuNhapKho> LichSuNhapKhos { get; set; }
         public ICollection<LichSuHangDen> LichSuHangDens { get; set; }
         public ICollection<VanDon> VanDons { get; set; }
-
+        public ICollection<DuyetChuyenHoan> DuyetChuyenHoans { get; set; }
     }
 }
