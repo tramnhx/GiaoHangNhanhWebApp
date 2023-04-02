@@ -1,4 +1,4 @@
-﻿using GiaoHangNhanh.DAL.Entities.Entity;
+using GiaoHangNhanh.DAL.Entities.Entity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -86,7 +86,11 @@ namespace GiaoHangNhanh.DAL.Extensions
                 new Menu() { Id = 11, SortOrder = 6, IsDeleted = false, IsActive = true, Code = "TT_LSXDE", Name = "Lịch sử xe đến", ParentId = 5, Link = "/LichSuXeDen/Index", ControllerName = "LichSuXeDen", ActionName = "Index" },
                 new Menu() { Id = 12, SortOrder = 7, IsDeleted = false, IsActive = true, Code = "TT_LSXD", Name = "Lịch sử xe đi", ParentId = 5, Link = "/LichSuXeDi/Index", ControllerName = "LichSuXeDi", ActionName = "Index" },
                 new Menu() { Id = 13, SortOrder = 8, IsDeleted = false, IsActive = true, Code = "TT_LSGH", Name = "Lịch sử gửi hàng", ParentId = 5, Link = "/LichSuGuiHang/Index", ControllerName = "LichSuGuiHang", ActionName = "Index" },
-                new Menu() { Id = 31, SortOrder = 9, IsDeleted = false, IsActive = true, Code = "TT_LSHD", Name = "Lịch sử hàng đến", ParentId = 5, Link = "/LichSuHangDen/Index", ControllerName = "LichSuHangDen", ActionName = "Index" },
+               
+                new Menu() { Id = 29, SortOrder = 2, IsDeleted = false, IsActive = true, Code = "TT_LSPH", Name = "Lịch sử phát hàng", ParentId = 5, Link = "/LichSuPhatHang/Index", ControllerName = "LichSuPhatHang", ActionName = "Index" },
+                new Menu() { Id = 28, SortOrder = 9, IsDeleted = false, IsActive = true, Code = "TT_DKCH", Name = "Đăng ký chuyển hoàn", ParentId = 5, Link = "/DangKyChuyenHoan/Index", ControllerName = "DangKyChuyenHoan", ActionName = "Index" },
+                new Menu() { Id = 30, SortOrder = 10, IsDeleted = false, IsActive = true, Code = "TT_DKKVD", Name = "Đăng ký kiện vấn đề", ParentId = 5, Link = "/DangKyKienVanDe/Index", ControllerName = "DangKyKienVanDe", ActionName = "Index" },
+
 
                 new Menu() { Id = 14, SortOrder = 4, IsDeleted = false, IsActive = true, Code = "DM", Name = "Danh mục", ParentId = new Nullable<int>(), Link = string.Empty, Icon = "<span class='menu-icon'><span class='svg-icon svg-icon-2'><svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24px' height='24px' viewBox='0 0 24 24' version='1.1'><g stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'><rect x='0' y='0' width='24' height='24'></rect><rect fill='#000000' x='4' y='4' width='7' height='7' rx='1.5'></rect><path d='M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z' fill='#000000' opacity='0.3'></path></g></svg></span></span>" },
                 new Menu() { Id = 15, SortOrder = 1, IsDeleted = false, IsActive = true, Code = "DM_DV", Name = "Dịch vụ", ParentId = 14, Link = "/DichVu/Index", ControllerName = "DanhMucDichVu", ActionName = "Index" },
@@ -321,21 +325,36 @@ namespace GiaoHangNhanh.DAL.Extensions
                 new VanDon
                 {
                     Id = 1,
-                    Code = "VDTN01CDA",
+                    Code = "920293392206",
                     BuuCucHangDenId = 1,
                     CongTyGuiHangId = 1,
                     DichVuId = 1,
                     PhuongThucThanhToanId = 1,
                     COD = 12000,
-                    CreatedDate = DateTime.Now,
                     CreatedUserId = new Guid("447FE343-9985-412C-BB19-C6F398BC014F"),
-                    HoTenNguoiNhan = "Ngoc Thanh",
+                    HoTenNguoiNhan = "Vũ Thành",
+                    HoTenNguoiGui = "Shopee",
                     DienThoaiNguoiNhan = "0905684251",
-                    DiaChiNguoiNhan = "79 Mai Thi Dong, Khanh Hoa",
+                    DiaChiNguoiNhan = "79 Mai Thi Dong, Khánh Hòa",
+                    DienThoaiNguoiGui = "01627038692",
+                    DiaChiNguoiGui = "123 Thống nhất, Ninh Thuận",
+                    NoiDungHangHoa = "Quần áo",
                     ModifiedUserId = new Guid("447FE343-9985-412C-BB19-C6F398BC014F"),
                     TrongLuong = 0.6,
                     NgayGuiHang = DateTime.Now,
-                    NhanVienLayHangId = new Guid("447FE343-9985-412C-BB19-C6F398BC014F"),
+                    NhanVienId = 1,
+                }
+            );
+            //DangKyKienVanDe
+            modelBuilder.Entity<DangKyKienVanDe>().HasData(
+                new DangKyKienVanDe
+                {
+                    Id = 1,
+                    Code = "DKKVD",
+                    VanDonId = 1,
+                    PhanLoaiHangBatThuongId = 1,
+                    CreatedUserId = new Guid("447FE343-9985-412C-BB19-C6F398BC014F"),
+                    ModifiedUserId = new Guid("447FE343-9985-412C-BB19-C6F398BC014F"),
                 }
             );
         }

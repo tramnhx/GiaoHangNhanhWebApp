@@ -1,14 +1,11 @@
-﻿using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.Tinhs;
-using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.Huyens;
-using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.KhuVucs;
-using GiaoHangNhanh.DAL.Entities.EntityDto.Common;
+﻿using GiaoHangNhanh.DAL.Entities.EntityDto.Common;
 using System;
 using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.BuuCucs;
 using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.CongTyGuiHangs;
 using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.DichVus;
 using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.PhuongThucThanhToans;
-using GiaoHangNhanh.DAL.Entities.EntityDto.Manipulation.KyNhans;
 using GiaoHangNhanh.DAL.Entities.EntityDto.System.Users;
+using GiaoHangNhanh.DAL.Entities.EntityDto.System.NhanViens;
 
 namespace GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.VanDons
 {
@@ -40,5 +37,6 @@ namespace GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.VanDons
         public DichVuDto DichVu { get; set; }
         public PhuongThucThanhToanDto PhuongThucThanhToan { get; set; }
         public UserDto User { get; set; }
+        public NhanVienDto NhanVien { get; set; }
     }
 }

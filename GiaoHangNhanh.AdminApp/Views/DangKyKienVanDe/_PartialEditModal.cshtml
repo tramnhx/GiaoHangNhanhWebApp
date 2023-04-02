@@ -1,6 +1,4 @@
-﻿@model KyNhanViewModel
-
-<!--end::Modal-->
+﻿<!--end::Modal-->
 <div class="modal fade" id="kt_modal_edit" data-bs-backdrop="static" data-bs-keyboard="true" aria-hidden="true">
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-850px">
@@ -10,7 +8,7 @@
             <form class="form fv-plugins-bootstrap5 fv-plugins-framework" action="#" id="kt_modal_edit_form">
                 <!--begin::Modal header-->
                 <div class="modal-header pb-0 border-0 justify-content-end" id="kt_modal_edit_header">
-                    <!--begin::Close-->
+                    <!--begin::Close--> 
                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                         <!--begin::Svg Icon | path: icons/duotone/Navigation/Close.svg-->
                         <span class="svg-icon svg-icon-1">
@@ -45,99 +43,131 @@
                     <div class="scroll-y me-n7 pe-7" id="kt_modal_edit_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
                          data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_edit_header"
                          data-kt-scroll-wrappers="#kt_modal_edit_scroll" data-kt-scroll-offset="300px" style="max-height: 122px;">
+
                         <!--begin::Input group-->
                         <div class="row g-9">
                             <!--begin::Col-->
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 fv-row mb-7 fv-plugins-icon-container">
                                 <!--begin::Label-->
-                                <label class="required fs-6 fw-bold mb-2">@Html.Raw("Chọn bưu cục")</label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <select name="kt_modal_edit_form_buuCucId" aria-label="Chọn mã bưu cục" data-field="BuuCucId"
-                                        data-placeholder="Chọn bưu cục..." class="form-select form-select-solid fw-bolder">
-                                </select>
-                                <!--end::Input-->
-                                <div class="fv-plugins-message-container invalid-feedback"></div>
-                            </div>
-                            <!--begin::Col-->
-
-                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 fv-row mb-7 fv-plugins-icon-container">
-                                <!--begin::Label-->
                                 <label class="required fs-6 fw-bold mb-2">@Html.Raw("Mã vận đơn")</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                
-                                <select name="kt_modal_edit_form_vanDonId" aria-label="Chọn mã bưu cục" data-field="VanDonId"
-                                        data-placeholder="Chọn vận đơn..." class="form-select form-select-solid fw-bolder">
+                                <select name="kt_modal_edit_form_vanDonId" aria-label="Chọn Vận đơn" data-field="VanDonId"
+                                        data-placeholder="Chọn Vận đơn..." class="form-select form-select-solid fw-bolder">
                                 </select>
                                 <!--end::Input-->
                                 <div class="fv-plugins-message-container invalid-feedback"></div>
                             </div>
                             <!--end::Col-->
-                        </div>
-                        <!--end::Input group-->
-                        <div class="row g-9">
-                            
-                            <div class="fv-row mb-7 fv-plugins-icon-container">
+
+                            <!--begin::Col-->
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 fv-row mb-7 fv-plugins-icon-container">
                                 <!--begin::Label-->
-                                <label class="required fs-6 fw-bold mb-2">@Html.Raw("Tên Nhân Viên Lấy Hàng")</label>
+                                <label class="required fs-6 fw-bold mb-2">@Html.Raw("Phân loại hàng bất thường")</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="kt_form_edit_form_nhanvienid" aria-label="tên nhân viên lấy hàng" data-field="NhanVienId"
-                                        data-placeholder="Tên Nhân Viên..." class="form-select form-select-solid fw-bolder">
+                                <select name="kt_modal_edit_form_phanLoaiHangBatThuongId" aria-label="Chọn phân loại hàng bất thường" data-field="PhanLoaiHangBatThuongId"
+                                        data-placeholder="Chọn phân loại hàng bất thường..." class="form-select form-select-solid fw-bolder">
                                 </select>
                                 <!--end::Input-->
                                 <div class="fv-plugins-message-container invalid-feedback"></div>
                             </div>
-                        </div>
-                        <!--begin::Input group-->
-                        <div class="row g-9">
-                            <!--begin::Col-->
+                            <!--end::Col-->
+
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 fv-row mb-7 fv-plugins-icon-container">
                                 <!--begin::Label-->
-                                <label class="required fs-6 fw-bold mb-2">@Html.Raw("Tên người ký")</label>
+                                <label class="fs-6 fw-bold mb-2">@Html.Raw("Tên người gửi")</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Tên người ký")" data-field="TenNguoiKy" name="kt_modal_edit_form_tennguoiky" />
+                                <select disabled="disabled" name="kt_modal_edit_form_hoTenNguoiGui" aria-label="Họ tên người gửi"
+                                        data-placeholder="Họ tên người gửi" class="form-select form-select-solid fw-bolder">
+                                </select>
+                                <!--end::Input-->
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                            <!--end::Col-->
+
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 fv-row mb-7 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="fs-6 fw-bold mb-2">@Html.Raw("Tên người nhận")</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <select disabled="disabled" name="kt_modal_edit_form_hoTenNguoiNhan" aria-label="Họ tên người nhận"
+                                        data-placeholder="Họ tên người nhận" class="form-select form-select-solid fw-bolder">
+                                </select>
+                                <!--end::Input-->
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                            <!--end::Col-->
+                            
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 fv-row mb-7 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="fs-6 fw-bold mb-2">@Html.Raw("Điện thoại người gửi")</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <select disabled="disabled" name="kt_modal_edit_form_dienThoaiNguoiGui" aria-label="Điện thoại người gửi"
+                                        data-placeholder="Điện thoại người gửi" class="form-select form-select-solid fw-bolder">
+                                </select>
+                                <!--end::Input-->
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                            <!--end::Col-->
+
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 fv-row mb-7 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="fs-6 fw-bold mb-2">@Html.Raw("Điện thoại người nhận")</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <select disabled="disabled" name="kt_modal_edit_form_dienThoaiNguoiNhan" aria-label="Điện thoại người nhận"
+                                        data-placeholder="Điện thoại người nhận" class="form-select form-select-solid fw-bolder">
+                                </select>
+                                <!--end::Input-->
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                            <!--end::Col-->
+                            
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 fv-row mb-7 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="fs-6 fw-bold mb-2">@Html.Raw("Ngày gửi hàng")</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <select disabled="disabled" name="kt_modal_edit_form_ngayGuiHang" aria-label="Ngày gửi hàng"
+                                        data-placeholder="Ngày gửi hàng" class="form-select form-select-solid fw-bolder">
+                                </select>
                                 <!--end::Input-->
                                 <div class="fv-plugins-message-container invalid-feedback"></div>
                             </div>
 
-                            <!--begin::Input group-->
-                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 fv-row mb-7 fv-plugins-icon-container">
-                                <!--begin::Label-->
-                                <label class="mb-4 col-lg-3 fw-bold fs-6">@Html.Raw("Dấu ký thay")</label>
-                                <!--begin::Label-->
-                                <!--begin::Label-->
-                                <div class="col-lg-2 d-flex align-items-center">
-                                    <div class="form-check form-check-solid form-switch fv-row">
-                                        <input class="form-check-input w-45px h-30px" type="checkbox" data-field="DauKyThay" />
-                                        <label class="form-check-label" for="DauKyThay"></label>
-                                    </div>
-                                </div>
-                                <!--begin::Label-->
-                            </div>
-                            <!--end::Input group-->
-
-                        </div>
-
-                        <!--end::Input group-->
-                        <!--end::Input group-->
-                        <div class="row g-9">
-                            <!--end::Input group-->
                             <!--begin::Col-->
                             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 fv-row mb-7 fv-plugins-icon-container">
                                 <!--begin::Label-->
-                                <label class="fs-6 fw-bold mb-2">@Html.Raw("Mô tả")</label>
+                                <label class="fs-6 fw-bold mb-2">@Html.Raw("Rút về đích đến")</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Mô tả")" data-field="Description" name="kt_modal_edit_form_description" />
+                                <select disabled="disabled" name="kt_modal_edit_form_dichden" aria-label="Rút về đích đến"
+                                        data-placeholder="Rút về đích đến" class="form-select form-select-solid fw-bolder">
+                                </select>
                                 <!--end::Input-->
                                 <div class="fv-plugins-message-container invalid-feedback"></div>
                             </div>
-                        </div>
-                        <!--end::Input group-->
+                            <!--end::Col-->
 
+                           @*<!--begin::Col-->
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 fv-row mb-7 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="fs-6 fw-bold mb-2">@Html.Raw("Ghi chú")</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <textarea type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Ghi chú")"
+                                          data-field="Description" name="kt_form_edit_form_description">
+                                </textarea>
+                                <!--end::Input-->
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                            <!--end::Col-->*@
+
+                            
+                        <!--end::Input group-->
                     </div>
                     <!--end::Scroll-->
                 </div>

@@ -71,7 +71,8 @@ namespace GiaoHangNhanh.ApiIntegration
                 $"/api/VanDons/GetManageListPaging?pageIndex={request.PageIndex}" +
                 $"&pageSize={request.PageSize}" +
                 (!string.IsNullOrEmpty(request.OrderCol) ? ($"&OrderCol={request.OrderCol}" + $"&OrderDir={request.OrderDir}") : "") +
-                (!string.IsNullOrEmpty(request.TextSearch) ? $"&TextSearch={request.TextSearch}" : ""));
+                (!string.IsNullOrEmpty(request.TextSearch) ? $"&TextSearch={request.TextSearch}" : "") +
+                (request.FilterByNhanVienId != null ? $"&FilterByNhanVienId={request.FilterByNhanVienId.Value}" : ""));
             //(request.FilterByBuuCucId != null ? $"&FilterByBuuCucId={request.FilterByBuuCucId.Value}" : "") +
             //(request.FilterByDichVuId != null ? $"&FilterByDichVuId={request.FilterByDichVuId.Value}" : "") +
             //(request.FilterByPhuongThucThanhToanId != null ? $"&FilterByPhuongThucThanhToanId={request.FilterByPhuongThucThanhToanId.Value}" : "") +
