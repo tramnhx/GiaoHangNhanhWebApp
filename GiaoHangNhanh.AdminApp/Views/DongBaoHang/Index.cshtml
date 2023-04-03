@@ -1,9 +1,8 @@
-﻿
-@model LichSuDongBaoViewModel
-@{
-    ViewBag.Title = "LichSuDongBao";
-}
+﻿@model LichSuBaoHangViewModel
 
+@{
+    ViewBag.Title = "Bao Hàng";
+}
 
 @section Vendors_CSS{
     <link rel="stylesheet" href="@Url.Content("~/plugins/DataTables/css/jquery.dataTables.css")" type="text/css">
@@ -22,8 +21,7 @@
 @section Custom_Scripts{
 
     <script type="text/javascript" src="@Url.Content("~/js/customize_third_party/customiseDatatable.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/js/Manipulation/LichSuDongBao/Index.js")"></script>
-
+    <script type="text/javascript" src="@Url.Content("~/js/DongBaoHang/Index.js")"></script>
 }
 
 <script>
@@ -37,7 +35,7 @@
     };
 
     $(document).ready(function () {
-        LichSuDongBao.init();
+        DongBaoHang.init();
     });
 
 </script>
@@ -67,7 +65,9 @@
                                 </svg>
                             </span>
                             <!--end::Svg Icon-->
-                            <input type="text" data-kt-customer-table-filter="search" id="dtTableSearch" class="form-control form-control-solid w-250px ps-15" placeholder="Tìm kiếm">                           
+                            <input type="text" data-kt-customer-table-filter="search" id="dtTableSearch" class="form-control form-control-solid w-250px ps-15" placeholder="Tìm kiếm">
+                            <!--begin::Input-->
+                            <!--end::Input-->
                         </div>
                         <!--end::Search-->
                     </div>
@@ -79,9 +79,7 @@
                             <button type="button" class="btn"> <span class="me-2" id="selected_count">10</span>Selected</button>
                             <button type="button" class="btn btn-danger" id="btnDelete" data-kt-user-table-select="delete_selected">Delete Selected</button>
                         </div>
-                        <div class="me-1">
 
-                        </div>
                         @if (Model.CurrentUserRole.IsAllowEdit)
                         {
                             <text>
@@ -121,7 +119,7 @@
                                 <text>
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-3">
-                                        <a href="#" class="menu-link px-3" name="btnCreate">@Html.Raw("Thêm")</a>
+                                        <a asp-controller="DongBaoHang" asp-action="Edit" class="menu-link px-3" name="btnCreate">@Html.Raw("Thêm")</a>
                                     </div>
                                     <!--end::Menu item-->
                                 </text>
@@ -141,19 +139,10 @@
                                 <a href="#" class="menu-link px-3" name="btnRefreshData">Refresh</a>
                             </div>
                             <!--end::Menu item-->
-                            <!--begin::Menu item-->
-                            <div class="menu-item px-3">
-                                <a href="@Url.Action("ExportToExcel", "LichSuDongBao")" class="menu-link px-3">Export to Excel</a>
-                            </div>
-                            <!--end::Menu item-->
+                        
                             <!--begin::Menu separator-->
                             <div class="separator mt-3 opacity-75"></div>
                             <!--end::Menu separator-->
-                            <!--begin::Menu item-->
-                            <div class="menu-item px-3">
-                                <a href="#" class="menu-link px-3" name="btnRestoreData">Restore</a>
-                            </div>
-                            <!--end::Menu item-->
                         </div>
                         <!--end::Menu 2-->
                         <!--end::Menu-->
@@ -178,7 +167,4 @@
     </div>
     <!--end::Post-->
 </div>
-
-
-@await Html.PartialAsync("_PartialEditModal")
 

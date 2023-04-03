@@ -1,0 +1,142 @@
+﻿@model LichSuBaoHangViewModel
+
+@{
+    ViewBag.Title = "Đóng bao hàng";
+}
+
+@section Vendors_CSS{
+    <link rel="stylesheet" href="@Url.Content("~/plugins/DataTables/css/jquery.dataTables.css")" type="text/css">
+    <link rel="stylesheet" href="@Url.Content("~/plugins/DataTables/css/dataTables.bootstrap4.min.css")" type="text/css">
+}
+
+@section Custom_CSS{
+    <link href="@Url.Content("~/css/customize_third_party/customiseDatatable.css")" rel="stylesheet" />
+}
+
+@section Vendors_Scripts{
+    <script src="@Url.Content("~/plugins/DataTables/js/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/plugins/DataTables/js/dataTables.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/js/customiseFlatpickr.js")"></script>
+}
+@section Custom_Scripts{
+    <script type="text/javascript" src="@Url.Content("~/js/util.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/customize_third_party/customiseDatatable.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/DongBaoHang/Edit.js")"></script>
+}
+
+@await Html.PartialAsync("_PartialToolbar")
+
+<script>
+    var user = {
+        userId: '@Model.CurrentUserRole.Id',
+        userName: '@User.Identity.Name',
+        roles: {
+            isAllowEdit: @if (Model.CurrentUserRole.IsAllowEdit == true) {<text>true</text>} else {<text>false</text>},
+            isAllowDelete: @if (Model.CurrentUserRole.IsAllowDelete == true) {<text>true</text>} else {<text>false</text>}
+        }
+    };
+
+	@if (Model.LichSuBaoHang != null)
+    {
+        <text>
+                var editingData = {
+                    id: '@Model.LichSuBaoHang.Id'
+    };
+        </text>
+        if (Model.LichSuBaoHang.VanDons != null)
+        {
+            <text>editingData.vanDons = [];</text>
+            foreach (var item in Model.LichSuBaoHang.VanDons)
+            {
+                <text>editingData.vanDons.push({ id: '@item.Id', code: '@item.Code' });</text>
+            }
+        }
+    }
+	else
+    {
+        <text>
+                editingData = null;
+        </text>
+    }
+
+    $(document).ready(function () {
+        EditBaoHang.init();
+    });
+
+</script>
+<!--begin::Post-->
+<div class="post d-flex flex-column-fluid" id="kt_form_post">
+    <!--begin::Container-->
+    <div id="kt_content_container" class="container">
+        <!--begin::Careers - Apply-->
+        <div class="card">
+            <!--begin::Body-->
+            <div class="card-body p-lg-17">
+                <!--begin::Layout-->
+                <div class="d-flex flex-column flex-lg-row mb-17">
+                    <!--begin::Content-->
+                    <div class="flex-lg-row-fluid me-0 me-lg-20">
+                        <!--begin::Form-->
+                        <form action="#" class="form mb-15" id="kt_edit_form">
+                            <!--begin::Title-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-bold fs-6">@Html.Raw("Mã seal bao")</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row">
+                                    <input type="tel" id="filterByMaSealBao" name="edit_form_code" class="form-control form-control-lg form-control-solid" placeholder="@Html.Raw("Mã seal bao")" data-field="Code" @if (Model.LichSuBaoHang != null) { <text> value="@Model.LichSuBaoHang.Code" </text> } />
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-bold fs-6">Đơn Hàng</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row">
+                                    <select multiple name="edit_form_donHangIds" aria-label="Select a DonHangs" data-control="select2" data-placeholder="@Html.Raw("Chọn đơn hàng")" data-field="VanDonIds" class="form-select form-select-solid form-select-lg">
+                                    </select>
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            
+                            <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                <a asp-controller="DongBaoHang" asp-action="Index" class="btn btn-light me-3">@Html.Raw("Trở về")</a>
+                                @if (Model.CurrentUserRole.IsAllowEdit)
+                                {
+                                    <text>
+                                        <!--begin::Button-->
+                                        <!--end::Button-->
+                                        <!--begin::Submit-->
+                                        <button type="button" class="btn btn-primary" id="kt_form_edit_submit">
+                                            <!--begin::Indicator-->
+                                            <span class="indicator-label" id="kt_form_edit_submit_text">@Html.Raw("Đóng bao hàng")</span>
+                                            <span class="indicator-progress">
+                                                @Html.Raw("Đang đóng bao...")
+                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                            </span>
+                                            <!--end::Indicator-->
+                                        </button>
+                                        <!--end::Button-->
+                                    </text>
+                                }
+
+                            </div>
+                        </form>
+                        <!--end::Form-->
+                    </div>
+                    <!--end::Content-->
+                </div>
+                <!--end::Layout-->
+            </div>
+            <!--end::Body-->
+        </div>
+        <!--end::Careers - Apply-->
+    </div>
+    <!--end::Container-->
+</div>
+<!--end::Post-->

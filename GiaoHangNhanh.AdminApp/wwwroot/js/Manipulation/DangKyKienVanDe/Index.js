@@ -358,18 +358,8 @@ var DangKyKienVanDe = function () {
                 }
             },
             {
-                "data": "phanLoaiHangBatThuong", "name": "phanLoaiHangBatThuong", "autoWidth": true, "title": "Phân loại hàng bất thường", "render": function (data, type, full, meta) {
-                    return '<span class="text-muted">' + data.name + '</span>';
-                }
-            },
-            {
-                "data": "vanDon", "name": "vanDon", "autoWidth": true, "title": "Tên người gửi", "render": function (data, type, full, meta) {
+                "data": "vanDon", "name": "vanDon", "autoWidth": true, "title": "Người gửi", "render": function (data, type, full, meta) {
                     return '<span class="text-muted">' + data.hoTenNguoiGui + '</span>';
-                }
-            },
-            {
-                "data": "vanDon", "name": "vanDon", "autoWidth": true, "title": "Tên người nhận", "render": function (data, type, full, meta) {
-                    return '<span class="text-muted">' + data.hoTenNguoiNhan + '</span>';
                 }
             },
             {
@@ -377,26 +367,20 @@ var DangKyKienVanDe = function () {
                     return '<span class="text-muted">' + data.dienThoaiNguoiGui + '</span>';
                 }
             },
+            { "data": "mieuTaVanDe", "name": "mieuTaVanDe", "autoWidth": true, "title": "Miêu tả vấn đề" },
+
             {
                 "data": "vanDon", "name": "vanDon", "autoWidth": true, "title": "Rút về đích đến", "render": function (data, type, full, meta) {
                     return '<span class="text-muted">' + data.diaChiNguoiGui + '</span>';
                 }
             },
+            { "data": "quaTrinhXuLy", "name": "quaTrinhXuLy", "autoWidth": true, "title": "Quá trình xử lý" },
+
             {
                 "data": "vanDon", "name": "vanDon", "autoWidth": true, "title": "Ngày gửi hàng", "render": function (data, type, full, meta) {
                     return '<span class="text-muted">' + data.ngayGuiHang + '</span>';
                 }
             },
-            //{
-            //    "data": "vanDon", "name": "vanDon", "autoWidth": true, "title": "Bưu cục", "render": function (data, type, full, meta) {
-            //        return '<span class="text-muted">' + data.buuCuc.name + '</span>';
-            //    }
-            //},
-            //{
-            //    "data": "vanDon", "name": "vanDon", "autoWidth": true, "title": "Công ty gửi hàng", "render": function (data, type, full, meta) {
-            //        return '<span class="text-muted">' + data.congTyGuiHang.name + '</span>';
-            //    }
-            //},
             {
                 width: "120px", "title": "Hành động", "render": function (data, type, full, meta) {
                     let html = '<div class="d-flex justify-content-center flex-shrink-0">';

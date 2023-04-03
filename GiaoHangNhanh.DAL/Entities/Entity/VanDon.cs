@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GiaoHangNhanh.DAL.Entities.Entity;
+using System;
 using System.Collections.Generic;
 
 namespace GiaoHangNhanh.DAL.Entities.Entity

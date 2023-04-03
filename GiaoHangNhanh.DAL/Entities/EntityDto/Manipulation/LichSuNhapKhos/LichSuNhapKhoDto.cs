@@ -14,11 +14,9 @@ namespace GiaoHangNhanh.DAL.Entities.EntityDto.Manipulation.LichSuNhapKhos
 {
     public class LichSuNhapKhoDto :BaseDto
     {
-
         public VanDonDto VanDon { get; set; }
         public BuuCucDto BuuCuc { get; set; }
         public NhanVienDto NhanVien { get; set; }
         public UserDto User { get; set; }
-       
     }
 }

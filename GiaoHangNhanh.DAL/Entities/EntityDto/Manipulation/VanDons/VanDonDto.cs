@@ -38,5 +38,6 @@ namespace GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.VanDons
         public PhuongThucThanhToanDto PhuongThucThanhToan { get; set; }
         public UserDto User { get; set; }
         public NhanVienDto NhanVien { get; set; }
+        public string StrCreatedDay { get; set; }
     }
 }

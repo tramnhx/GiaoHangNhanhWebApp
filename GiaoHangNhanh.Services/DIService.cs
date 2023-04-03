@@ -39,8 +39,6 @@ namespace GiaoHangNhanh.Services
             services.AddTransient<IPhanLoaiVanDonService, PhanLoaiVanDonService>();
             services.AddTransient<IKyNhanService, KyNhanService>();
             services.AddTransient<ILichSuNhapKhoService, LichSuNhapKhoService>();
-            services.AddTransient<ILichSuThaoBaoService, LichSuThaoBaoService>();
-            services.AddTransient<ILichSuDongBaoService, LichSuDongBaoService>();
             services.AddTransient<ILichSuGuiHangService, LichSuGuiHangService>();
             services.AddTransient<ILichSuHangDenService, LichSuHangDenService>();
             services.AddTransient<IDangKyChuyenHoanService, DangKyChuyenHoanService>();
@@ -50,6 +48,8 @@ namespace GiaoHangNhanh.Services
             services.AddTransient<ILichSuXeDenService, LichSuXeDenService>();
             services.AddTransient<ILichSuPhatHangService, LichSuPhatHangService>();
             services.AddTransient<IVanDonService, VanDonService>();
+            services.AddTransient<ILichSuBaoHangService, LichSuBaoHangService>();
+
             //UI
             services.AddTransient<IAdminAppUIService, AdminAppUIService>();
 

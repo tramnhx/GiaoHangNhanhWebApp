@@ -140,7 +140,7 @@ namespace GiaoHangNhanh.Services.Manipulation
             {
                 Id = x.gh.Id,
                 Code = x.gh.Code,
-                StrCreatedDay = x.gh.CreatedDate.ToString("dd/MM/yyyy HH:mm:ss"),
+                StrCreatedDay = x.gh.CreatedDate.ToString("dd/MM/yyyy"),
                 SortOrder = x.gh.SortOrder,
                 IsDeleted = x.gh.IsDeleted,
                 VanDon = new VanDonDto()
