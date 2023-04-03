@@ -12,8 +12,9 @@ namespace GiaoHangNhanh.DAL.Entities.EntityDto.Manipulation.DangKyKienVanDes
         public int? Id { get; set; }
         public int? VanDonId { get; set; }
         public int? PhanLoaiHangBatThuongId { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime ModifieDate { get; set; }
+        public string MieuTaVanDe { get; set; }
+        public string QuaTrinhXuLy { get; set; }
+        public string NgayGuiHang { get; set; }
         public string CreatedUserId { set; get; }
         public string ModifiedUserId { set; get; }
     }

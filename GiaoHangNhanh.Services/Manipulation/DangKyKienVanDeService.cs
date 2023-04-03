@@ -40,6 +40,8 @@ namespace GiaoHangNhanh.Services.Manipulation
                 {
                     VanDonId = request.VanDonId,
                     PhanLoaiHangBatThuongId = request.PhanLoaiHangBatThuongId,
+                    MieuTaVanDe = request.MieuTaVanDe,
+                    QuaTrinhXuLy = request.QuaTrinhXuLy,
                     CreatedDate = DateTime.Now,
                     ModifiedDate = DateTime.Now,
                     CreatedUserId = Guid.Parse(request.CreatedUserId),
@@ -148,6 +150,9 @@ namespace GiaoHangNhanh.Services.Manipulation
             {
                 Id = x.gh.Id,
                 Code = x.gh.Code,
+                MieuTaVanDe = x.gh.MieuTaVanDe,
+                QuaTrinhXuLy = x.gh.QuaTrinhXuLy,
+                CreatedDate = x.gh.CreatedDate,
                 SortOrder = x.gh.SortOrder,
                 IsDeleted = x.gh.IsDeleted,
                 VanDon = new VanDonDto()
@@ -204,6 +209,8 @@ namespace GiaoHangNhanh.Services.Manipulation
 
                 DangKyKienVanDe.VanDonId = request.VanDonId;
                 DangKyKienVanDe.PhanLoaiHangBatThuongId = request.PhanLoaiHangBatThuongId;
+                DangKyKienVanDe.MieuTaVanDe = request.MieuTaVanDe;
+                DangKyKienVanDe.QuaTrinhXuLy = request.QuaTrinhXuLy;
                 DangKyKienVanDe.ModifiedDate = DateTime.Now;
 
                 _context.DangKyKienVanDes.Update(DangKyKienVanDe);

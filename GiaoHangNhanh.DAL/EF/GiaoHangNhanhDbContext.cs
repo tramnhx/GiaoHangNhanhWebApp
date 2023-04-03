@@ -59,6 +59,7 @@ namespace GiaoHangNhanh.DAL.EF
             modelBuilder.ApplyConfiguration(new LichSuNhapKhoConfigutaion());
             modelBuilder.ApplyConfiguration(new LichSuHangDenConfiguration());
             modelBuilder.ApplyConfiguration(new LichSuPhatHangConfiguration());
+            modelBuilder.ApplyConfiguration(new BaoHangConfigurations());
 
             //modelBuilder.ApplyConfiguration(new PhanLoaiVanDonConfiguration());
 
@@ -102,6 +103,7 @@ namespace GiaoHangNhanh.DAL.EF
         public DbSet<Tinh> Tinhs { get; set; }
         public DbSet<VanDon> VanDons { get; set; }
         public DbSet<NhanVien> NhanViens { get; set; }
+        public DbSet<BaoHang> BaoHangs { get; set; }
 
     }
 }
