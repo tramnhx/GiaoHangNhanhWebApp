@@ -10,9 +10,9 @@ namespace GiaoHangNhanh.DAL.Entities.Entity
     {
         public int? VanDonId { get; set; }
         public int? PhanLoaiHangBatThuongId { get; set; }
-
+        public string MieuTaVanDe { get; set; }
+        public string QuaTrinhXuLy { get; set; }
         public VanDon VanDon { get; set; }
         public PhanLoaiHangBatThuong PhanLoaiHangBatThuong { get; set; }
-
     }
 }

@@ -33,8 +33,10 @@ namespace GiaoHangNhanh.AdminApp.Controllers
                                                                                                             (ControllerContext.ActionDescriptor).ControllerName,
                                                                                                             (ControllerContext.ActionDescriptor).ActionName);
 
-            model.PageTitle = "Menu hệ thống";
-            model.Breadcrumbs = new List<string>() { "Cài đặt", "Menu hệ thống" };
+
+            model.PageTitle = "Menu";
+            model.Breadcrumbs = new List<string>() { "Cài đặt", "Danh mục hệ thống", "Menu" };
+
 
             return View(model);
         }

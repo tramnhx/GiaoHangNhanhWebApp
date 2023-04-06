@@ -28,8 +28,6 @@ namespace GiaoHangNhanh.ApiIntegration
 
             //ThaoTac
             services.AddTransient<ILichSuNhapKhoApiClient, LichSuNhapKhoApiClient>();
-            services.AddTransient<ILichSuThaoBaoApiClient, LichSuThaoBaoApiClient>();
-            services.AddTransient<ILichSuDongBaoApiClient, LichSuDongBaoApiClient>();
             services.AddTransient<ILichSuGuiHangApiClient, LichSuGuiHangApiClient>();
             services.AddTransient<ILichSuChuyenHangApiClient, LichSuChuyenHangApiClient>();
             services.AddTransient<ILichSuHangDenApiClient, LichSuHangDenApiClient>();
@@ -44,8 +42,7 @@ namespace GiaoHangNhanh.ApiIntegration
             services.AddTransient<ILichSuXeDenApiClient, LichSuXeDenApiClient>();
             services.AddTransient<ILichSuPhatHangApiClient, LichSuPhatHangApiClient>();
             services.AddTransient<IKhachHangApiClient, KhachHangApiClient>();
-
-
+            services.AddTransient<ILichSuBaoHangApiClient, LichSuBaoHangApiClient>();
 
             return services;
         }

@@ -65,7 +65,6 @@ namespace GiaoHangNhanh.Services.Manipulation
                     TrongLuong = request.TrongLuong,
                     GiaTriHangHoa = request.GiaTriHangHoa,
                     NoiDungHangHoa = request.NoiDungHangHoa,
-                    //NhanVienLayHangId = Guid.Parse(request.NhanVienLayHangId),
                     SortOrder = request.SortOrder,
                 };
                 if (DateTime.TryParseExact(request.NgayGuiHang, _configuration[SystemConstants.AppConstants.DateFormat], null, DateTimeStyles.None, out ngayGuiHangValue))
@@ -118,7 +117,6 @@ namespace GiaoHangNhanh.Services.Manipulation
                                 join d in _context.DichVus on v.DichVuId equals d.Id
                                 join c in _context.CongTyGuiHangs on v.CongTyGuiHangId equals c.Id
                                 join b in _context.BuuCucs on v.BuuCucHangDenId equals b.Id
-                                //join a in _context.AppUsers on v.NhanVienLayHangId equals a.Id
                                 join a in _context.NhanViens on v.NhanVienId equals a.Id
                                 select new VanDonDto()
                                 {
@@ -167,12 +165,6 @@ namespace GiaoHangNhanh.Services.Manipulation
                                         Code = b.Code,
                                         Name = b.Name
                                     },
-                                    //User = new UserDto()
-                                    //{
-                                    //    Id = a.Id.ToString(),
-                                    //    UserName = a.UserName,
-                                    //    FullName = $"{a.LastName} {a.FirstName}"
-                                    //}
                                     NhanVien = new NhanVienDto()
                                     {
                                         Id = a.Id,
@@ -253,7 +245,6 @@ namespace GiaoHangNhanh.Services.Manipulation
                         join d in _context.DichVus on vd.DichVuId equals d.Id
                         join c in _context.CongTyGuiHangs on vd.CongTyGuiHangId equals c.Id
                         join b in _context.BuuCucs on vd.BuuCucHangDenId equals b.Id
-                        //join a in _context.AppUsers on vd.NhanVienLayHangId equals a.Id
                         join a in _context.NhanViens on vd.NhanVienId equals a.Id
                         select new { vd, p, d, c, b, a };
 
@@ -264,21 +255,6 @@ namespace GiaoHangNhanh.Services.Manipulation
             {
                 query = query.Where(x => x.vd.Id == request.FilterByNhanVienId.Value);
             }
-
-            //if (request.FilterByTinhId != null)
-            //{
-            //    query = query.Where(x => x.t.Id == request.FilterByTinhId.Value);
-            //}
-
-            //if (request.FilterByHuyenId != null)
-            //{
-            //    query = query.Where(x => x.h.Id == request.FilterByHuyenId.Value);
-            //}
-
-            //if (request.FilterByKhuVucId != null)
-            //{
-            //    query = query.Where(x => x.kv.Id == request.FilterByKhuVucId.Value);
-            //}
 
             //3. Paging
             int totalRow = await query.CountAsync();
@@ -296,7 +272,7 @@ namespace GiaoHangNhanh.Services.Manipulation
                 ModifiedDate = x.vd.ModifiedDate,
                 CreatedUserId = x.vd.CreatedUserId,
                 ModifiedUserId = x.vd.ModifiedUserId,
-                StrNgayGuiHang = x.vd.NgayGuiHang.ToString("dd/MM/yyyy HH:mm:ss"),
+                StrNgayGuiHang = x.vd.NgayGuiHang.ToString("dd/MM/yyyy"),
                 SortOrder = x.vd.SortOrder,
                 IsDeleted = x.vd.IsDeleted,
                 HoTenNguoiGui = x.vd.HoTenNguoiGui,
@@ -335,12 +311,6 @@ namespace GiaoHangNhanh.Services.Manipulation
                     Code = x.b.Code,
                     Name = x.b.Name
                 },
-                //User = new UserDto()
-                //{
-                //    Id = x.a.Id.ToString(),
-                //    UserName = x.a.UserName,
-                //    FullName = $"{x.a.LastName} {x.a.FirstName}"
-                //}
                 NhanVien = new NhanVienDto()
                 {
                     Id = x.a.Id,

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using GiaoHangNhanh.DAL.Entities.Entity;
 using System;
 using System.Collections.Generic;
 

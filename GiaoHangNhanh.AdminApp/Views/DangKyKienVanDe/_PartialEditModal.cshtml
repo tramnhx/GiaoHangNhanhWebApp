@@ -125,18 +125,31 @@
                                 <div class="fv-plugins-message-container invalid-feedback"></div>
                             </div>
                             <!--end::Col-->
-                            
+
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 fv-row mb-7 fv-plugins-icon-container">
                                 <!--begin::Label-->
-                                <label class="fs-6 fw-bold mb-2">@Html.Raw("Ngày gửi hàng")</label>
+                                <label class="required fs-6 fw-bold mb-2">@Html.Raw("Quá trình xử lý")</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select disabled="disabled" name="kt_modal_edit_form_ngayGuiHang" aria-label="Ngày gửi hàng"
-                                        data-placeholder="Ngày gửi hàng" class="form-select form-select-solid fw-bolder">
-                                </select>
+                                <input name="kt_modal_edit_form_quaTrinhXuLy" aria-label="Quá trình xử lý"
+                                       data-placeholder="Quá trình xử lý" class="form-select form-select-solid fw-bolder" />
+                                <!--end::Input-->
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+
+                            </div>
+                            <!--end::Col-->
+                            
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-12 fv-row mb-7 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="required fs-6 fw-bold mb-2">@Html.Raw("Miêu tả Vấn đề")</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input name="kt_modal_edit_form_mieuTaVanDe" aria-label="Miêu tả Vấn đề"
+                                       data-placeholder="Miêu tả Vấn đề" class="form-select form-select-solid fw-bolder" />
                                 <!--end::Input-->
                                 <div class="fv-plugins-message-container invalid-feedback"></div>
                             </div>
+                            <!--end::Col-->
 
                             <!--begin::Col-->
                             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 fv-row mb-7 fv-plugins-icon-container">
@@ -151,21 +164,6 @@
                                 <div class="fv-plugins-message-container invalid-feedback"></div>
                             </div>
                             <!--end::Col-->
-
-                           @*<!--begin::Col-->
-                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 fv-row mb-7 fv-plugins-icon-container">
-                                <!--begin::Label-->
-                                <label class="fs-6 fw-bold mb-2">@Html.Raw("Ghi chú")</label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <textarea type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Ghi chú")"
-                                          data-field="Description" name="kt_form_edit_form_description">
-                                </textarea>
-                                <!--end::Input-->
-                                <div class="fv-plugins-message-container invalid-feedback"></div>
-                            </div>
-                            <!--end::Col-->*@
-
                             
                         <!--end::Input group-->
                     </div>
