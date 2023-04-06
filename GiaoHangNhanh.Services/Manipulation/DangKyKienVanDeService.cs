@@ -166,7 +166,7 @@ namespace GiaoHangNhanh.Services.Manipulation
                     DienThoaiNguoiNhan =x.v.DienThoaiNguoiNhan,
                     DiaChiNguoiGui = x.v.DiaChiNguoiGui,
                     DiaChiNguoiNhan = x.v.DiaChiNguoiNhan,
-                    NgayGuiHang = x.v.NgayGuiHang,
+                    StrNgayGuiHang = x.v.NgayGuiHang.ToString("dd/MM/yyyy HH:mm:ss"),
                     BuuCuc = new BuuCucDto()
                     {
                         Id = x.v.Id,

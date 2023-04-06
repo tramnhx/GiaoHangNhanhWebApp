@@ -6,7 +6,7 @@ namespace GiaoHangNhanh.DAL.Entities.Entity
     {
         public string NguoiKyNhanChuyenHoan { get; set; }
         public bool IsDaDuyet { get; set; }
-        public DateTime? NgayDuyetChuyenHoan { get; set; }
+        public DateTime NgayDuyetChuyenHoan { get; set; }
         public int? VanDonId { get; set; }
         public VanDon VanDon { get; set; }
         public int? BuuCucDuyetHangId { get; set; }

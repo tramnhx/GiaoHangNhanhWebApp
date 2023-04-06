@@ -184,7 +184,11 @@ var LichSuPhatHang = function () {
                     return '<span class="text-muted">' + data.fullName + '</span>';
                 }
             },
-            { "data": "strCreatedDay", "name": "strCreatedDay", "autoWidth": true, "title": "Ngày thao tác" },
+            {
+                "data": "vanDon", "name": "vanDon", "autoWidth": true, "title": "Ngày gửi hàng", "render": function (data, type, full, meta) {
+                    return '<span class="text-muted">' + data.strNgayGuiHang + '</span>';
+                }
+            },
             {
                 width: "120px", "title": "Hành động", "render": function (data, type, full, meta) {
                     let html = '<div class="d-flex justify-content-center flex-shrink-0">';

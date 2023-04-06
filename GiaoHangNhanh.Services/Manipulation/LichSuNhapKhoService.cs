@@ -117,7 +117,8 @@ namespace GiaoHangNhanh.Services.Manipulation
                     Description = x.v.Description,
                     CreatedUserId = x.v.CreatedUserId,
                     ModifiedUserId = x.v.ModifiedUserId,
-                    
+                    StrNgayGuiHang = x.v.NgayGuiHang.ToString("dd/MM/yyyy HH:mm:ss"),
+
                     SortOrder = x.v.SortOrder,
                     IsDeleted = x.v.IsDeleted,
                     NhanVien = new NhanVienDto()

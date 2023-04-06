@@ -109,7 +109,6 @@ namespace GiaoHangNhanh.Services.Manipulation
             var data = await query.Select(x => new LichSuHangDenDto()
             {
                 Id = x.l.Id,
-                StrCreatedDay = x.l.CreatedDate.ToString("dd/MM/yyyy HH:mm:ss"),
                 IsDeleted = x.l.IsDeleted,
                 BuuCuc = new BuuCucDto()
                 {
@@ -120,7 +119,8 @@ namespace GiaoHangNhanh.Services.Manipulation
                 VanDon = new VanDonDto()
                 {
                     Id = x.v.Id,
-                    Code = x.v.Code
+                    Code = x.v.Code,
+                    StrNgayGuiHang = x.v.NgayGuiHang.ToString("dd/MM/yyyy HH:mm:ss"),
                 },
             }).AsNoTracking().ToListAsync();
 

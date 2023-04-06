@@ -378,7 +378,7 @@ var DangKyKienVanDe = function () {
 
             {
                 "data": "vanDon", "name": "vanDon", "autoWidth": true, "title": "Ngày gửi hàng", "render": function (data, type, full, meta) {
-                    return '<span class="text-muted">' + data.ngayGuiHang + '</span>';
+                    return '<span class="text-muted">' + data.strNgayGuiHang + '</span>';
                 }
             },
             {

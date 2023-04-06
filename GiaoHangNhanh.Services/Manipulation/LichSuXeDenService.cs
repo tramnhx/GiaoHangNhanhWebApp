@@ -111,6 +111,7 @@ namespace GiaoHangNhanh.Services.Manipulation
                 {
                     Id = x.v.Id,
                     Code = x.v.Code,
+                    StrNgayGuiHang = x.v.NgayGuiHang.ToString("dd/MM/yyyy HH:mm:ss"),
                 },
                 BuuCuc = new BuuCucDto()
                 {
