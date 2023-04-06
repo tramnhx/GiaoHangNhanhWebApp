@@ -28,7 +28,7 @@ namespace GiaoHangNhanh.AdminApp.Controllers
             model.CurrentUserRole = InternalService.FixedUserRole(HttpContext.Session.GetObject<UserDto>(SystemConstants.UserConstants.CurrentUserRoleSession),
                                                                                                             (ControllerContext.ActionDescriptor).ControllerName,
                                                                                                             (ControllerContext.ActionDescriptor).ActionName);
-            model.PageTitle = "Chuyển hàng";
+            model.PageTitle = "Lịch sử hàng đến";
             model.Breadcrumbs = new List<string>() { "Cài đặt", "Thao Tác", "Lịch sử hàng đến" };
 
             return View(model);
