@@ -140,7 +140,6 @@ namespace GiaoHangNhanh.Services.Manipulation
             {
                 Id = x.gh.Id,
                 Code = x.gh.Code,
-                StrCreatedDay = x.gh.CreatedDate.ToString("dd/MM/yyyy"),
                 SortOrder = x.gh.SortOrder,
                 IsDeleted = x.gh.IsDeleted,
                 VanDon = new VanDonDto()
@@ -148,6 +147,7 @@ namespace GiaoHangNhanh.Services.Manipulation
                     Id = x.v.Id,
                     Code = x.v.Code,
                     Name = x.v.Name,
+                    StrNgayGuiHang = x.v.NgayGuiHang.ToString("dd/MM/yyyy HH:mm:ss"),
                 },
                 NhanVien = new NhanVienDto()
                 {

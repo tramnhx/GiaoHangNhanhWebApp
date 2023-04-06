@@ -12,7 +12,7 @@ namespace GiaoHangNhanh.DAL.Entities.EntityDto.Manipulation.DuyetChuyenHoans
         public int? VanDonId { get; set; }
         public string NguoiKyNhanChuyenHoan { get; set; }
         public string IsDaDuyet { get; set; }
-        public DateTime? NgayDuyetChuyenHoan { get; set; }
+        public string StrNgayDuyetChuyenHoan { get; set; }
         public VanDonDto VanDon { get; set; }
         public DangKyChuyenHoanDto DangKyChuyenHoan { get; set; }
         public BuuCucDto BuuCuc { get; set; }

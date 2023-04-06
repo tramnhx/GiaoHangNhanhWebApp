@@ -122,7 +122,7 @@ namespace GiaoHangNhanh.Services.Manipulation
                                 {
                                     Id = v.Id,
                                     Code = v.Code,
-                                    //StrNgayGuiHang = v.NgayGuiHang.ToString("dd/MM/yyyy HH:mm:ss"),
+                                    StrNgayGuiHang = v.NgayGuiHang.ToString("dd/MM/yyyy HH:mm:ss"),
                                     CreatedDate = v.CreatedDate,
                                     ModifiedDate = v.ModifiedDate,
                                     CreatedUserId = v.CreatedUserId,

@@ -121,7 +121,7 @@ namespace GiaoHangNhanh.Services.Manipulation
                     TrongLuong = x.v.TrongLuong,
                     DiaChiNguoiGui = x.v.DiaChiNguoiGui,
                     HoTenNguoiGui = x.v.HoTenNguoiGui,
-                    NgayGuiHang = x.v.NgayGuiHang
+                    StrNgayGuiHang = x.v.NgayGuiHang.ToString("dd/MM/yyyy HH:mm:ss"),
                 }
 
             }).AsNoTracking().ToListAsync();

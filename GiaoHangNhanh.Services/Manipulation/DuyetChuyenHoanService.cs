@@ -136,7 +136,7 @@ namespace GiaoHangNhanh.Services.Manipulation
                 TenKhachHang = x.vd.HoTenNguoiNhan,
                 RutVeDichDen = x.vd.DiaChiNguoiGui,
                 NguyenNhanChuyenHoan = x.dkch.NguyenNhan,
-                NgayDuyetChuyenHoan = x.dch.NgayDuyetChuyenHoan,
+                StrNgayDuyetChuyenHoan = x.dch.NgayDuyetChuyenHoan.ToString("dd/MM/yyyy HH:mm:ss"),
                 BuuCucDuyetChuyenHoan = x.bcdh.Code,
                 IsDaDuyet = x.dch.IsDaDuyet == true ? "Đã duyệt" : String.Empty,
                 
