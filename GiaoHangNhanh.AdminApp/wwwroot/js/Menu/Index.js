@@ -188,7 +188,7 @@ var Menu = function () {
 
             {
                 "data": "parentId", "name": "parentId", "autoWidth": true, "title": "ParentId", "render": function (data, type, full, meta) {
-                    return '<span class="text-muted">' + data.name + '</span>';
+                    return '<span class="text-muted">' + data + '</span>';
                 }
             },
             {

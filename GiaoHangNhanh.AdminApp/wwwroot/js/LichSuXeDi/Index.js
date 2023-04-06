@@ -43,7 +43,7 @@ var LichSuXeDi = function () {
             e.preventDefault();
 
             editingDataRow = null;
-            modal_header_text.text("Thêm bưu cục");
+            modal_header_text.text("Thêm xe đi");
             modal_form_submit_text.text("Thêm");
             resetForm();
             modal.modal("show");
