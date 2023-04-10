@@ -6,6 +6,7 @@ using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.DichVus;
 using GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.PhuongThucThanhToans;
 using GiaoHangNhanh.DAL.Entities.EntityDto.System.Users;
 using GiaoHangNhanh.DAL.Entities.EntityDto.System.NhanViens;
+using GiaoHangNhanh.DAL.Entities.EntityDto.Manipulation.LichSuHangDens;
 
 namespace GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.VanDons
 {
@@ -39,5 +40,9 @@ namespace GiaoHangNhanh.DAL.Entities.EntityDto.Catalog.VanDons
         public UserDto User { get; set; }
         public NhanVienDto NhanVien { get; set; }
         public string StrCreatedDay { get; set; }
+
+
+        public LichSuHangDenDto LichSuHangDen { get; set; }
+        public VanDonDto VanDon { get; set; }
     }
 }

@@ -241,15 +241,11 @@ var HangDen = function () {
                 },
             },
             {
-                "data": "vanDon", "name": "vanDon", "autoWidth": true, "title": "Mã vận đơn", "render": function (data, type, full, meta) {
+                "data": "vanDon", "name": "vanDon", "autoWidth": true, "title": "Mã vân đơn", "render": function (data, type, full, meta) {
                     return '<span class="text-muted">' + data.code + '</span>';
                 },
             },
-            {
-                "data": "vanDon", "name": "vanDon", "autoWidth": true, "title": "Ngày gửi hàng", "render": function (data, type, full, meta) {
-                    return '<span class="text-muted">' + data.strNgayGuiHang + '</span>';
-                }
-            },
+            { "data": "strCreatedDate", "name": "strCreatedDate", "autoWidth": true, "title": "Ngày hàng đến" },
             {
                 width: "120px", "title": "Hành động", "render": function (data, type, full, meta) {
                     let html = '<div class="d-flex justify-content-center flex-shrink-0">';

@@ -1,4 +1,6 @@
-﻿namespace GiaoHangNhanh.DAL.Entities.Entity
+﻿using System.Collections.Generic;
+
+namespace GiaoHangNhanh.DAL.Entities.Entity
 {
     public class LichSuHangDen : BaseEntity
     {
