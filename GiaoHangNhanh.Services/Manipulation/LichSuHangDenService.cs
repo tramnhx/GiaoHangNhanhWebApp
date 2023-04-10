@@ -81,58 +81,66 @@ namespace GiaoHangNhanh.Services.Manipulation
 
         public async Task<PagedResult<LichSuHangDenDto>> GetManageListPaging(ManageLichSuHangDenPagingRequest request)
         {
-            //1. Select join
-            var query = from l in _context.LichSuHangDens
-                        where l.IsDeleted == false
-                        join b in _context.BuuCucs on l.BuuCucId equals b.Id
-                        join v in _context.VanDons on l.VanDonId equals v.Id
-                        select new { l, b, v };
-
-            //2. filter
-            if (!string.IsNullOrEmpty(request.TextSearch))
-                query = query.Where(x => x.l.VanDon.Code.Contains(request.TextSearch));
-
-            if (request.FilterByBuuCucId != null)
+            try
             {
-                query = query.Where(x => x.b.Id == request.FilterByBuuCucId.Value);
-            }
+                //1. Select join
+                var query = from l in _context.LichSuHangDens
+                            where l.IsDeleted == false
+                            join b in _context.BuuCucs on l.BuuCucId equals b.Id
+                            join v in _context.VanDons on l.VanDonId equals v.Id
+                            select new { l, b, v };
 
-            //3. Paging
-            int totalRow = await query.CountAsync();
+                //2. filter
+                if (!string.IsNullOrEmpty(request.TextSearch))
+                    query = query.Where(x => x.l.VanDon.Code.Contains(request.TextSearch));
 
-            if (request.PageIndex != null)
-            {
-                query = query.Skip((request.PageIndex.Value - 1) * request.PageSize)
-                            .Take(request.PageSize);
-            }
-
-            var data = await query.Select(x => new LichSuHangDenDto()
-            {
-                Id = x.l.Id,
-                IsDeleted = x.l.IsDeleted,
-                BuuCuc = new BuuCucDto()
+                if (request.FilterByBuuCucId != null)
                 {
-                    Id = x.b.Id,
-                    Name = x.b.Name,
-                    Code = x.b.Code
-                },
-                VanDon = new VanDonDto()
-                {
-                    Id = x.v.Id,
-                    Code = x.v.Code,
-                    StrNgayGuiHang = x.v.NgayGuiHang.ToString("dd/MM/yyyy HH:mm:ss"),
-                },
-            }).AsNoTracking().ToListAsync();
+                    query = query.Where(x => x.b.Id == request.FilterByBuuCucId.Value);
+                }
 
-            //4. Select and projection
-            var pagedResult = new PagedResult<LichSuHangDenDto>()
+                //3. Paging
+                int totalRow = await query.CountAsync();
+
+                if (request.PageIndex != null)
+                {
+                    query = query.Skip((request.PageIndex.Value - 1) * request.PageSize)
+                                .Take(request.PageSize);
+                }
+
+                var data = await query.Select(x => new LichSuHangDenDto()
+                {
+                    Id = x.l.Id,
+                    StrCreatedDate = x.l.CreatedDate.ToString("dd/MM/yyyy HH:mm:ss"),
+                    BuuCuc = new BuuCucDto()
+                    {
+                        Id = x.b.Id,
+                        Name = x.b.Name,
+                        Code = x.b.Code
+                    },
+                    VanDon = new VanDonDto()
+                    {
+                        Id = x.v.Id,
+                        Code = x.v.Code,
+                        StrNgayGuiHang = x.v.NgayGuiHang.ToString("dd/MM/yyyy HH:mm:ss"),
+                    }
+                }).AsNoTracking().ToListAsync();
+
+                //4. Select and projection
+                var pagedResult = new PagedResult<LichSuHangDenDto>()
+                {
+                    TotalRecords = totalRow,
+                    PageSize = request.PageSize,
+                    PageIndex = request.PageIndex,
+                    Items = data
+                };
+                return pagedResult;
+
+            }
+            catch(Exception ex)
             {
-                TotalRecords = totalRow,
-                PageSize = request.PageSize,
-                PageIndex = request.PageIndex,
-                Items = data
-            };
-            return pagedResult;
+                throw new NotImplementedException();
+            }
         }
     }
 }
