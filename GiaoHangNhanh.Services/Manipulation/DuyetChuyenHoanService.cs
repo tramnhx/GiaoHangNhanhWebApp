@@ -138,7 +138,7 @@ namespace GiaoHangNhanh.Services.Manipulation
                 NguyenNhanChuyenHoan = x.dkch.NguyenNhan,
                 StrNgayDuyetChuyenHoan = x.dch.NgayDuyetChuyenHoan.ToString("dd/MM/yyyy HH:mm:ss"),
                 BuuCucDuyetChuyenHoan = x.bcdh.Code,
-                IsDaDuyet = x.dch.IsDaDuyet == true ? "Đã duyệt" : String.Empty,
+                IsDaDuyet = x.dch.IsDaDuyet == true ? "Đã duyệt" : "Chưa duyệt",
                 
             }).AsNoTracking().ToListAsync();
 

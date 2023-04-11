@@ -50,7 +50,7 @@
 
             if (arr.length == 1) {
                 modal_header_text.text("Duyệt chuyển hoàn");
-                modal_form_submit_text.text("Cập nhật");
+                modal_form_submit_text.text("OK!");
                 modal.modal('show');
             }
             else {
@@ -116,22 +116,7 @@
             $('input[name="kt_modal_edit_form_code"]').focus();
         });
 
-        //$('#btnDuyet').click(function (e) {
-        //    e.preventDefault();
-        //    let arr = [];
-
-        //    $('#dtTable tbody input[type="checkbox"]:checked').each(function () {
-        //        let selectedDataRow = dtTable.row($(this).parents('tr')).data();
-        //        arr.push({ id: selectedDataRow.id });
-        //    });
-
-        //    if (arr.length > 0) {
-        //        modal.modal("show");
-        //    }
-        //    if (arr.length >= 2) {
-        //        show.message("Chỉ được chọn 1 dòng");
-        //    }
-        //});
+        
 
         // filter
         App.initSelectCodeBase($('#filterByVanDonId'), '/VanDon/Filter');
@@ -208,7 +193,7 @@
 
             { "data": "nguyenNhanChuyenHoan", "name": "nguyenNhanChuyenHoan", "autoWidth": true, "title": "Nguyên nhân chuyển hoàn" },
 
-            { "data": "ngayDuyetChuyenHoan", "name": "ngayDuyetChuyenHoan", "autoWidth": true, "title": "Ngày duyệt" },
+            { "data": "strNgayDuyetChuyenHoan", "name": "strNgayDuyetChuyenHoan", "autoWidth": true, "title": "Ngày duyệt" },
 
             { "data": "buuCucDuyetChuyenHoan", "name": "buuCucDuyetChuyenHoan", "autoWidth": true, "title": "Bưu cục duyệt" },
 

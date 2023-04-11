@@ -10,10 +10,10 @@ namespace GiaoHangNhanh.DAL.Configurations
         {
             builder.ToTable("LichSuChuyenHangs");
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).UseIdentityColumn();
 
             builder.Property(x => x.SealXe).HasMaxLength(50).IsRequired();
-            builder.Property(x => x.MaSealBao).HasMaxLength(50).IsRequired(false);
+
+            builder.HasOne(x => x.BuuCuc).WithMany(x => x.LichSuChuyenHangs).HasForeignKey(x => x.BuuCucId);
 
         }
     }

@@ -1,6 +1,6 @@
 ﻿//== Class definition
 
-var LichSuXeDi = function () {
+var ChuyenHang = function () {
     let dtTable = null;
     let modal = $("#kt_modal_edit"),
         modal_form = $("#kt_modal_edit_form"),
@@ -14,10 +14,8 @@ var LichSuXeDi = function () {
 
     let validator = FormValidation.formValidation(modal_form[0], {
         fields: {
-            kt_modal_edit_form_buuCucId: { validators: { notEmpty: { message: "vui lòng chọn trạm tiếp" } } },
-            kt_modal_edit_form_vanDonId: { validators: { notEmpty: { message: "vui lòng nhập mã vận đơn" } } },
-            kt_modal_edit_form_sealXe: { validators: { notEmpty: { message: "vui lòng nhập mã seal xe" } } },
-            kt_modal_edit_form_sealBao: { validators: { notEmpty: { message: "vui lòng nhập mã seal bao" } } },
+            kt_modal_edit_form_code: { validators: { notEmpty: { message: "vui lòng nhập mã bưu cục" } } },
+            kt_modal_edit_form_name: { validators: { notEmpty: { message: "vui lòng nhập tên bưu cục" } } },
         },
         plugins: {
             trigger: new FormValidation.plugins.Trigger(),
@@ -32,6 +30,10 @@ var LichSuXeDi = function () {
             dtTable.draw();
         });
 
+        $('#kt_filter_form_button_reset').click(function (e) {
+            $('#filterByBuuCucId').val(null).trigger('change');
+        });
+
         $('#dtTableSearch').on('keyup', function (e) {
             e.preventDefault();
             if (e.keyCode == 13) {
@@ -43,10 +45,15 @@ var LichSuXeDi = function () {
             e.preventDefault();
 
             editingDataRow = null;
-            modal_header_text.text("Thêm xe đi");
+            modal_header_text.text("Thêm mới");
             modal_form_submit_text.text("Thêm");
             resetForm();
             modal.modal("show");
+        });
+
+        //fillter 
+        $('#filterByTenBuuCuc').change(function (e) {
+            dtTable.draw();
         });
 
         $('[name="btnRefreshData"]').click(function (e) {
@@ -70,6 +77,10 @@ var LichSuXeDi = function () {
 
                                     switch (fieldName) {
 
+                                        case "IsXeDi":
+                                            result[$(el).data("field")] = $(el).is(":checked");
+                                            break;
+
                                         default:
                                             result[$(el).data("field")] = $(el).val();
                                     }
@@ -79,7 +90,7 @@ var LichSuXeDi = function () {
                                 Id: (editingDataRow != null ? editingDataRow.id : null),
                                 Data: result
                             },
-                            App.sendDataToURL("/LichSuXeDi/Save", data, "POST")
+                            App.sendDataToURL("/LichSuChuyenHang/Save", data, "POST")
                                 .then(function (res) {
                                     modal_form_buttonSubmit.removeAttr("data-kt-indicator");
                                     if (!res.isSuccessed) {
@@ -115,19 +126,29 @@ var LichSuXeDi = function () {
             }
         });
 
-        // modal add
-        App.initSelect2Base($('[name="kt_modal_edit_form_buuCucId"]'), '/BuuCuc/Filter');
-        App.initSelectCodeBase($('[name="kt_modal_edit_form_vanDonId"]'), '/VanDon/Filter');
+        // filter
+        App.initSelect2Base($('#filterByBuuCucId'), '/BuuCuc/Filter');
 
+        // modal add
+        App.initSelect2Base($('[name="kt_modal_edit_form_buucuc_id"]'), '/BuuCuc/Filter');
+
+        $('[name=kt_modal_edit_form_sealxe]').select2({
+            tags: true,
+            tokenSeparators: [',', ' ']
+        });
     };
 
     let initialDatatable = function () {
         var datatableOption = initialDatatableOption();
-        datatableOption.ajax.url = "/LichSuXeDi/DataTableGetList";
+        datatableOption.ajax.url = "/LichSuChuyenHang/DataTableGetList";
         datatableOption.ajax.data = {
             textSearch: function () {
                 return $('#dtTableSearch').val();
             },
+            filterByBuuCucId: function () {
+                return $('#filterByBuuCucId').val();
+            },
+           
         },
             datatableOption.order = [[1, "desc"]];
         datatableOption.columnDefs = [
@@ -184,35 +205,23 @@ var LichSuXeDi = function () {
                 }
             },
             { "data": "id", "name": "id", "autoWidth": true, "title": "Id" },
-            {
-                "data": "vanDon", "name": "vanDon", "autoWidth": true, "title": "Mã vận đơn", "render": function (data, type, full, meta) {
-                    return '<span class="text-muted">' + data.code + '</span>';
-                }
-            },
-            {
-                "data": "buuCuc", "name": "buuCuc", "autoWidth": true, "title": "Trạm Tiếp", "render": function (data, type, full, meta) {
-                    return '<span class="text-muted">' + data.name + '</span>';
-                }
-            },
+            { "data": "tenBuuCuc", "name": "tenBuuCuc", "autoWidth": true, "title": "Bưu cục" },
             { "data": "sealXe", "name": "sealXe", "autoWidth": true, "title": "Seal xe" },
-            { "data": "sealBao", "name": "sealBao", "autoWidth": true, "title": "Seal bao" },
-            {
-                "data": "vanDon", "name": "vanDon", "autoWidth": true, "title": "Ngày gửi hàng", "render": function (data, type, full, meta) {
-                    return '<span class="text-muted">' + data.strNgayGuiHang + '</span>';
-                }
-            },
+            { "data": "isXeDi", "name": "isXeDi", "autoWidth": true, "title": "Loại xe" },
+
+            { "data": "strCreatedDay", "name": "strCreatedDay", "autoWidth": true, "title": "Ngày thao tác" },
             {
                 width: "120px", "title": "Hành động", "render": function (data, type, full, meta) {
                     let html = '<div class="d-flex justify-content-center flex-shrink-0">';
                     if (user.roles.isAllowEdit == true) {
                         html += '<a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 edit">\
-					                <span class="svg-icon svg-icon-3">\
-						                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">\
-							                <path d="M12.2674799,18.2323597 L12.0084872,5.45852451 C12.0004303,5.06114792 12.1504154,4.6768183 12.4255037,4.38993949 L15.0030167,1.70195304 L17.5910752,4.40093695 C17.8599071,4.6812911 18.0095067,5.05499603 18.0083938,5.44341307 L17.9718262,18.2062508 C17.9694575,19.0329966 17.2985816,19.701953 16.4718324,19.701953 L13.7671717,19.701953 C12.9505952,19.701953 12.2840328,19.0487684 12.2674799,18.2323597 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.701953, 10.701953) rotate(-135.000000) translate(-14.701953, -10.701953)"></path>\
-							                <path d="M12.9,2 C13.4522847,2 13.9,2.44771525 13.9,3 C13.9,3.55228475 13.4522847,4 12.9,4 L6,4 C4.8954305,4 4,4.8954305 4,6 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,13 C20,12.4477153 20.4477153,12 21,12 C21.5522847,12 22,12.4477153 22,13 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,6 C2,3.790861 3.790861,2 6,2 L12.9,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>\
-						                </svg>\
-					                </span>\
-				                </a>';
+                     <span class="svg-icon svg-icon-3">\
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">\
+                       <path d="M12.2674799,18.2323597 L12.0084872,5.45852451 C12.0004303,5.06114792 12.1504154,4.6768183 12.4255037,4.38993949 L15.0030167,1.70195304 L17.5910752,4.40093695 C17.8599071,4.6812911 18.0095067,5.05499603 18.0083938,5.44341307 L17.9718262,18.2062508 C17.9694575,19.0329966 17.2985816,19.701953 16.4718324,19.701953 L13.7671717,19.701953 C12.9505952,19.701953 12.2840328,19.0487684 12.2674799,18.2323597 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.701953, 10.701953) rotate(-135.000000) translate(-14.701953, -10.701953)"></path>\
+                       <path d="M12.9,2 C13.4522847,2 13.9,2.44771525 13.9,3 C13.9,3.55228475 13.4522847,4 12.9,4 L6,4 C4.8954305,4 4,4.8954305 4,6 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,13 C20,12.4477153 20.4477153,12 21,12 C21.5522847,12 22,12.4477153 22,13 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,6 C2,3.790861 3.790861,2 6,2 L12.9,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>\
+                      </svg>\
+                     </span>\
+                    </a>';
                     }
                     if (user.roles.isAllowDelete == true) {
                         html += '<a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm delete">\
@@ -236,23 +245,6 @@ var LichSuXeDi = function () {
         ]
         dtTable = $('#dtTable').DataTable(datatableOption);
 
-        $('#dtTable tbody').on('click', 'a.edit', function (e) {
-            e.preventDefault();
-            let selectedDataRow = dtTable.row($(this).parents('tr')).data();
-            editingDataRow = selectedDataRow;
-            $('[name="kt_modal_edit_form_vanDonId"]').append("<option value=" + selectedDataRow.buuCuc.id + " selected>" + selectedDataRow.buuCuc.code + "</option>").trigger('change');
-            $('[name="kt_modal_edit_form_buuCucId"]').append("<option value=" + selectedDataRow.buuCuc.id + " selected>" + selectedDataRow.buuCuc.name + "</option>").trigger('change');
-            $('input[data-field="SealXe"]').val(selectedDataRow.sealXe);
-            $('input[data-field="SealBao"]').val(selectedDataRow.sealBao);
-            $('input[data-field="CreatedDate"]').val(selectedDataRow.createdDate);
-
-            modal_header_text.text("Cập nhật lịch sủ xe đi");
-            modal_form_submit_text.text("Cập nhật");
-            setTimeout(function () { $('input[name="kt_modal_edit_form_code"]').focus() }, 500);
-            modal.modal('show');
-
-        });
-
         $('#dtTable tbody').on('click', 'a.delete', function (e) {
             e.preventDefault();
             let selectedDataRow = dtTable.row($(this).parents('tr')).data();
@@ -263,14 +255,13 @@ var LichSuXeDi = function () {
     };
 
     let resetForm = () => {
-        modal_form[0].reset();
-        $('[name="kt_modal_edit_form_buuCucId"]').val(null).trigger('change');
-        $('[name="kt_modal_edit_form_vanDonId"]').val(null).trigger('change');
-        setTimeout(function () { $('input[name="kt_modal_edit_form_code"]').focus() }, 500);
+        /*modal_form[0].reset();*/
+        $('[name="kt_modal_edit_form_sealxe"]').val(null).trigger('change');
+        $('[name="kt_modal_edit_form_buucuc_id"]').val(null).trigger('change');
     }
 
     function deleteDataRows(dataRows) {
-        App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/LichSuXeDi/DeleteByIds", dtTable, null)
+        App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/LichSuChuyenHang/DeleteByIds", dtTable, null)
             .then(function () {
                 dtTable.draw();
                 App.showHideButtonDelete(false);

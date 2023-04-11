@@ -98,7 +98,6 @@ namespace GiaoHangNhanh.DAL.EF
         public DbSet<Menu> Menus { get; set; }
         public DbSet<MenuAppRole> MenuAppRoles { get; set; }
         public DbSet<PhanLoaiHangBatThuong> PhanLoaiHangBatThuongs { get; set; }
-        public DbSet<PhanLoaiVanDon> PhanLoaiVanDons { get; set; }
         public DbSet<PhuongThucThanhToan> PhuongThucThanhToans { get; set; }
         public DbSet<Tinh> Tinhs { get; set; }
         public DbSet<VanDon> VanDons { get; set; }
