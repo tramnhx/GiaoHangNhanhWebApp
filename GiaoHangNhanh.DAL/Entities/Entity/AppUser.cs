@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using GiaoHangNhanh.DAL.Entities.Entity;
 using System;
 using System.Collections.Generic;
 
@@ -27,7 +26,7 @@ namespace GiaoHangNhanh.DAL.Entities.Entity
 
         public ICollection<LichSuBaoHang> LichSuBaoHangs { get; set; }
         public ICollection<LichSuNhapKho> LichSuNhapKhos { get; set; }
-        public ICollection<PhanLoaiVanDon> PhanLoaiHangBatThuongs { get; set; }
+        public ICollection<PhanLoaiHangBatThuong> PhanLoaiHangBatThuongs { get; set; }
         public ICollection<VanDon> VanDons { get; set; }
     }
 }

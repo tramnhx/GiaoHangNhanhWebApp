@@ -38,8 +38,7 @@ namespace GiaoHangNhanh.ApiIntegration
             services.AddTransient<IKyNhanApiClient, KyNhanApiClient>();
 
             services.AddTransient<IVanDonApiClient, VanDonApiClient>();
-            services.AddTransient<ILichSuXeDiApiClient, LichSuXeDiApiClient>();
-            services.AddTransient<ILichSuXeDenApiClient, LichSuXeDenApiClient>();
+            services.AddTransient<ILichSuChuyenHangApiClient, LichSuChuyenHangApiClient>();
             services.AddTransient<ILichSuPhatHangApiClient, LichSuPhatHangApiClient>();
             services.AddTransient<IKhachHangApiClient, KhachHangApiClient>();
             services.AddTransient<ILichSuBaoHangApiClient, LichSuBaoHangApiClient>();

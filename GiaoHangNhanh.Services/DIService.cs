@@ -36,7 +36,6 @@ namespace GiaoHangNhanh.Services
             services.AddTransient<IFileStorageService, FileStorageService>();
 
             //Manipulation
-            services.AddTransient<IPhanLoaiVanDonService, PhanLoaiVanDonService>();
             services.AddTransient<IKyNhanService, KyNhanService>();
             services.AddTransient<ILichSuNhapKhoService, LichSuNhapKhoService>();
             services.AddTransient<ILichSuGuiHangService, LichSuGuiHangService>();
@@ -44,8 +43,7 @@ namespace GiaoHangNhanh.Services
             services.AddTransient<IDangKyChuyenHoanService, DangKyChuyenHoanService>();
             services.AddTransient<IDuyetChuyenHoanService, DuyetChuyenHoanService>();
             services.AddTransient<IDangKyKienVanDeService, DangKyKienVanDeService>();
-            services.AddTransient<ILichSuXeDiService, LichSuXeDiService>();
-            services.AddTransient<ILichSuXeDenService, LichSuXeDenService>();
+            services.AddTransient<ILichSuChuyenHangService, LichSuChuyenHangService>();
             services.AddTransient<ILichSuPhatHangService, LichSuPhatHangService>();
             services.AddTransient<IVanDonService, VanDonService>();
             services.AddTransient<ILichSuBaoHangService, LichSuBaoHangService>();

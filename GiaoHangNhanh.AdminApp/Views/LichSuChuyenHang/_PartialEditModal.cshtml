@@ -49,11 +49,11 @@
                             <!--begin::Col-->
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 fv-row mb-7 fv-plugins-icon-container">
                                 <!--begin::Label-->
-                                <label class="required fs-6 fw-bold mb-2">@Html.Raw("Trạm tiếp")</label>
+                                <label class="required fs-6 fw-bold mb-2">@Html.Raw("Bưu cục")</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="kt_modal_edit_form_buuCucId" aria-label="Chọn trạm tiếp" data-field="MaTramTiepId"
-                                        data-placeholder="Chọn trạm sau..." class="form-select form-select-solid fw-bolder">
+                                <select name="kt_modal_edit_form_buucuc_id" aria-label="Chọn bưu cục" data-field="BuuCucId"
+                                        data-placeholder="Chọn bưu cục..." class="form-select form-select-solid fw-bolder">
                                 </select>
                                 <!--end::Input-->
                                 <div class="fv-plugins-message-container invalid-feedback"></div>
@@ -62,40 +62,36 @@
                             <!--begin::Col-->
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 fv-row mb-7 fv-plugins-icon-container">
                                 <!--begin::Label-->
-                                <label class="required fs-6 fw-bold mb-2">@Html.Raw("Mã vận đơn")</label>
+                                <label class="required fs-6 fw-bold mb-2">@Html.Raw("Seal Xe")</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="kt_modal_edit_form_vanDonId" aria-label="mã vận đơn" data-field="VanDonId"
-                                        data-placeholder="Mã vận đơn..." class="form-select form-select-solid fw-bolder">
+                                <select multiple class="form-control form-control-solid" placeholder="@Html.Raw("Seal Xe")" data-field="SealXes" name="kt_modal_edit_form_sealxe">
                                 </select>
-                                <!--end::Input-->
-                                <div class="fv-plugins-message-container invalid-feedback"></div>
-                            </div>
-                            <!--end::Col-->
-                            <!--begin::Col-->
-                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 fv-row mb-7 fv-plugins-icon-container">
-                                <!--begin::Label-->
-                                <label class="required fs-6 fw-bold mb-2">@Html.Raw("seal xe")</label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <input type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Seal xe")" data-field="SealXe" name="kt_modal_edit_form_sealXe" />
-                                <!--end::Input-->
-                                <div class="fv-plugins-message-container invalid-feedback"></div>
-                            </div>
-                            <!--end::Col-->
-                            <!--begin::Col-->
-                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 fv-row mb-7 fv-plugins-icon-container">
-                                <!--begin::Label-->
-                                <label class="required fs-6 fw-bold mb-2">@Html.Raw("seal bao")</label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <input type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Seal bao")" data-field="SealBao" name="kt_modal_edit_form_sealBao" />
                                 <!--end::Input-->
                                 <div class="fv-plugins-message-container invalid-feedback"></div>
                             </div>
                             <!--end::Col-->
                         </div>
                         <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="row g-9">
+                            <!--begin::Col-->
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 fv-row mb-7 fv-plugins-icon-container">
+								<!--begin::Label-->
+								<label class="form-label fw-bold">@Html.Raw("Xe đi")</label>
+								<!--end::Label-->
+								<!--begin::Switch-->
+								<div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
+									<input id="isXedi" class="form-check-input" type="checkbox" value="" data-field="IsXeDi" checked="checked" />
+									<label class="form-check-label">Kích Hoạt</label>
+								</div>
+								<!--end::Switch-->
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->                      
                     </div>
                     <!--end::Scroll-->
                 </div>
